@@ -1,0 +1,1 @@
+./test_a/peopleonstreet_rate1/test_peopleonstreet_rate1.sh: line 3: ../../../x265: No such file or directory
