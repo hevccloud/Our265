@@ -136,7 +136,7 @@ the option "--b-adapt 1" in tests.
 ## Performance
 Encoding test sequences of JCTVC CLASS-A ~ CLASS-F in veryslow preset:
 
-Comparing with x265, the quality of Our265 increases with **0.811dB** in average, while the bitrate saves with **22.925kbps** in average.
+Comparing with x265, the quality of Our265 increases with **0.811dB** in average, while the bitrate saves with **22.925%** in average.
 
 Comparing with x265, Our265 saves with **5.45%** encoding time in average.
 
@@ -149,7 +149,7 @@ Our work is still being improved...
 |  our265 vs x265      | medium   | veryslow |placebo|
 | --------   | :-----:  | :----:  |:----:  |
 | BD-PSNR(dB)|0.764  |  0.811      | 0.807|
-| BD-BR(kbps)|   -21.45   |   -22.92   |-22.47|
+| BD-BR(%)|   -21.45   |   -22.92   |-22.47|
 
 
 
