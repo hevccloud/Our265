@@ -4,7 +4,7 @@ An effective h265 encoder. x265 is compiled in CentOS-6.9 g++ (GCC) 4.4.7 201203
 
 ## Usage
 
-When you first use Our265, the library file libx265.so.130 should be copy to /usr/lib.
+Only linux edition is supported. When you use Our265 at the first time, the library file libx265.so.130 should be copied to /usr/lib.
 
 ### Encode single sequence
 
@@ -72,6 +72,7 @@ Enable reporting PSNR metric scores. Default disabled
 Enforce an encode profile: main, main10, mainstillpicture
    
 --level-idc <integer|float> 
+
 Force a minimum required decoder level (as '5.0' or '50')
 
 --[no-]high-tier              
