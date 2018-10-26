@@ -15,50 +15,103 @@ command line examples:
 #### Parameters:
 
 ##### Executable Options:
--h/--help                        Show this help text and exit
--V/--version                     Show version info and exit
+
+-h/--help                        
+Show this help text and exit.
+
+-V/--version                    
+Show version info and exit.
 
 ##### Output Options:
--o/--output <filename>           Bitstream output file name
--D/--output-depth 8|10|12        Output bit depth (also internal bit depth). Default 8
-   --log-level <string>          Logging level: none error warning info debug full. Default info
-   --no-progress                 Disable CLI progress reports
-   --csv <filename>              Comma separated log file, if csv-log-level > 0 frame level statistics, else one line per run
-   --csv-log-level <integer>     Level of csv logging, if csv-log-level > 0 frame level statistics, else one line per run: 0-2
+-o/--output <filename>           
+Bitstream output file name
+
+-D/--output-depth 8|10|12        
+Output bit depth (also internal bit depth). Default 8
+   
+--log-level <string>          
+Logging level: none error warning info debug full. Default info
+
+--no-progress              
+Disable CLI progress reports
+   
+--csv <filename>              
+Comma separated log file, if csv-log-level > 0 frame level statistics, else one line per run
+   
+--csv-log-level <integer>     
+Level of csv logging, if csv-log-level > 0 frame level statistics, else one line per run: 0-2
    
 ##### Input Options:
-   --input <filename>            Raw YUV or Y4M input file name. `-` for stdin
-   --fps <float|rational>        Source frame rate (float or num/denom), auto-detected if Y4M
-   --input-res WxH               Source picture size [w x h], auto-detected if Y4M
--f/--frames <integer>            Maximum number of frames to encode. Default all
-   --seek <integer>              First frame to encode
+--input <filename>            
+Raw YUV or Y4M input file name. `-` for stdin
+   
+--fps <float|rational>        
+Source frame rate (float or num/denom), auto-detected if Y4M
+
+--input-res WxH          
+Source picture size [w x h], auto-detected if Y4M
+
+-f/--frames <integer>            
+Maximum number of frames to encode. Default all
+   
+--seek <integer>              
+First frame to encode
 
 ##### Quality reporting metrics:
-   --[no-]ssim                   Enable reporting SSIM metric scores. Default disabled
-   --[no-]psnr                   Enable reporting PSNR metric scores. Default disabled
+
+--[no-]ssim                   
+Enable reporting SSIM metric scores. Default disabled
+
+--[no-]psnr                  
+Enable reporting PSNR metric scores. Default disabled
 
 ##### Profile, Level, Tier:
--P/--profile <string>            Enforce an encode profile: main, main10, mainstillpicture
-   --level-idc <integer|float>   Force a minimum required decoder level (as '5.0' or '50')
-   --[no-]high-tier              If a decoder level is specified, this modifier selects High tier of that level
-   --uhd-bd                      Enable UHD Bluray compatibility support
-   --[no-]allow-non-conformance  Allow the encoder to generate profile NONE bitstreams. Default disabled
+-P/--profile <string>            
+Enforce an encode profile: main, main10, mainstillpicture
+   
+--level-idc <integer|float> 
+Force a minimum required decoder level (as '5.0' or '50')
 
-Threading, performance:
-   --pools <integer,...>         Comma separated thread count per thread pool (pool per NUMA node)
-                                 '-' implies no threads on node, '+' implies one thread per core on node
--F/--frame-threads <integer>     Number of concurrently encoded frames. 0: auto-determined by core count
-   --[no-]wpp                    Enable Wavefront Parallel Processing. Default enabled
-   --[no-]slices <integer>       Enable Multiple Slices feature. Default 1
-   --[no-]pmode                  Parallel mode analysis. Default disabled
-   --[no-]pme                    Parallel motion estimation. Default disabled
-   --[no-]asm <bool|int|string>  Override CPU detection. Default: auto
+--[no-]high-tier              
+If a decoder level is specified, this modifier selects High tier of that level
+
+--uhd-bd                      
+Enable UHD Bluray compatibility support
+
+--[no-]allow-non-conformance
+Allow the encoder to generate profile NONE bitstreams. Default disabled
+
+##### Threading, performance:
+
+--pools <integer,...>         
+Comma separated thread count per thread pool (pool per NUMA node), '-' implies no threads on node, '+' implies one thread per core on node
+
+-F/--frame-threads <integer> 
+Number of concurrently encoded frames. 0: auto-determined by core count
+   
+--[no-]wpp                 
+Enable Wavefront Parallel Processing. Default enabled
+
+--[no-]slices <integer>   
+Enable Multiple Slices feature. Default 1
+
+--[no-]pmode                  
+Parallel mode analysis. Default disabled
+
+--[no-]pme                    
+Parallel motion estimation. Default disabled
+
+--[no-]asm <bool|int|string> 
+Override CPU detection. Default: auto
 
 ##### Presets:
--p/--preset <string>             Trade off performance for compression efficiency. Default medium
-                                 ultrafast, superfast, veryfast, faster, fast, medium, slow, slower, veryslow, or placebo
--t/--tune <string>               Tune the settings for a particular type of source or situation:
-                                 psnr, ssim, grain, zerolatency, fastdecode
+
+-p/--preset <string>
+Trade off performance for compression efficiency. Default medium
+ultrafast, superfast, veryfast, faster, fast, medium, slow, slower, veryslow, or placebo
+
+-t/--tune <string>  
+Tune the settings for a particular type of source or situation: psnr, ssim, grain, zerolatency, fastdecode
 
 For more parameters, you can refer to ./x265 --help.
 
