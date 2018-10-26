@@ -72,7 +72,6 @@ Enable reporting PSNR metric scores. Default disabled
 Enforce an encode profile: main, main10, mainstillpicture
    
 --level-idc <integer|float> 
-
 Force a minimum required decoder level (as '5.0' or '50')
 
 --[no-]high-tier              
@@ -81,7 +80,7 @@ If a decoder level is specified, this modifier selects High tier of that level
 --uhd-bd                      
 Enable UHD Bluray compatibility support
 
---[no-]allow-non-conformance
+--[no-]allow-non-conformance            
 Allow the encoder to generate profile NONE bitstreams. Default disabled
 
 ##### Threading, performance:
@@ -89,7 +88,7 @@ Allow the encoder to generate profile NONE bitstreams. Default disabled
 --pools <integer,...>         
 Comma separated thread count per thread pool (pool per NUMA node), '-' implies no threads on node, '+' implies one thread per core on node
 
--F/--frame-threads <integer> 
+-F/--frame-threads <integer>       
 Number of concurrently encoded frames. 0: auto-determined by core count
    
 --[no-]wpp                 
@@ -104,7 +103,7 @@ Parallel mode analysis. Default disabled
 --[no-]pme                    
 Parallel motion estimation. Default disabled
 
---[no-]asm <bool|int|string> 
+--[no-]asm <bool|int|string>     
 Override CPU detection. Default: auto
 
 ##### Presets:
