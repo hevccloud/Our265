@@ -4,7 +4,7 @@ An effective h265 encoder. x265 is compiled in CentOS-6.9 g++ (GCC) 4.4.7 201203
 
 ## Usage
 
-Only linux edition is supported. When you use Our265 at the first time, the library file libx265.so.130 should be copied to /usr/lib.
+Only linux edition is supported. When you use Our265 at the first time, the library files (libx265.a, libx265.so, libx265.so.130)  should be copied to /usr/lib.
 
 ### Encode single sequence
 
@@ -136,9 +136,9 @@ the option "--b-adapt 1" in tests.
 ## Performance
 Encoding test sequences of JCTVC CLASS-A ~ CLASS-F in veryslow preset:
 
-Comparing with x265, the quality of Our265 increases with **0.811dB** in average, while the bitrate saves with **22.925%** in average.
+Compared with x265, the quality of Our265 increases with **0.811dB** in average, while the bitrate saves with **22.925%** in average.
 
-Comparing with x265, Our265 saves with **5.45%** encoding time in average.
+Compared with x265, Our265 saves with **5.45%** encoding time in average.
 
 Our work is still being improved...
 
