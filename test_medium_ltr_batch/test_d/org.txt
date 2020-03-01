@@ -1,540 +1,0 @@
-yuv  [info]: 416x240 fps 50000/1000 i420p8 frames 0 - 199 of 501
-raw  [info]: output file: output.265
-x265 [info]: HEVC encoder version 0.0
-x265 [info]: Ratecontrol Optimization by Zhenyu Liu, liuzhenyu73@tsinghua.edu.cn
-x265 [info]: build info [Linux][GCC 4.4.7][64 bit] 8bit
-x265 [info]: using cpu capabilities: MMX2 SSE2Fast LZCNT SSSE3 SSE4.2 AVX FMA3 BMI2 AVX2
-x265 [warning]: maxSlices can not be less than 1, force set to 1
-x265 [info]: Main profile, Level-2.1 (Main tier)
-x265 [info]: Slices                              : 1
-x265 [info]: frame threads / pool features       : 1 / none
-x265 [info]: Coding QT: max CU size, min CU size : 64 / 8
-x265 [info]: Residual QT: max TU size, max depth : 32 / 1 inter / 1 intra
-x265 [info]: ME / range / subpel / merge         : hex / 57 / 2 / 2
-x265 [info]: Keyframe min / max / scenecut       : disabled
-x265 [info]: Lookahead / bframes / badapt        : 20 / 8 / 1
-x265 [info]: b-pyramid / weightp / weightb       : 1 / 1 / 0
-x265 [info]: References / ref-limit  cu / depth  : 4 / on / on
-x265 [info]: AQ: mode / str / qg-size / cu-tree  : 1 / 0.0 / 32 / 1
-x265 [info]: Rate Control / qCompress            : ABR-1500 kbps / 0.60
-x265 [info]: tools: rd=3 rskip signhide tmvp strong-intra-smoothing deblock sao
-[0.5%] 1/200 frames, 6.40 fps, 13502.00 kb/s, eta 0:00:31  [8.5%] 17/200 frames, 41.15 fps, 2097.74 kb/s, eta 0:00:04  [16.5%] 33/200 frames, 48.11 fps, 1806.72 kb/s, eta 0:00:03  [23.5%] 47/200 frames, 50.05 fps, 1716.67 kb/s, eta 0:00:03  [30.0%] 60/200 frames, 49.84 fps, 1657.30 kb/s, eta 0:00:02  [35.0%] 70/200 frames, 47.81 fps, 1661.06 kb/s, eta 0:00:02  [40.0%] 80/200 frames, 46.47 fps, 1656.32 kb/s, eta 0:00:02  [46.0%] 92/200 frames, 46.26 fps, 1629.47 kb/s, eta 0:00:02  [52.5%] 105/200 frames, 46.61 fps, 1621.54 kb/s, eta 0:00:02  [59.5%] 119/200 frames, 47.51 fps, 1577.77 kb/s, eta 0:00:01  [66.5%] 133/200 frames, 47.74 fps, 1564.02 kb/s, eta 0:00:01  [73.0%] 146/200 frames, 47.73 fps, 1550.47 kb/s, eta 0:00:01  [80.0%] 160/200 frames, 48.24 fps, 1518.81 kb/s, eta 0:00:00  [85.5%] 171/200 frames, 47.91 fps, 1530.44 kb/s, eta 0:00:00  [92.0%] 184/200 frames, 48.17 fps, 1526.72 kb/s, eta 0:00:00  [98.5%] 197/200 frames, 48.27 fps, 1532.33 kb/s, eta 0:00:00                                                                                  x265 [info]: frame I:      1, Avg QP:13.46  kb/s: 12735.60  PSNR Mean: Y:49.057 U:49.852 V:49.984
-x265 [info]: frame P:     47, Avg QP:19.92  kb/s: 3476.63   PSNR Mean: Y:42.772 U:45.379 V:45.115
-x265 [info]: frame B:    152, Avg QP:26.68  kb/s: 848.49    PSNR Mean: Y:40.563 U:44.452 V:43.522
-x265 [info]: Weighted P-Frames: Y:2.1% UV:2.1%
-x265 [info]: consecutive B-frames: 10.4% 0.0% 18.7% 27.1% 22.9% 18.7% 2.1% 0.0% 0.0% 
-
-encoded 200 frames in 4.14s (48.36 fps), 1525.54 kb/s, Avg QP:25.03, Global PSNR: 41.922
-yuv  [info]: 416x240 fps 50000/1000 i420p8 frames 0 - 199 of 501
-raw  [info]: output file: output.265
-x265 [info]: HEVC encoder version 0.0
-x265 [info]: Ratecontrol Optimization by Zhenyu Liu, liuzhenyu73@tsinghua.edu.cn
-x265 [info]: build info [Linux][GCC 4.4.7][64 bit] 8bit
-x265 [info]: using cpu capabilities: MMX2 SSE2Fast LZCNT SSSE3 SSE4.2 AVX FMA3 BMI2 AVX2
-x265 [warning]: maxSlices can not be less than 1, force set to 1
-x265 [info]: Main profile, Level-2.1 (Main tier)
-x265 [info]: Slices                              : 1
-x265 [info]: frame threads / pool features       : 1 / none
-x265 [info]: Coding QT: max CU size, min CU size : 64 / 8
-x265 [info]: Residual QT: max TU size, max depth : 32 / 1 inter / 1 intra
-x265 [info]: ME / range / subpel / merge         : hex / 57 / 2 / 2
-x265 [info]: Keyframe min / max / scenecut       : disabled
-x265 [info]: Lookahead / bframes / badapt        : 20 / 8 / 1
-x265 [info]: b-pyramid / weightp / weightb       : 1 / 1 / 0
-x265 [info]: References / ref-limit  cu / depth  : 4 / on / on
-x265 [info]: AQ: mode / str / qg-size / cu-tree  : 1 / 0.0 / 32 / 1
-x265 [info]: Rate Control / qCompress            : ABR-1000 kbps / 0.60
-x265 [info]: tools: rd=3 rskip signhide tmvp strong-intra-smoothing deblock sao
-[0.5%] 1/200 frames, 6.72 fps, 10756.40 kb/s, eta 0:00:29  [9.0%] 18/200 frames, 44.04 fps, 1570.51 kb/s, eta 0:00:04  [18.0%] 36/200 frames, 54.06 fps, 1245.68 kb/s, eta 0:00:03  [26.5%] 53/200 frames, 56.59 fps, 1150.22 kb/s, eta 0:00:02  [33.0%] 66/200 frames, 54.71 fps, 1131.69 kb/s, eta 0:00:02  [39.0%] 78/200 frames, 52.98 fps, 1135.30 kb/s, eta 0:00:02  [46.0%] 92/200 frames, 53.02 fps, 1094.26 kb/s, eta 0:00:02  [53.5%] 107/200 frames, 53.75 fps, 1075.63 kb/s, eta 0:00:01  [60.5%] 121/200 frames, 53.95 fps, 1063.91 kb/s, eta 0:00:01  [68.5%] 137/200 frames, 54.48 fps, 1044.00 kb/s, eta 0:00:01  [76.0%] 152/200 frames, 54.77 fps, 1027.91 kb/s, eta 0:00:00  [83.0%] 166/200 frames, 54.77 fps, 1017.75 kb/s, eta 0:00:00  [90.5%] 181/200 frames, 54.97 fps, 1010.95 kb/s, eta 0:00:00  [97.5%] 195/200 frames, 54.98 fps, 1024.31 kb/s, eta 0:00:00                                                                                  x265 [info]: frame I:      1, Avg QP:16.22  kb/s: 9990.00   PSNR Mean: Y:46.774 U:47.992 V:48.106
-x265 [info]: frame P:     47, Avg QP:23.42  kb/s: 2363.74   PSNR Mean: Y:40.439 U:43.537 V:43.082
-x265 [info]: frame B:    152, Avg QP:30.09  kb/s: 531.94    PSNR Mean: Y:38.449 U:42.927 V:41.805
-x265 [info]: Weighted P-Frames: Y:2.1% UV:2.1%
-x265 [info]: consecutive B-frames: 10.4% 0.0% 18.7% 27.1% 22.9% 18.7% 2.1% 0.0% 0.0% 
-
-encoded 200 frames in 3.61s (55.33 fps), 1009.70 kb/s, Avg QP:28.45, Global PSNR: 39.873
-yuv  [info]: 416x240 fps 50000/1000 i420p8 frames 0 - 199 of 501
-raw  [info]: output file: output.265
-x265 [info]: HEVC encoder version 0.0
-x265 [info]: Ratecontrol Optimization by Zhenyu Liu, liuzhenyu73@tsinghua.edu.cn
-x265 [info]: build info [Linux][GCC 4.4.7][64 bit] 8bit
-x265 [info]: using cpu capabilities: MMX2 SSE2Fast LZCNT SSSE3 SSE4.2 AVX FMA3 BMI2 AVX2
-x265 [warning]: maxSlices can not be less than 1, force set to 1
-x265 [info]: Main profile, Level-2.1 (Main tier)
-x265 [info]: Slices                              : 1
-x265 [info]: frame threads / pool features       : 1 / none
-x265 [info]: Coding QT: max CU size, min CU size : 64 / 8
-x265 [info]: Residual QT: max TU size, max depth : 32 / 1 inter / 1 intra
-x265 [info]: ME / range / subpel / merge         : hex / 57 / 2 / 2
-x265 [info]: Keyframe min / max / scenecut       : disabled
-x265 [info]: Lookahead / bframes / badapt        : 20 / 8 / 1
-x265 [info]: b-pyramid / weightp / weightb       : 1 / 1 / 0
-x265 [info]: References / ref-limit  cu / depth  : 4 / on / on
-x265 [info]: AQ: mode / str / qg-size / cu-tree  : 1 / 0.0 / 32 / 1
-x265 [info]: Rate Control / qCompress            : ABR-500 kbps / 0.60
-x265 [info]: tools: rd=3 rskip signhide tmvp strong-intra-smoothing deblock sao
-[0.5%] 1/200 frames, 7.32 fps, 7395.60 kb/s, eta 0:00:27  [11.5%] 23/200 frames, 58.49 fps, 812.38 kb/s, eta 0:00:03  [23.0%] 46/200 frames, 70.73 fps, 607.23 kb/s, eta 0:00:02  [31.5%] 63/200 frames, 69.34 fps, 587.94 kb/s, eta 0:00:01  [38.5%] 77/200 frames, 66.33 fps, 582.01 kb/s, eta 0:00:01  [47.0%] 94/200 frames, 66.14 fps, 564.47 kb/s, eta 0:00:01  [56.5%] 113/200 frames, 67.41 fps, 539.38 kb/s, eta 0:00:01  [66.0%] 132/200 frames, 68.04 fps, 521.20 kb/s, eta 0:00:00  [75.0%] 150/200 frames, 68.29 fps, 512.49 kb/s, eta 0:00:00  [83.5%] 167/200 frames, 67.99 fps, 509.95 kb/s, eta 0:00:00  [92.5%] 185/200 frames, 68.36 fps, 505.34 kb/s, eta 0:00:00                                                                                  x265 [info]: frame I:      1, Avg QP:20.73  kb/s: 6629.60   PSNR Mean: Y:43.423 U:45.465 V:45.407
-x265 [info]: frame P:     47, Avg QP:29.14  kb/s: 1226.94   PSNR Mean: Y:36.846 U:40.806 V:40.026
-x265 [info]: frame B:    152, Avg QP:35.71  kb/s: 232.69    PSNR Mean: Y:35.148 U:40.526 V:39.140
-x265 [info]: Weighted P-Frames: Y:2.1% UV:2.1%
-x265 [info]: consecutive B-frames: 10.4% 0.0% 18.7% 27.1% 22.9% 18.7% 2.1% 0.0% 0.0% 
-
-encoded 200 frames in 2.90s (69.00 fps), 498.32 kb/s, Avg QP:34.09, Global PSNR: 36.691
-yuv  [info]: 416x240 fps 50000/1000 i420p8 frames 0 - 199 of 501
-raw  [info]: output file: output.265
-x265 [info]: HEVC encoder version 0.0
-x265 [info]: Ratecontrol Optimization by Zhenyu Liu, liuzhenyu73@tsinghua.edu.cn
-x265 [info]: build info [Linux][GCC 4.4.7][64 bit] 8bit
-x265 [info]: using cpu capabilities: MMX2 SSE2Fast LZCNT SSSE3 SSE4.2 AVX FMA3 BMI2 AVX2
-x265 [warning]: maxSlices can not be less than 1, force set to 1
-x265 [info]: Main profile, Level-2.1 (Main tier)
-x265 [info]: Slices                              : 1
-x265 [info]: frame threads / pool features       : 1 / none
-x265 [info]: Coding QT: max CU size, min CU size : 64 / 8
-x265 [info]: Residual QT: max TU size, max depth : 32 / 1 inter / 1 intra
-x265 [info]: ME / range / subpel / merge         : hex / 57 / 2 / 2
-x265 [info]: Keyframe min / max / scenecut       : disabled
-x265 [info]: Lookahead / bframes / badapt        : 20 / 8 / 1
-x265 [info]: b-pyramid / weightp / weightb       : 1 / 1 / 0
-x265 [info]: References / ref-limit  cu / depth  : 4 / on / on
-x265 [info]: AQ: mode / str / qg-size / cu-tree  : 1 / 0.0 / 32 / 1
-x265 [info]: Rate Control / qCompress            : ABR-250 kbps / 0.60
-x265 [info]: tools: rd=3 rskip signhide tmvp strong-intra-smoothing deblock sao
-[0.5%] 1/200 frames, 7.17 fps, 8106.80 kb/s, eta 0:00:27  [13.5%] 27/200 frames, 68.62 fps, 555.72 kb/s, eta 0:00:02  [27.0%] 54/200 frames, 83.64 fps, 364.67 kb/s, eta 0:00:01  [36.5%] 73/200 frames, 80.96 fps, 321.46 kb/s, eta 0:00:01  [46.5%] 93/200 frames, 79.79 fps, 305.99 kb/s, eta 0:00:01  [58.0%] 116/200 frames, 80.94 fps, 285.54 kb/s, eta 0:00:01  [69.0%] 138/200 frames, 81.94 fps, 274.00 kb/s, eta 0:00:00  [80.0%] 160/200 frames, 82.57 fps, 259.68 kb/s, eta 0:00:00  [90.5%] 181/200 frames, 82.58 fps, 257.46 kb/s, eta 0:00:00                                                                                  x265 [info]: frame I:      1, Avg QP:19.62  kb/s: 7340.80   PSNR Mean: Y:44.221 U:46.143 V:46.055
-x265 [info]: frame P:     45, Avg QP:35.22  kb/s: 591.19    PSNR Mean: Y:33.419 U:38.484 V:37.320
-x265 [info]: frame B:    154, Avg QP:41.47  kb/s: 100.85    PSNR Mean: Y:32.033 U:38.416 V:36.651
-x265 [info]: Weighted P-Frames: Y:2.2% UV:2.2%
-x265 [info]: consecutive B-frames: 13.0% 0.0% 17.4% 19.6% 21.7% 23.9% 0.0% 0.0% 4.3% 
-
-encoded 200 frames in 2.37s (84.33 fps), 247.38 kb/s, Avg QP:39.96, Global PSNR: 33.719
-yuv  [info]: 416x240 fps 50000/1000 i420p8 frames 0 - 199 of 501
-raw  [info]: output file: output.265
-x265 [info]: HEVC encoder version 0.0
-x265 [info]: Ratecontrol Optimization by Zhenyu Liu, liuzhenyu73@tsinghua.edu.cn
-x265 [info]: build info [Linux][GCC 4.4.7][64 bit] 8bit
-x265 [info]: using cpu capabilities: MMX2 SSE2Fast LZCNT SSSE3 SSE4.2 AVX FMA3 BMI2 AVX2
-x265 [warning]: maxSlices can not be less than 1, force set to 1
-x265 [info]: Main profile, Level-2.1 (Main tier)
-x265 [info]: Slices                              : 1
-x265 [info]: frame threads / pool features       : 1 / none
-x265 [info]: Coding QT: max CU size, min CU size : 64 / 8
-x265 [info]: Residual QT: max TU size, max depth : 32 / 1 inter / 1 intra
-x265 [info]: ME / range / subpel / merge         : hex / 57 / 2 / 2
-x265 [info]: Keyframe min / max / scenecut       : disabled
-x265 [info]: Lookahead / bframes / badapt        : 20 / 8 / 1
-x265 [info]: b-pyramid / weightp / weightb       : 1 / 1 / 0
-x265 [info]: References / ref-limit  cu / depth  : 4 / on / on
-x265 [info]: AQ: mode / str / qg-size / cu-tree  : 1 / 0.0 / 32 / 1
-x265 [info]: Rate Control / qCompress            : ABR-1500 kbps / 0.60
-x265 [info]: tools: rd=3 rskip signhide tmvp strong-intra-smoothing deblock sao
-[0.5%] 1/200 frames, 5.62 fps, 16099.20 kb/s, eta 0:00:35  [6.0%] 12/200 frames, 27.46 fps, 3147.93 kb/s, eta 0:00:06  [12.0%] 24/200 frames, 34.82 fps, 2243.52 kb/s, eta 0:00:05  [17.0%] 34/200 frames, 36.18 fps, 2076.58 kb/s, eta 0:00:04  [22.5%] 45/200 frames, 36.52 fps, 2052.96 kb/s, eta 0:00:04  [29.5%] 59/200 frames, 39.60 fps, 1814.39 kb/s, eta 0:00:03  [37.5%] 75/200 frames, 42.42 fps, 1708.26 kb/s, eta 0:00:02  [44.0%] 88/200 frames, 43.52 fps, 1697.01 kb/s, eta 0:00:02  [52.0%] 104/200 frames, 45.16 fps, 1658.27 kb/s, eta 0:00:02  [60.0%] 120/200 frames, 46.87 fps, 1584.66 kb/s, eta 0:00:01  [66.0%] 132/200 frames, 46.93 fps, 1603.15 kb/s, eta 0:00:01  [74.0%] 148/200 frames, 48.12 fps, 1532.64 kb/s, eta 0:00:01  [80.0%] 160/200 frames, 47.96 fps, 1551.00 kb/s, eta 0:00:00  [87.0%] 174/200 frames, 48.28 fps, 1518.62 kb/s, eta 0:00:00  [92.5%] 185/200 frames, 47.96 fps, 1544.34 kb/s, eta 0:00:00                                                                                  x265 [info]: frame I:      1, Avg QP:17.01  kb/s: 15332.80  PSNR Mean: Y:45.498 U:45.526 V:46.663
-x265 [info]: frame P:     27, Avg QP:21.43  kb/s: 6276.19   PSNR Mean: Y:39.668 U:41.959 V:42.925
-x265 [info]: frame B:    172, Avg QP:28.69  kb/s: 654.81    PSNR Mean: Y:36.733 U:41.054 V:42.221
-x265 [info]: Weighted P-Frames: Y:11.1% UV:11.1%
-x265 [info]: consecutive B-frames: 3.6% 0.0% 0.0% 10.7% 3.6% 21.4% 7.1% 10.7% 42.9% 
-
-encoded 200 frames in 4.08s (49.06 fps), 1487.09 kb/s, Avg QP:27.65, Global PSNR: 38.322
-yuv  [info]: 416x240 fps 50000/1000 i420p8 frames 0 - 199 of 501
-raw  [info]: output file: output.265
-x265 [info]: HEVC encoder version 0.0
-x265 [info]: Ratecontrol Optimization by Zhenyu Liu, liuzhenyu73@tsinghua.edu.cn
-x265 [info]: build info [Linux][GCC 4.4.7][64 bit] 8bit
-x265 [info]: using cpu capabilities: MMX2 SSE2Fast LZCNT SSSE3 SSE4.2 AVX FMA3 BMI2 AVX2
-x265 [warning]: maxSlices can not be less than 1, force set to 1
-x265 [info]: Main profile, Level-2.1 (Main tier)
-x265 [info]: Slices                              : 1
-x265 [info]: frame threads / pool features       : 1 / none
-x265 [info]: Coding QT: max CU size, min CU size : 64 / 8
-x265 [info]: Residual QT: max TU size, max depth : 32 / 1 inter / 1 intra
-x265 [info]: ME / range / subpel / merge         : hex / 57 / 2 / 2
-x265 [info]: Keyframe min / max / scenecut       : disabled
-x265 [info]: Lookahead / bframes / badapt        : 20 / 8 / 1
-x265 [info]: b-pyramid / weightp / weightb       : 1 / 1 / 0
-x265 [info]: References / ref-limit  cu / depth  : 4 / on / on
-x265 [info]: AQ: mode / str / qg-size / cu-tree  : 1 / 0.0 / 32 / 1
-x265 [info]: Rate Control / qCompress            : ABR-1000 kbps / 0.60
-x265 [info]: tools: rd=3 rskip signhide tmvp strong-intra-smoothing deblock sao
-[0.5%] 1/200 frames, 5.73 fps, 13094.40 kb/s, eta 0:00:34  [7.5%] 15/200 frames, 34.73 fps, 1838.59 kb/s, eta 0:00:05  [14.0%] 28/200 frames, 40.38 fps, 1524.87 kb/s, eta 0:00:04  [20.0%] 40/200 frames, 42.00 fps, 1362.07 kb/s, eta 0:00:03  [27.0%] 54/200 frames, 43.80 fps, 1308.13 kb/s, eta 0:00:03  [37.0%] 74/200 frames, 49.50 fps, 1090.14 kb/s, eta 0:00:02  [44.0%] 88/200 frames, 50.36 fps, 1145.79 kb/s, eta 0:00:02  [53.0%] 106/200 frames, 52.92 fps, 1104.54 kb/s, eta 0:00:01  [61.5%] 123/200 frames, 54.26 fps, 1082.88 kb/s, eta 0:00:01  [70.5%] 141/200 frames, 55.58 fps, 1055.51 kb/s, eta 0:00:01  [78.5%] 157/200 frames, 56.21 fps, 1033.89 kb/s, eta 0:00:00  [86.5%] 173/200 frames, 56.76 fps, 1012.75 kb/s, eta 0:00:00  [93.0%] 186/200 frames, 56.38 fps, 1023.81 kb/s, eta 0:00:00                                                                                  x265 [info]: frame I:      1, Avg QP:19.69  kb/s: 12328.00  PSNR Mean: Y:43.026 U:43.753 V:45.148
-x265 [info]: frame P:     27, Avg QP:24.34  kb/s: 4298.93   PSNR Mean: Y:37.437 U:40.371 V:41.287
-x265 [info]: frame B:    172, Avg QP:31.63  kb/s: 398.93    PSNR Mean: Y:35.274 U:39.767 V:40.837
-x265 [info]: Weighted P-Frames: Y:11.1% UV:11.1%
-x265 [info]: consecutive B-frames: 3.6% 0.0% 0.0% 10.7% 3.6% 21.4% 7.1% 10.7% 42.9% 
-
-encoded 200 frames in 3.47s (57.67 fps), 985.07 kb/s, Avg QP:30.59, Global PSNR: 36.802
-yuv  [info]: 416x240 fps 50000/1000 i420p8 frames 0 - 199 of 501
-raw  [info]: output file: output.265
-x265 [info]: HEVC encoder version 0.0
-x265 [info]: Ratecontrol Optimization by Zhenyu Liu, liuzhenyu73@tsinghua.edu.cn
-x265 [info]: build info [Linux][GCC 4.4.7][64 bit] 8bit
-x265 [info]: using cpu capabilities: MMX2 SSE2Fast LZCNT SSSE3 SSE4.2 AVX FMA3 BMI2 AVX2
-x265 [warning]: maxSlices can not be less than 1, force set to 1
-x265 [info]: Main profile, Level-2.1 (Main tier)
-x265 [info]: Slices                              : 1
-x265 [info]: frame threads / pool features       : 1 / none
-x265 [info]: Coding QT: max CU size, min CU size : 64 / 8
-x265 [info]: Residual QT: max TU size, max depth : 32 / 1 inter / 1 intra
-x265 [info]: ME / range / subpel / merge         : hex / 57 / 2 / 2
-x265 [info]: Keyframe min / max / scenecut       : disabled
-x265 [info]: Lookahead / bframes / badapt        : 20 / 8 / 1
-x265 [info]: b-pyramid / weightp / weightb       : 1 / 1 / 0
-x265 [info]: References / ref-limit  cu / depth  : 4 / on / on
-x265 [info]: AQ: mode / str / qg-size / cu-tree  : 1 / 0.0 / 32 / 1
-x265 [info]: Rate Control / qCompress            : ABR-500 kbps / 0.60
-x265 [info]: tools: rd=3 rskip signhide tmvp strong-intra-smoothing deblock sao
-[0.5%] 1/200 frames, 6.06 fps, 11462.80 kb/s, eta 0:00:32  [9.0%] 18/200 frames, 42.75 fps, 1195.51 kb/s, eta 0:00:04  [17.5%] 35/200 frames, 51.37 fps, 830.93 kb/s, eta 0:00:03  [24.5%] 49/200 frames, 52.09 fps, 756.52 kb/s, eta 0:00:02  [36.0%] 72/200 frames, 60.38 fps, 603.24 kb/s, eta 0:00:02  [46.0%] 92/200 frames, 63.72 fps, 586.07 kb/s, eta 0:00:01  [57.0%] 114/200 frames, 66.87 fps, 565.16 kb/s, eta 0:00:01  [69.0%] 138/200 frames, 70.50 fps, 521.45 kb/s, eta 0:00:00  [78.5%] 157/200 frames, 70.55 fps, 518.94 kb/s, eta 0:00:00  [87.5%] 175/200 frames, 70.48 fps, 515.25 kb/s, eta 0:00:00  [98.0%] 196/200 frames, 71.63 fps, 499.63 kb/s, eta 0:00:00                                                                                  x265 [info]: frame I:      1, Avg QP:21.24  kb/s: 10696.80  PSNR Mean: Y:41.626 U:42.787 V:44.182
-x265 [info]: frame P:     27, Avg QP:29.42  kb/s: 2065.93   PSNR Mean: Y:33.910 U:38.029 V:38.888
-x265 [info]: frame B:    172, Avg QP:36.68  kb/s: 180.33    PSNR Mean: Y:32.686 U:37.665 V:38.665
-x265 [info]: Weighted P-Frames: Y:11.1% UV:11.1%
-x265 [info]: consecutive B-frames: 3.6% 0.0% 0.0% 10.7% 3.6% 21.4% 7.1% 10.7% 42.9% 
-
-encoded 200 frames in 2.76s (72.34 fps), 487.47 kb/s, Avg QP:35.62, Global PSNR: 34.230
-yuv  [info]: 416x240 fps 50000/1000 i420p8 frames 0 - 199 of 501
-raw  [info]: output file: output.265
-x265 [info]: HEVC encoder version 0.0
-x265 [info]: Ratecontrol Optimization by Zhenyu Liu, liuzhenyu73@tsinghua.edu.cn
-x265 [info]: build info [Linux][GCC 4.4.7][64 bit] 8bit
-x265 [info]: using cpu capabilities: MMX2 SSE2Fast LZCNT SSSE3 SSE4.2 AVX FMA3 BMI2 AVX2
-x265 [warning]: maxSlices can not be less than 1, force set to 1
-x265 [info]: Main profile, Level-2.1 (Main tier)
-x265 [info]: Slices                              : 1
-x265 [info]: frame threads / pool features       : 1 / none
-x265 [info]: Coding QT: max CU size, min CU size : 64 / 8
-x265 [info]: Residual QT: max TU size, max depth : 32 / 1 inter / 1 intra
-x265 [info]: ME / range / subpel / merge         : hex / 57 / 2 / 2
-x265 [info]: Keyframe min / max / scenecut       : disabled
-x265 [info]: Lookahead / bframes / badapt        : 20 / 8 / 1
-x265 [info]: b-pyramid / weightp / weightb       : 1 / 1 / 0
-x265 [info]: References / ref-limit  cu / depth  : 4 / on / on
-x265 [info]: AQ: mode / str / qg-size / cu-tree  : 1 / 0.0 / 32 / 1
-x265 [info]: Rate Control / qCompress            : ABR-250 kbps / 0.60
-x265 [info]: tools: rd=3 rskip signhide tmvp strong-intra-smoothing deblock sao
-[0.5%] 1/200 frames, 6.61 fps, 7959.20 kb/s, eta 0:00:30  [11.5%] 23/200 frames, 56.36 fps, 591.04 kb/s, eta 0:00:03  [20.5%] 41/200 frames, 61.61 fps, 443.60 kb/s, eta 0:00:02  [32.5%] 65/200 frames, 70.82 fps, 340.81 kb/s, eta 0:00:01  [46.0%] 92/200 frames, 78.71 fps, 299.08 kb/s, eta 0:00:01  [59.5%] 119/200 frames, 83.53 fps, 277.57 kb/s, eta 0:00:00  [72.5%] 145/200 frames, 86.39 fps, 262.37 kb/s, eta 0:00:00  [83.0%] 166/200 frames, 85.99 fps, 259.79 kb/s, eta 0:00:00  [94.0%] 188/200 frames, 85.97 fps, 254.89 kb/s, eta 0:00:00                                                                                  x265 [info]: frame I:      1, Avg QP:25.22  kb/s: 7193.20   PSNR Mean: Y:38.410 U:40.169 V:41.793
-x265 [info]: frame P:     26, Avg QP:34.17  kb/s: 1010.49   PSNR Mean: Y:30.963 U:36.111 V:36.911
-x265 [info]: frame B:    173, Avg QP:41.49  kb/s: 84.83     PSNR Mean: Y:30.149 U:35.876 V:36.764
-x265 [info]: Weighted P-Frames: Y:15.4% UV:15.4%
-x265 [info]: consecutive B-frames: 3.7% 0.0% 0.0% 11.1% 3.7% 11.1% 7.4% 11.1% 51.9% 
-
-encoded 200 frames in 2.28s (87.72 fps), 240.70 kb/s, Avg QP:40.46, Global PSNR: 31.814
-yuv  [info]: 416x240 fps 60000/1000 i420p8 frames 0 - 199 of 601
-raw  [info]: output file: output.265
-x265 [info]: HEVC encoder version 0.0
-x265 [info]: Ratecontrol Optimization by Zhenyu Liu, liuzhenyu73@tsinghua.edu.cn
-x265 [info]: build info [Linux][GCC 4.4.7][64 bit] 8bit
-x265 [info]: using cpu capabilities: MMX2 SSE2Fast LZCNT SSSE3 SSE4.2 AVX FMA3 BMI2 AVX2
-x265 [warning]: maxSlices can not be less than 1, force set to 1
-x265 [info]: Main profile, Level-2.1 (Main tier)
-x265 [info]: Slices                              : 1
-x265 [info]: frame threads / pool features       : 1 / none
-x265 [info]: Coding QT: max CU size, min CU size : 64 / 8
-x265 [info]: Residual QT: max TU size, max depth : 32 / 1 inter / 1 intra
-x265 [info]: ME / range / subpel / merge         : hex / 57 / 2 / 2
-x265 [info]: Keyframe min / max / scenecut       : disabled
-x265 [info]: Lookahead / bframes / badapt        : 20 / 8 / 1
-x265 [info]: b-pyramid / weightp / weightb       : 1 / 1 / 0
-x265 [info]: References / ref-limit  cu / depth  : 4 / on / on
-x265 [info]: AQ: mode / str / qg-size / cu-tree  : 1 / 0.0 / 32 / 1
-x265 [info]: Rate Control / qCompress            : ABR-1500 kbps / 0.60
-x265 [info]: tools: rd=3 rskip signhide tmvp strong-intra-smoothing deblock sao
-[0.5%] 1/200 frames, 5.85 fps, 20087.04 kb/s, eta 0:00:34  [6.5%] 13/200 frames, 29.93 fps, 3849.86 kb/s, eta 0:00:06  [14.5%] 29/200 frames, 42.22 fps, 2414.45 kb/s, eta 0:00:04  [23.5%] 47/200 frames, 48.32 fps, 1942.72 kb/s, eta 0:00:03  [32.0%] 64/200 frames, 52.05 fps, 1672.91 kb/s, eta 0:00:02  [39.5%] 79/200 frames, 53.07 fps, 1659.53 kb/s, eta 0:00:02  [46.0%] 92/200 frames, 52.24 fps, 1685.32 kb/s, eta 0:00:02  [53.5%] 107/200 frames, 53.01 fps, 1621.36 kb/s, eta 0:00:01  [60.0%] 120/200 frames, 52.57 fps, 1652.40 kb/s, eta 0:00:01  [68.0%] 136/200 frames, 53.34 fps, 1586.39 kb/s, eta 0:00:01  [74.0%] 148/200 frames, 52.83 fps, 1624.34 kb/s, eta 0:00:00  [81.5%] 163/200 frames, 53.23 fps, 1572.56 kb/s, eta 0:00:00  [88.0%] 176/200 frames, 53.09 fps, 1590.83 kb/s, eta 0:00:00  [95.5%] 191/200 frames, 53.33 fps, 1570.41 kb/s, eta 0:00:00                                                                                  x265 [info]: frame I:      1, Avg QP:16.78  kb/s: 19167.36  PSNR Mean: Y:45.941 U:47.341 V:47.630
-x265 [info]: frame P:     23, Avg QP:20.92  kb/s: 6925.09   PSNR Mean: Y:40.274 U:44.143 V:44.837
-x265 [info]: frame B:    176, Avg QP:28.92  kb/s: 721.20    PSNR Mean: Y:36.202 U:43.924 V:44.634
-x265 [info]: Weighted P-Frames: Y:0.0% UV:0.0%
-x265 [info]: consecutive B-frames: 8.3% 0.0% 0.0% 0.0% 0.0% 0.0% 0.0% 0.0% 91.7% 
-
-encoded 200 frames in 3.70s (54.00 fps), 1526.88 kb/s, Avg QP:27.94, Global PSNR: 38.619
-yuv  [info]: 416x240 fps 60000/1000 i420p8 frames 0 - 199 of 601
-raw  [info]: output file: output.265
-x265 [info]: HEVC encoder version 0.0
-x265 [info]: Ratecontrol Optimization by Zhenyu Liu, liuzhenyu73@tsinghua.edu.cn
-x265 [info]: build info [Linux][GCC 4.4.7][64 bit] 8bit
-x265 [info]: using cpu capabilities: MMX2 SSE2Fast LZCNT SSSE3 SSE4.2 AVX FMA3 BMI2 AVX2
-x265 [warning]: maxSlices can not be less than 1, force set to 1
-x265 [info]: Main profile, Level-2.1 (Main tier)
-x265 [info]: Slices                              : 1
-x265 [info]: frame threads / pool features       : 1 / none
-x265 [info]: Coding QT: max CU size, min CU size : 64 / 8
-x265 [info]: Residual QT: max TU size, max depth : 32 / 1 inter / 1 intra
-x265 [info]: ME / range / subpel / merge         : hex / 57 / 2 / 2
-x265 [info]: Keyframe min / max / scenecut       : disabled
-x265 [info]: Lookahead / bframes / badapt        : 20 / 8 / 1
-x265 [info]: b-pyramid / weightp / weightb       : 1 / 1 / 0
-x265 [info]: References / ref-limit  cu / depth  : 4 / on / on
-x265 [info]: AQ: mode / str / qg-size / cu-tree  : 1 / 0.0 / 32 / 1
-x265 [info]: Rate Control / qCompress            : ABR-1000 kbps / 0.60
-x265 [info]: tools: rd=3 rskip signhide tmvp strong-intra-smoothing deblock sao
-[0.5%] 1/200 frames, 5.85 fps, 16643.04 kb/s, eta 0:00:33  [9.0%] 18/200 frames, 42.69 fps, 2056.69 kb/s, eta 0:00:04  [19.0%] 38/200 frames, 55.16 fps, 1463.31 kb/s, eta 0:00:02  [29.0%] 58/200 frames, 61.30 fps, 1221.63 kb/s, eta 0:00:02  [39.0%] 78/200 frames, 64.71 fps, 1132.95 kb/s, eta 0:00:01  [46.5%] 93/200 frames, 63.63 fps, 1155.36 kb/s, eta 0:00:01  [55.5%] 111/200 frames, 64.15 fps, 1131.17 kb/s, eta 0:00:01  [64.5%] 129/200 frames, 64.78 fps, 1115.23 kb/s, eta 0:00:01  [73.5%] 147/200 frames, 65.23 fps, 1097.76 kb/s, eta 0:00:00  [82.5%] 165/200 frames, 65.69 fps, 1076.91 kb/s, eta 0:00:00  [91.5%] 183/200 frames, 66.17 fps, 1061.20 kb/s, eta 0:00:00                                                                                  x265 [info]: frame I:      1, Avg QP:19.71  kb/s: 15723.36  PSNR Mean: Y:43.415 U:45.457 V:45.931
-x265 [info]: frame P:     23, Avg QP:23.51  kb/s: 5211.49   PSNR Mean: Y:38.238 U:42.881 V:43.612
-x265 [info]: frame B:    176, Avg QP:31.62  kb/s: 375.41    PSNR Mean: Y:34.746 U:42.864 V:43.573
-x265 [info]: Weighted P-Frames: Y:0.0% UV:0.0%
-x265 [info]: consecutive B-frames: 8.3% 0.0% 0.0% 0.0% 0.0% 0.0% 0.0% 0.0% 91.7% 
-
-encoded 200 frames in 2.96s (67.55 fps), 1008.30 kb/s, Avg QP:30.63, Global PSNR: 37.202
-yuv  [info]: 416x240 fps 60000/1000 i420p8 frames 0 - 199 of 601
-raw  [info]: output file: output.265
-x265 [info]: HEVC encoder version 0.0
-x265 [info]: Ratecontrol Optimization by Zhenyu Liu, liuzhenyu73@tsinghua.edu.cn
-x265 [info]: build info [Linux][GCC 4.4.7][64 bit] 8bit
-x265 [info]: using cpu capabilities: MMX2 SSE2Fast LZCNT SSSE3 SSE4.2 AVX FMA3 BMI2 AVX2
-x265 [warning]: maxSlices can not be less than 1, force set to 1
-x265 [info]: Main profile, Level-2.1 (Main tier)
-x265 [info]: Slices                              : 1
-x265 [info]: frame threads / pool features       : 1 / none
-x265 [info]: Coding QT: max CU size, min CU size : 64 / 8
-x265 [info]: Residual QT: max TU size, max depth : 32 / 1 inter / 1 intra
-x265 [info]: ME / range / subpel / merge         : hex / 57 / 2 / 2
-x265 [info]: Keyframe min / max / scenecut       : disabled
-x265 [info]: Lookahead / bframes / badapt        : 20 / 8 / 1
-x265 [info]: b-pyramid / weightp / weightb       : 1 / 1 / 0
-x265 [info]: References / ref-limit  cu / depth  : 4 / on / on
-x265 [info]: AQ: mode / str / qg-size / cu-tree  : 1 / 0.0 / 32 / 1
-x265 [info]: Rate Control / qCompress            : ABR-500 kbps / 0.60
-x265 [info]: tools: rd=3 rskip signhide tmvp strong-intra-smoothing deblock sao
-[0.5%] 1/200 frames, 6.38 fps, 14270.88 kb/s, eta 0:00:31  [11.5%] 23/200 frames, 56.52 fps, 1218.87 kb/s, eta 0:00:03  [24.5%] 49/200 frames, 74.10 fps, 756.25 kb/s, eta 0:00:02  [37.0%] 74/200 frames, 81.11 fps, 644.10 kb/s, eta 0:00:01  [50.0%] 100/200 frames, 84.97 fps, 579.56 kb/s, eta 0:00:01  [61.5%] 123/200 frames, 85.94 fps, 578.53 kb/s, eta 0:00:00  [73.0%] 146/200 frames, 86.65 fps, 569.78 kb/s, eta 0:00:00  [86.0%] 172/200 frames, 88.68 fps, 534.20 kb/s, eta 0:00:00  [98.5%] 197/200 frames, 89.73 fps, 522.60 kb/s, eta 0:00:00                                                                                  x265 [info]: frame I:      1, Avg QP:21.95  kb/s: 13351.68  PSNR Mean: Y:41.471 U:44.114 V:44.636
-x265 [info]: frame P:     23, Avg QP:28.39  kb/s: 2816.54   PSNR Mean: Y:34.618 U:41.337 V:42.028
-x265 [info]: frame B:    176, Avg QP:36.46  kb/s: 135.15    PSNR Mean: Y:32.426 U:41.475 V:42.138
-x265 [info]: Weighted P-Frames: Y:0.0% UV:0.0%
-x265 [info]: consecutive B-frames: 8.3% 0.0% 0.0% 0.0% 0.0% 0.0% 0.0% 0.0% 91.7% 
-
-encoded 200 frames in 2.21s (90.46 fps), 509.59 kb/s, Avg QP:35.46, Global PSNR: 34.994
-yuv  [info]: 416x240 fps 60000/1000 i420p8 frames 0 - 199 of 601
-raw  [info]: output file: output.265
-x265 [info]: HEVC encoder version 0.0
-x265 [info]: Ratecontrol Optimization by Zhenyu Liu, liuzhenyu73@tsinghua.edu.cn
-x265 [info]: build info [Linux][GCC 4.4.7][64 bit] 8bit
-x265 [info]: using cpu capabilities: MMX2 SSE2Fast LZCNT SSSE3 SSE4.2 AVX FMA3 BMI2 AVX2
-x265 [warning]: maxSlices can not be less than 1, force set to 1
-x265 [info]: Main profile, Level-2.1 (Main tier)
-x265 [info]: Slices                              : 1
-x265 [info]: frame threads / pool features       : 1 / none
-x265 [info]: Coding QT: max CU size, min CU size : 64 / 8
-x265 [info]: Residual QT: max TU size, max depth : 32 / 1 inter / 1 intra
-x265 [info]: ME / range / subpel / merge         : hex / 57 / 2 / 2
-x265 [info]: Keyframe min / max / scenecut       : disabled
-x265 [info]: Lookahead / bframes / badapt        : 20 / 8 / 1
-x265 [info]: b-pyramid / weightp / weightb       : 1 / 1 / 0
-x265 [info]: References / ref-limit  cu / depth  : 4 / on / on
-x265 [info]: AQ: mode / str / qg-size / cu-tree  : 1 / 0.0 / 32 / 1
-x265 [info]: Rate Control / qCompress            : ABR-250 kbps / 0.60
-x265 [info]: tools: rd=3 rskip signhide tmvp strong-intra-smoothing deblock sao
-[0.5%] 1/200 frames, 6.86 fps, 10538.40 kb/s, eta 0:00:29  [15.0%] 30/200 frames, 74.72 fps, 576.08 kb/s, eta 0:00:02  [32.0%] 64/200 frames, 96.14 fps, 332.61 kb/s, eta 0:00:01  [46.0%] 92/200 frames, 100.04 fps, 313.94 kb/s, eta 0:00:01  [60.0%] 120/200 frames, 102.56 fps, 296.62 kb/s, eta 0:00:00  [74.5%] 149/200 frames, 104.61 fps, 281.44 kb/s, eta 0:00:00  [89.0%] 178/200 frames, 106.03 fps, 268.28 kb/s, eta 0:00:00                                                                                  x265 [info]: frame I:      1, Avg QP:26.03  kb/s: 9619.20   PSNR Mean: Y:37.958 U:41.777 V:42.348
-x265 [info]: frame P:     23, Avg QP:33.45  kb/s: 1291.01   PSNR Mean: Y:31.022 U:39.731 V:40.383
-x265 [info]: frame B:    176, Avg QP:41.70  kb/s: 61.07     PSNR Mean: Y:29.927 U:39.893 V:40.526
-x265 [info]: Weighted P-Frames: Y:0.0% UV:0.0%
-x265 [info]: consecutive B-frames: 8.3% 0.0% 0.0% 0.0% 0.0% 0.0% 0.0% 0.0% 91.7% 
-
-encoded 200 frames in 1.85s (108.27 fps), 250.30 kb/s, Avg QP:40.67, Global PSNR: 32.620
-yuv  [info]: 416x240 fps 30000/1000 i420p8 frames 0 - 199 of 301
-raw  [info]: output file: output.265
-x265 [info]: HEVC encoder version 0.0
-x265 [info]: Ratecontrol Optimization by Zhenyu Liu, liuzhenyu73@tsinghua.edu.cn
-x265 [info]: build info [Linux][GCC 4.4.7][64 bit] 8bit
-x265 [info]: using cpu capabilities: MMX2 SSE2Fast LZCNT SSSE3 SSE4.2 AVX FMA3 BMI2 AVX2
-x265 [warning]: maxSlices can not be less than 1, force set to 1
-x265 [info]: Main profile, Level-2 (Main tier)
-x265 [info]: Slices                              : 1
-x265 [info]: frame threads / pool features       : 1 / none
-x265 [info]: Coding QT: max CU size, min CU size : 64 / 8
-x265 [info]: Residual QT: max TU size, max depth : 32 / 1 inter / 1 intra
-x265 [info]: ME / range / subpel / merge         : hex / 57 / 2 / 2
-x265 [info]: Keyframe min / max / scenecut       : disabled
-x265 [info]: Lookahead / bframes / badapt        : 20 / 8 / 1
-x265 [info]: b-pyramid / weightp / weightb       : 1 / 1 / 0
-x265 [info]: References / ref-limit  cu / depth  : 4 / on / on
-x265 [info]: AQ: mode / str / qg-size / cu-tree  : 1 / 0.0 / 32 / 1
-x265 [info]: Rate Control / qCompress            : ABR-1500 kbps / 0.60
-x265 [info]: tools: rd=3 rskip signhide tmvp strong-intra-smoothing deblock sao
-[0.5%] 1/200 frames, 8.11 fps, 5673.36 kb/s, eta 0:00:24  [7.5%] 15/200 frames, 39.78 fps, 1360.69 kb/s, eta 0:00:04  [13.5%] 27/200 frames, 41.57 fps, 1400.38 kb/s, eta 0:00:04  [18.0%] 36/200 frames, 39.81 fps, 1645.48 kb/s, eta 0:00:04  [23.0%] 46/200 frames, 39.62 fps, 1674.54 kb/s, eta 0:00:03  [28.0%] 56/200 frames, 39.48 fps, 1653.54 kb/s, eta 0:00:03  [32.5%] 65/200 frames, 38.39 fps, 1760.56 kb/s, eta 0:00:03  [38.0%] 76/200 frames, 39.05 fps, 1678.09 kb/s, eta 0:00:03  [44.5%] 89/200 frames, 40.37 fps, 1530.24 kb/s, eta 0:00:02  [51.0%] 102/200 frames, 41.37 fps, 1506.46 kb/s, eta 0:00:02  [56.5%] 113/200 frames, 41.28 fps, 1508.87 kb/s, eta 0:00:02  [61.5%] 123/200 frames, 41.16 fps, 1492.57 kb/s, eta 0:00:01  [67.5%] 135/200 frames, 41.57 fps, 1495.29 kb/s, eta 0:00:01  [72.0%] 144/200 frames, 40.73 fps, 1540.34 kb/s, eta 0:00:01  [77.5%] 155/200 frames, 40.81 fps, 1524.63 kb/s, eta 0:00:01  [83.0%] 166/200 frames, 40.80 fps, 1525.72 kb/s, eta 0:00:00  [89.0%] 178/200 frames, 41.12 fps, 1495.03 kb/s, eta 0:00:00  [94.5%] 189/200 frames, 41.17 fps, 1479.29 kb/s, eta 0:00:00                                                                                  x265 [info]: frame I:      1, Avg QP:4.57  kb/s: 5213.52   PSNR Mean: Y:60.630 U:68.881 V:68.719
-x265 [info]: frame P:     33, Avg QP:6.47  kb/s: 4943.02   PSNR Mean: Y:54.613 U:59.412 V:59.788
-x265 [info]: frame B:    166, Avg QP:13.22  kb/s: 738.32    PSNR Mean: Y:50.319 U:57.131 V:57.205
-x265 [info]: Weighted P-Frames: Y:3.0% UV:0.0%
-x265 [info]: consecutive B-frames: 2.9% 2.9% 0.0% 0.0% 32.4% 32.4% 17.6% 5.9% 5.9% 
-
-encoded 200 frames in 4.82s (41.47 fps), 1454.47 kb/s, Avg QP:12.06, Global PSNR: 52.716
-yuv  [info]: 416x240 fps 30000/1000 i420p8 frames 0 - 199 of 301
-raw  [info]: output file: output.265
-x265 [info]: HEVC encoder version 0.0
-x265 [info]: Ratecontrol Optimization by Zhenyu Liu, liuzhenyu73@tsinghua.edu.cn
-x265 [info]: build info [Linux][GCC 4.4.7][64 bit] 8bit
-x265 [info]: using cpu capabilities: MMX2 SSE2Fast LZCNT SSSE3 SSE4.2 AVX FMA3 BMI2 AVX2
-x265 [warning]: maxSlices can not be less than 1, force set to 1
-x265 [info]: Main profile, Level-2 (Main tier)
-x265 [info]: Slices                              : 1
-x265 [info]: frame threads / pool features       : 1 / none
-x265 [info]: Coding QT: max CU size, min CU size : 64 / 8
-x265 [info]: Residual QT: max TU size, max depth : 32 / 1 inter / 1 intra
-x265 [info]: ME / range / subpel / merge         : hex / 57 / 2 / 2
-x265 [info]: Keyframe min / max / scenecut       : disabled
-x265 [info]: Lookahead / bframes / badapt        : 20 / 8 / 1
-x265 [info]: b-pyramid / weightp / weightb       : 1 / 1 / 0
-x265 [info]: References / ref-limit  cu / depth  : 4 / on / on
-x265 [info]: AQ: mode / str / qg-size / cu-tree  : 1 / 0.0 / 32 / 1
-x265 [info]: Rate Control / qCompress            : ABR-1000 kbps / 0.60
-x265 [info]: tools: rd=3 rskip signhide tmvp strong-intra-smoothing deblock sao
-[0.5%] 1/200 frames, 7.97 fps, 5673.36 kb/s, eta 0:00:24  [8.0%] 16/200 frames, 41.60 fps, 1254.59 kb/s, eta 0:00:04  [14.0%] 28/200 frames, 43.03 fps, 1292.81 kb/s, eta 0:00:03  [21.0%] 42/200 frames, 45.40 fps, 1162.70 kb/s, eta 0:00:03  [26.5%] 53/200 frames, 45.07 fps, 1204.88 kb/s, eta 0:00:03  [32.0%] 64/200 frames, 44.53 fps, 1225.73 kb/s, eta 0:00:03  [39.0%] 78/200 frames, 45.47 fps, 1134.27 kb/s, eta 0:00:02  [47.5%] 95/200 frames, 48.07 fps, 1010.46 kb/s, eta 0:00:02  [54.0%] 108/200 frames, 48.51 fps, 1031.56 kb/s, eta 0:00:01  [60.0%] 120/200 frames, 48.21 fps, 1022.70 kb/s, eta 0:00:01  [66.5%] 133/200 frames, 48.52 fps, 1033.53 kb/s, eta 0:00:01  [72.0%] 144/200 frames, 48.13 fps, 1029.59 kb/s, eta 0:00:01  [79.0%] 158/200 frames, 48.47 fps, 1013.51 kb/s, eta 0:00:00  [85.0%] 170/200 frames, 48.21 fps, 1029.09 kb/s, eta 0:00:00  [91.5%] 183/200 frames, 48.40 fps, 1008.62 kb/s, eta 0:00:00  [97.5%] 195/200 frames, 48.31 fps, 1014.52 kb/s, eta 0:00:00                                                                                  x265 [info]: frame I:      1, Avg QP:4.57  kb/s: 5213.52   PSNR Mean: Y:60.630 U:68.881 V:68.719
-x265 [info]: frame P:     33, Avg QP:8.80  kb/s: 3824.13   PSNR Mean: Y:52.589 U:57.628 V:58.049
-x265 [info]: frame B:    166, Avg QP:15.54  kb/s: 415.74    PSNR Mean: Y:49.258 U:56.408 V:56.477
-x265 [info]: Weighted P-Frames: Y:3.0% UV:0.0%
-x265 [info]: consecutive B-frames: 2.9% 2.9% 0.0% 0.0% 32.4% 32.4% 17.6% 5.9% 5.9% 
-
-encoded 200 frames in 4.13s (48.43 fps), 1002.11 kb/s, Avg QP:14.38, Global PSNR: 51.582
-yuv  [info]: 416x240 fps 30000/1000 i420p8 frames 0 - 199 of 301
-raw  [info]: output file: output.265
-x265 [info]: HEVC encoder version 0.0
-x265 [info]: Ratecontrol Optimization by Zhenyu Liu, liuzhenyu73@tsinghua.edu.cn
-x265 [info]: build info [Linux][GCC 4.4.7][64 bit] 8bit
-x265 [info]: using cpu capabilities: MMX2 SSE2Fast LZCNT SSSE3 SSE4.2 AVX FMA3 BMI2 AVX2
-x265 [warning]: maxSlices can not be less than 1, force set to 1
-x265 [info]: Main profile, Level-2 (Main tier)
-x265 [info]: Slices                              : 1
-x265 [info]: frame threads / pool features       : 1 / none
-x265 [info]: Coding QT: max CU size, min CU size : 64 / 8
-x265 [info]: Residual QT: max TU size, max depth : 32 / 1 inter / 1 intra
-x265 [info]: ME / range / subpel / merge         : hex / 57 / 2 / 2
-x265 [info]: Keyframe min / max / scenecut       : disabled
-x265 [info]: Lookahead / bframes / badapt        : 20 / 8 / 1
-x265 [info]: b-pyramid / weightp / weightb       : 1 / 1 / 0
-x265 [info]: References / ref-limit  cu / depth  : 4 / on / on
-x265 [info]: AQ: mode / str / qg-size / cu-tree  : 1 / 0.0 / 32 / 1
-x265 [info]: Rate Control / qCompress            : ABR-500 kbps / 0.60
-x265 [info]: tools: rd=3 rskip signhide tmvp strong-intra-smoothing deblock sao
-[0.5%] 1/200 frames, 8.42 fps, 4299.60 kb/s, eta 0:00:23  [10.0%] 20/200 frames, 50.11 fps, 759.67 kb/s, eta 0:00:03  [18.0%] 36/200 frames, 55.01 fps, 671.71 kb/s, eta 0:00:02  [25.5%] 51/200 frames, 56.30 fps, 646.48 kb/s, eta 0:00:02  [33.0%] 66/200 frames, 56.90 fps, 630.97 kb/s, eta 0:00:02  [41.5%] 83/200 frames, 58.60 fps, 573.93 kb/s, eta 0:00:01  [49.5%] 99/200 frames, 59.13 fps, 566.58 kb/s, eta 0:00:01  [57.5%] 115/200 frames, 59.54 fps, 562.93 kb/s, eta 0:00:01  [66.0%] 132/200 frames, 59.95 fps, 560.51 kb/s, eta 0:00:01  [74.0%] 148/200 frames, 60.22 fps, 549.29 kb/s, eta 0:00:00  [81.5%] 163/200 frames, 60.06 fps, 552.78 kb/s, eta 0:00:00  [89.0%] 178/200 frames, 59.92 fps, 555.59 kb/s, eta 0:00:00  [97.0%] 194/200 frames, 59.80 fps, 556.04 kb/s, eta 0:00:00                                                                                  x265 [info]: frame I:      1, Avg QP:8.16  kb/s: 3840.00   PSNR Mean: Y:56.718 U:63.628 V:63.797
-x265 [info]: frame P:     32, Avg QP:12.51  kb/s: 2444.26   PSNR Mean: Y:50.099 U:55.187 V:55.572
-x265 [info]: frame B:    167, Avg QP:19.33  kb/s: 158.19    PSNR Mean: Y:47.659 U:55.013 V:55.121
-x265 [info]: Weighted P-Frames: Y:6.2% UV:0.0%
-x265 [info]: consecutive B-frames: 3.0% 0.0% 0.0% 0.0% 30.3% 33.3% 21.2% 6.1% 6.1% 
-
-encoded 200 frames in 3.31s (60.35 fps), 542.37 kb/s, Avg QP:18.18, Global PSNR: 49.861
-yuv  [info]: 416x240 fps 30000/1000 i420p8 frames 0 - 199 of 301
-raw  [info]: output file: output.265
-x265 [info]: HEVC encoder version 0.0
-x265 [info]: Ratecontrol Optimization by Zhenyu Liu, liuzhenyu73@tsinghua.edu.cn
-x265 [info]: build info [Linux][GCC 4.4.7][64 bit] 8bit
-x265 [info]: using cpu capabilities: MMX2 SSE2Fast LZCNT SSSE3 SSE4.2 AVX FMA3 BMI2 AVX2
-x265 [warning]: maxSlices can not be less than 1, force set to 1
-x265 [info]: Main profile, Level-2 (Main tier)
-x265 [info]: Slices                              : 1
-x265 [info]: frame threads / pool features       : 1 / none
-x265 [info]: Coding QT: max CU size, min CU size : 64 / 8
-x265 [info]: Residual QT: max TU size, max depth : 32 / 1 inter / 1 intra
-x265 [info]: ME / range / subpel / merge         : hex / 57 / 2 / 2
-x265 [info]: Keyframe min / max / scenecut       : disabled
-x265 [info]: Lookahead / bframes / badapt        : 20 / 8 / 1
-x265 [info]: b-pyramid / weightp / weightb       : 1 / 1 / 0
-x265 [info]: References / ref-limit  cu / depth  : 4 / on / on
-x265 [info]: AQ: mode / str / qg-size / cu-tree  : 1 / 0.0 / 32 / 1
-x265 [info]: Rate Control / qCompress            : ABR-250 kbps / 0.60
-x265 [info]: tools: rd=3 rskip signhide tmvp strong-intra-smoothing deblock sao
-[0.5%] 1/200 frames, 8.96 fps, 3065.28 kb/s, eta 0:00:22  [11.5%] 23/200 frames, 63.10 fps, 387.99 kb/s, eta 0:00:02  [21.5%] 43/200 frames, 67.64 fps, 346.78 kb/s, eta 0:00:02  [32.0%] 64/200 frames, 70.30 fps, 332.35 kb/s, eta 0:00:01  [42.0%] 84/200 frames, 71.70 fps, 316.64 kb/s, eta 0:00:01  [52.5%] 105/200 frames, 73.81 fps, 301.36 kb/s, eta 0:00:01  [63.0%] 126/200 frames, 74.50 fps, 300.37 kb/s, eta 0:00:00  [74.0%] 148/200 frames, 75.79 fps, 287.71 kb/s, eta 0:00:00  [84.0%] 168/200 frames, 76.25 fps, 283.53 kb/s, eta 0:00:00  [94.5%] 189/200 frames, 76.21 fps, 283.77 kb/s, eta 0:00:00                                                                                  x265 [info]: frame I:      1, Avg QP:12.92  kb/s: 2605.68   PSNR Mean: Y:53.736 U:60.032 V:60.538
-x265 [info]: frame P:     32, Avg QP:17.49  kb/s: 1336.74   PSNR Mean: Y:47.060 U:52.325 V:52.815
-x265 [info]: frame B:    167, Avg QP:24.36  kb/s: 51.37     PSNR Mean: Y:45.681 U:52.844 V:53.139
-x265 [info]: Weighted P-Frames: Y:6.2% UV:0.0%
-x265 [info]: consecutive B-frames: 3.0% 0.0% 0.0% 0.0% 30.3% 33.3% 21.2% 6.1% 6.1% 
-
-encoded 200 frames in 2.57s (77.72 fps), 269.80 kb/s, Avg QP:23.20, Global PSNR: 47.696
-yuv  [info]: 416x240 fps 30000/1000 i420p8 frames 0 - 199 of 300
-raw  [info]: output file: output.265
-x265 [info]: HEVC encoder version 0.0
-x265 [info]: Ratecontrol Optimization by Zhenyu Liu, liuzhenyu73@tsinghua.edu.cn
-x265 [info]: build info [Linux][GCC 4.4.7][64 bit] 8bit
-x265 [info]: using cpu capabilities: MMX2 SSE2Fast LZCNT SSSE3 SSE4.2 AVX FMA3 BMI2 AVX2
-x265 [warning]: maxSlices can not be less than 1, force set to 1
-x265 [info]: Main profile, Level-2 (Main tier)
-x265 [info]: Slices                              : 1
-x265 [info]: frame threads / pool features       : 1 / none
-x265 [info]: Coding QT: max CU size, min CU size : 64 / 8
-x265 [info]: Residual QT: max TU size, max depth : 32 / 1 inter / 1 intra
-x265 [info]: ME / range / subpel / merge         : hex / 57 / 2 / 2
-x265 [info]: Keyframe min / max / scenecut       : disabled
-x265 [info]: Lookahead / bframes / badapt        : 20 / 8 / 1
-x265 [info]: b-pyramid / weightp / weightb       : 1 / 1 / 0
-x265 [info]: References / ref-limit  cu / depth  : 4 / on / on
-x265 [info]: AQ: mode / str / qg-size / cu-tree  : 1 / 0.0 / 32 / 1
-x265 [info]: Rate Control / qCompress            : ABR-1500 kbps / 0.60
-x265 [info]: tools: rd=3 rskip signhide tmvp strong-intra-smoothing deblock sao
-[0.5%] 1/200 frames, 6.04 fps, 5967.36 kb/s, eta 0:00:32  [4.5%] 9/200 frames, 20.71 fps, 2315.79 kb/s, eta 0:00:09  [9.0%] 18/200 frames, 25.47 fps, 1833.73 kb/s, eta 0:00:07  [13.5%] 27/200 frames, 27.81 fps, 1687.86 kb/s, eta 0:00:06  [17.5%] 35/200 frames, 28.59 fps, 1649.48 kb/s, eta 0:00:05  [23.0%] 46/200 frames, 30.46 fps, 1530.63 kb/s, eta 0:00:05  [28.0%] 56/200 frames, 31.15 fps, 1495.79 kb/s, eta 0:00:04  [32.5%] 65/200 frames, 31.47 fps, 1485.68 kb/s, eta 0:00:04  [37.0%] 74/200 frames, 31.54 fps, 1483.94 kb/s, eta 0:00:03  [41.5%] 83/200 frames, 31.81 fps, 1487.27 kb/s, eta 0:00:03  [46.0%] 92/200 frames, 31.80 fps, 1502.63 kb/s, eta 0:00:03  [50.5%] 101/200 frames, 31.86 fps, 1508.41 kb/s, eta 0:00:03  [55.0%] 110/200 frames, 32.07 fps, 1497.21 kb/s, eta 0:00:02  [59.0%] 118/200 frames, 32.05 fps, 1511.30 kb/s, eta 0:00:02  [64.0%] 128/200 frames, 32.21 fps, 1524.81 kb/s, eta 0:00:02  [70.5%] 141/200 frames, 33.09 fps, 1497.26 kb/s, eta 0:00:01  [76.0%] 152/200 frames, 33.68 fps, 1477.78 kb/s, eta 0:00:01  [81.0%] 162/200 frames, 33.95 fps, 1468.68 kb/s, eta 0:00:01  [85.5%] 171/200 frames, 34.02 fps, 1476.64 kb/s, eta 0:00:00  [90.0%] 180/200 frames, 34.10 fps, 1473.28 kb/s, eta 0:00:00  [94.5%] 189/200 frames, 34.04 fps, 1482.90 kb/s, eta 0:00:00  [99.0%] 198/200 frames, 34.00 fps, 1485.14 kb/s, eta 0:00:00                                                                                  x265 [info]: frame I:      1, Avg QP:21.89  kb/s: 5507.52   PSNR Mean: Y:42.085 U:43.258 V:43.778
-x265 [info]: frame P:     65, Avg QP:21.88  kb/s: 2998.23   PSNR Mean: Y:40.323 U:42.206 V:43.076
-x265 [info]: frame B:    134, Avg QP:27.46  kb/s: 708.51    PSNR Mean: Y:37.880 U:41.061 V:42.059
-x265 [info]: Weighted P-Frames: Y:1.5% UV:1.5%
-x265 [info]: consecutive B-frames: 3.0% 31.8% 40.9% 15.2% 6.1% 0.0% 1.5% 1.5% 0.0% 
-
-encoded 200 frames in 5.87s (34.09 fps), 1476.67 kb/s, Avg QP:25.62, Global PSNR: 39.502
-yuv  [info]: 416x240 fps 30000/1000 i420p8 frames 0 - 199 of 300
-raw  [info]: output file: output.265
-x265 [info]: HEVC encoder version 0.0
-x265 [info]: Ratecontrol Optimization by Zhenyu Liu, liuzhenyu73@tsinghua.edu.cn
-x265 [info]: build info [Linux][GCC 4.4.7][64 bit] 8bit
-x265 [info]: using cpu capabilities: MMX2 SSE2Fast LZCNT SSSE3 SSE4.2 AVX FMA3 BMI2 AVX2
-x265 [warning]: maxSlices can not be less than 1, force set to 1
-x265 [info]: Main profile, Level-2 (Main tier)
-x265 [info]: Slices                              : 1
-x265 [info]: frame threads / pool features       : 1 / none
-x265 [info]: Coding QT: max CU size, min CU size : 64 / 8
-x265 [info]: Residual QT: max TU size, max depth : 32 / 1 inter / 1 intra
-x265 [info]: ME / range / subpel / merge         : hex / 57 / 2 / 2
-x265 [info]: Keyframe min / max / scenecut       : disabled
-x265 [info]: Lookahead / bframes / badapt        : 20 / 8 / 1
-x265 [info]: b-pyramid / weightp / weightb       : 1 / 1 / 0
-x265 [info]: References / ref-limit  cu / depth  : 4 / on / on
-x265 [info]: AQ: mode / str / qg-size / cu-tree  : 1 / 0.0 / 32 / 1
-x265 [info]: Rate Control / qCompress            : ABR-1000 kbps / 0.60
-x265 [info]: tools: rd=3 rskip signhide tmvp strong-intra-smoothing deblock sao
-[0.5%] 1/200 frames, 6.19 fps, 5159.52 kb/s, eta 0:00:32  [5.0%] 10/200 frames, 23.87 fps, 1585.78 kb/s, eta 0:00:07  [10.0%] 20/200 frames, 29.31 fps, 1309.02 kb/s, eta 0:00:06  [15.5%] 31/200 frames, 32.43 fps, 1147.19 kb/s, eta 0:00:05  [21.0%] 42/200 frames, 34.37 fps, 1062.51 kb/s, eta 0:00:04  [26.5%] 53/200 frames, 35.49 fps, 1017.31 kb/s, eta 0:00:04  [31.5%] 63/200 frames, 35.93 fps, 1003.32 kb/s, eta 0:00:03  [36.5%] 73/200 frames, 36.42 fps, 1011.13 kb/s, eta 0:00:03  [41.5%] 83/200 frames, 36.70 fps, 1019.07 kb/s, eta 0:00:03  [46.5%] 93/200 frames, 36.89 fps, 1015.28 kb/s, eta 0:00:02  [51.5%] 103/200 frames, 36.96 fps, 1020.04 kb/s, eta 0:00:02  [57.0%] 114/200 frames, 37.17 fps, 1018.99 kb/s, eta 0:00:02  [63.0%] 126/200 frames, 37.75 fps, 1007.90 kb/s, eta 0:00:01  [69.5%] 139/200 frames, 38.47 fps, 1010.18 kb/s, eta 0:00:01  [76.5%] 153/200 frames, 39.58 fps, 985.78 kb/s, eta 0:00:01  [82.5%] 165/200 frames, 39.92 fps, 978.14 kb/s, eta 0:00:00  [88.5%] 177/200 frames, 40.01 fps, 989.06 kb/s, eta 0:00:00  [94.0%] 188/200 frames, 40.21 fps, 984.59 kb/s, eta 0:00:00  [99.0%] 198/200 frames, 40.18 fps, 984.82 kb/s, eta 0:00:00                                                                                  x265 [info]: frame I:      1, Avg QP:23.79  kb/s: 4699.68   PSNR Mean: Y:40.539 U:42.064 V:42.526
-x265 [info]: frame P:     50, Avg QP:24.93  kb/s: 2287.20   PSNR Mean: Y:37.973 U:40.348 V:41.357
-x265 [info]: frame B:    149, Avg QP:30.32  kb/s: 513.01    PSNR Mean: Y:36.123 U:39.648 V:40.703
-x265 [info]: Weighted P-Frames: Y:2.0% UV:2.0%
-x265 [info]: consecutive B-frames: 3.9% 0.0% 39.2% 37.3% 7.8% 5.9% 2.0% 2.0% 2.0% 
-
-encoded 200 frames in 4.96s (40.31 fps), 977.49 kb/s, Avg QP:28.94, Global PSNR: 37.544
-yuv  [info]: 416x240 fps 30000/1000 i420p8 frames 0 - 199 of 300
-raw  [info]: output file: output.265
-x265 [info]: HEVC encoder version 0.0
-x265 [info]: Ratecontrol Optimization by Zhenyu Liu, liuzhenyu73@tsinghua.edu.cn
-x265 [info]: build info [Linux][GCC 4.4.7][64 bit] 8bit
-x265 [info]: using cpu capabilities: MMX2 SSE2Fast LZCNT SSSE3 SSE4.2 AVX FMA3 BMI2 AVX2
-x265 [warning]: maxSlices can not be less than 1, force set to 1
-x265 [info]: Main profile, Level-2 (Main tier)
-x265 [info]: Slices                              : 1
-x265 [info]: frame threads / pool features       : 1 / none
-x265 [info]: Coding QT: max CU size, min CU size : 64 / 8
-x265 [info]: Residual QT: max TU size, max depth : 32 / 1 inter / 1 intra
-x265 [info]: ME / range / subpel / merge         : hex / 57 / 2 / 2
-x265 [info]: Keyframe min / max / scenecut       : disabled
-x265 [info]: Lookahead / bframes / badapt        : 20 / 8 / 1
-x265 [info]: b-pyramid / weightp / weightb       : 1 / 1 / 0
-x265 [info]: References / ref-limit  cu / depth  : 4 / on / on
-x265 [info]: AQ: mode / str / qg-size / cu-tree  : 1 / 0.0 / 32 / 1
-x265 [info]: Rate Control / qCompress            : ABR-500 kbps / 0.60
-x265 [info]: tools: rd=3 rskip signhide tmvp strong-intra-smoothing deblock sao
-[0.5%] 1/200 frames, 6.69 fps, 3583.68 kb/s, eta 0:00:29  [6.0%] 12/200 frames, 29.93 fps, 909.48 kb/s, eta 0:00:06  [13.0%] 26/200 frames, 38.42 fps, 654.58 kb/s, eta 0:00:04  [20.0%] 40/200 frames, 42.00 fps, 573.91 kb/s, eta 0:00:03  [27.0%] 54/200 frames, 44.44 fps, 531.82 kb/s, eta 0:00:03  [33.5%] 67/200 frames, 45.32 fps, 519.97 kb/s, eta 0:00:02  [40.5%] 81/200 frames, 46.41 fps, 507.43 kb/s, eta 0:00:02  [46.5%] 93/200 frames, 46.56 fps, 513.37 kb/s, eta 0:00:02  [53.0%] 106/200 frames, 46.89 fps, 505.82 kb/s, eta 0:00:02  [59.0%] 118/200 frames, 46.98 fps, 513.33 kb/s, eta 0:00:01  [66.5%] 133/200 frames, 47.95 fps, 511.66 kb/s, eta 0:00:01  [74.5%] 149/200 frames, 49.27 fps, 503.38 kb/s, eta 0:00:01  [82.5%] 165/200 frames, 50.20 fps, 491.55 kb/s, eta 0:00:00  [89.0%] 178/200 frames, 50.32 fps, 500.09 kb/s, eta 0:00:00  [96.5%] 193/200 frames, 50.53 fps, 497.91 kb/s, eta 0:00:00                                                                                  x265 [info]: frame I:      1, Avg QP:28.06  kb/s: 3124.08   PSNR Mean: Y:37.087 U:39.238 V:39.788
-x265 [info]: frame P:     50, Avg QP:30.11  kb/s: 1198.45   PSNR Mean: Y:34.301 U:37.778 V:38.782
-x265 [info]: frame B:    149, Avg QP:35.44  kb/s: 234.35    PSNR Mean: Y:32.968 U:37.405 V:38.504
-x265 [info]: Weighted P-Frames: Y:2.0% UV:2.0%
-x265 [info]: consecutive B-frames: 3.9% 0.0% 39.2% 37.3% 7.8% 5.9% 2.0% 2.0% 2.0% 
-
-encoded 200 frames in 3.93s (50.86 fps), 489.82 kb/s, Avg QP:34.07, Global PSNR: 34.503
-yuv  [info]: 416x240 fps 30000/1000 i420p8 frames 0 - 199 of 300
-raw  [info]: output file: output.265
-x265 [info]: HEVC encoder version 0.0
-x265 [info]: Ratecontrol Optimization by Zhenyu Liu, liuzhenyu73@tsinghua.edu.cn
-x265 [info]: build info [Linux][GCC 4.4.7][64 bit] 8bit
-x265 [info]: using cpu capabilities: MMX2 SSE2Fast LZCNT SSSE3 SSE4.2 AVX FMA3 BMI2 AVX2
-x265 [warning]: maxSlices can not be less than 1, force set to 1
-x265 [info]: Main profile, Level-2 (Main tier)
-x265 [info]: Slices                              : 1
-x265 [info]: frame threads / pool features       : 1 / none
-x265 [info]: Coding QT: max CU size, min CU size : 64 / 8
-x265 [info]: Residual QT: max TU size, max depth : 32 / 1 inter / 1 intra
-x265 [info]: ME / range / subpel / merge         : hex / 57 / 2 / 2
-x265 [info]: Keyframe min / max / scenecut       : disabled
-x265 [info]: Lookahead / bframes / badapt        : 20 / 8 / 1
-x265 [info]: b-pyramid / weightp / weightb       : 1 / 1 / 0
-x265 [info]: References / ref-limit  cu / depth  : 4 / on / on
-x265 [info]: AQ: mode / str / qg-size / cu-tree  : 1 / 0.0 / 32 / 1
-x265 [info]: Rate Control / qCompress            : ABR-250 kbps / 0.60
-x265 [info]: tools: rd=3 rskip signhide tmvp strong-intra-smoothing deblock sao
-[0.5%] 1/200 frames, 7.34 fps, 2376.48 kb/s, eta 0:00:27  [7.5%] 15/200 frames, 38.83 fps, 452.93 kb/s, eta 0:00:04  [16.0%] 32/200 frames, 49.01 fps, 326.65 kb/s, eta 0:00:03  [25.0%] 50/200 frames, 54.97 fps, 269.84 kb/s, eta 0:00:02  [33.0%] 66/200 frames, 56.82 fps, 258.55 kb/s, eta 0:00:02  [41.0%] 82/200 frames, 57.34 fps, 261.88 kb/s, eta 0:00:02  [49.0%] 98/200 frames, 58.19 fps, 257.29 kb/s, eta 0:00:01  [57.0%] 114/200 frames, 58.38 fps, 257.53 kb/s, eta 0:00:01  [65.5%] 131/200 frames, 59.22 fps, 258.79 kb/s, eta 0:00:01  [75.5%] 151/200 frames, 61.20 fps, 252.93 kb/s, eta 0:00:00  [84.5%] 169/200 frames, 62.03 fps, 251.28 kb/s, eta 0:00:00  [93.5%] 187/200 frames, 62.59 fps, 251.82 kb/s, eta 0:00:00                                                                                  x265 [info]: frame I:      1, Avg QP:32.66  kb/s: 1916.88   PSNR Mean: Y:33.605 U:37.091 V:37.300
-x265 [info]: frame P:     50, Avg QP:34.86  kb/s: 618.11    PSNR Mean: Y:31.257 U:35.763 V:36.580
-x265 [info]: frame B:    149, Avg QP:40.13  kb/s: 109.49    PSNR Mean: Y:30.296 U:35.577 V:36.537
-x265 [info]: Weighted P-Frames: Y:2.0% UV:2.0%
-x265 [info]: consecutive B-frames: 3.9% 0.0% 39.2% 37.3% 7.8% 5.9% 2.0% 2.0% 2.0% 
-
-encoded 200 frames in 3.16s (63.27 fps), 245.68 kb/s, Avg QP:38.78, Global PSNR: 31.937
