@@ -1,6 +1,6 @@
 # Our265
 
-An effective h265 encoder. x265 is compiled in CentOS-6.9 g++ (GCC) 4.4.7 20120313. 
+An effective h265 encoder. x265 is compiled in CentOS-7 g++ (GCC) 4.8.5 20150623. 
 
 ## Usage
 
@@ -11,7 +11,7 @@ Only linux edition is supported. When you use Our265 at the first time, the libr
 command line examples:
 
 ```
-./x265 --preset veryslow --input PeopleOnStreet_2560x1600_30_crop.yuv --input-res 2560x1600 --ref 4 --fps 30 --frame-thread 1 --no-wpp --bitrate 10000 --no-pmode --no-pme --slices 0 --lookahead-slices 0 --psnr --tune psnr --b-adapt 1 --bframes 8 --keyint -1 --frames 200 -o output.265
+./x265 --preset veryslow --input PeopleOnStreet_2560x1600_30_crop.yuv --input-res 2560x1600 --ref 4 --fps 30 --frame-thread 1 --no-wpp --bitrate 10000 --no-pmode --no-pme --slices 0 --lookahead-slices 0 --psnr --tune psnr --b-adapt 1 --bframes 15 --max-tlayer 4 --keyint 5000 -o output.265
 ```
 
 #### Parameters:
@@ -106,6 +106,10 @@ Parallel motion estimation. Default disabled
 --[no-]asm <bool|int|string>     
 Override CPU detection. Default: auto
 
+##### GOP structure:
+--max-tlayer
+max temporal layer number. For example, GOP16: --bframes 15 --max-tlayer 4; GOP8: --bframes 7 --max-tlayer 3
+
 ##### Presets:
 
 -p/--preset <string>
@@ -118,38 +122,31 @@ Tune the settings for a particular type of source or situation: psnr, ssim, grai
 For more parameters, you can refer to ./x265 --help.
 
 ### Encode batch sequences
+HTcondor is required to run our tests. condor_test_read_file.sh is a shell scripts and sequence_file.txt contains all sequence configurations.
 
-test_medium_ltr_batch is a test command sets with --preset medium for classes A, B, C, D, E and F.
+(1) You can change the source dir and other options in sequence_file.txt.
 
-(1) You can change the source dir and other options with change_source_dir.sh.
-
-(2) test_all.sh ignites tests for all classes. merge.sh collects all results.
-
-(3) In our tests, we use 4 references to enable the long-term reference technique,
-which is supplemented by our. You also can use less than 4 references.
-
-(4) We optimize the mode 1 fast slice type decision algorithm. So, we applied
-the option "--b-adapt 1" in tests.
-
-(5) Other presets' experiments can be traced by analogy.
+(2) run the command "sh condor_test_read_file.sh sequence_file.txt".
 
 ## Performance
-Encoding test sequences of JCTVC CLASS-A ~ CLASS-F in veryslow preset:
+Encoding test sequences of JCTVC CLASS-A ~ CLASS-F in medium preset:
 
-Compared with x265, the quality of Our265 increases with **0.811dB** in average, while the bitrate saves with **22.925%** in average.
+Compared with x265, the quality of Our265 increases with **1.15dB** in average, while the bitrate saves with **30.93%** in average.
 
-Compared with x265, Our265 saves with **5.45%** encoding time in average.
-
-Our work is still being improved...
+Our work is still being improved in terms of 2-pass encoding.
 
 
 
 ### Compare with x265 encoder
 
-|  our265 vs x265      | medium   | veryslow |placebo|
-| --------   | :-----:  | :----:  |:----:  |
-| BD-PSNR(dB)|0.764  |  0.811      | 0.807|
-| BD-BR(%)|   -21.45   |   -22.92   |-22.47|
+|  our265 vs x265      | medium in PSNR  |
+| --------   | :-----:  |
+| BD-PSNR(dB)|1.1503  | 
+| BD-BR(%)|   -30.93   | 
 
+|  our265 vs x265      | medium in SSIM
+| --------   | :-----:  |
+| BD-SSIM| 0.0187 |
+| BD-BR(%)| -32.50 |
 
 
