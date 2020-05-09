@@ -16,7 +16,7 @@ do
         height=$(echo $line | cut -d " " -f 4)
         framerate=$(echo $line | cut -d " " -f 5)
         rate=$(echo $line | cut -d " " -f 6)
-        
+        ypixelnum=$(echo "$width * $height"|bc)
         #seq=$(echo $sequence_name | cut -d . -f 1)
         #for crf in ${crflist}
         #do
@@ -41,9 +41,20 @@ do
             echo "should_transfer_files = YES" >> ${sub_file}
             echo "run_as_owner    = True" >> ${sub_file}
             echo "priority        = 10" >> ${sub_file}
-            echo "arguments       =  --preset medium --input ${sequence_dir}/${sequence_name} --input-res ${width}x${height} --fps ${framerate} --ref 4 --frame-thread 1 --no-wpp --bitrate ${rate} --no-pmode --no-pme --slices 0 --lookahead-slices 0 --ssim --tune ssim --qg-size 64 --aq-mode 1 --aq-strength 1.0 --b-adapt 1 --bframes 15 --keyint 5000 --max-tlayer 4 -o output.265 --csv ${seq}_${rate}.csv" >> ${sub_file}
-            #echo "arguments       =  --preset medium --input ${sequence_dir}/${sequence_name} --input-res ${width}x${height} --fps ${framerate} --ref 4 --frame-thread 1 --no-wpp --bitrate ${rate} --no-pmode --no-pme --slices 0 --lookahead-slices 0 --ssim --tune ssim --qg-size 32 --aq-mode 1 --aq-strength 1.0 --b-adapt 2 --bframes 15 --keyint -1 --max-tlayer 4 -o output.265 --csv ${seq}_${rate}.csv" >> ${sub_file}
-            #echo "arguments       =  --preset medium --input ${sequence_dir}/${sequence_name} --input-res ${width}x${height} --fps ${framerate} --ref 4 --frame-thread 1 --no-wpp --bitrate ${rate} --no-pmode --no-pme --slices 0 --lookahead-slices 0 --psnr --tune psnr --qg-size 32 --b-adapt 1 --bframes 8 --keyint -1 -o output.265 --csv ${seq}_${rate}.csv" >> ${sub_file}
+            #veryslow ssim single-thread
+            echo "arguments       =  --preset veryslow --min-keyint 1 --input ${sequence_dir}/${sequence_name} --input-res ${width}x${height} --fps ${framerate} --ref 4 --frame-thread 1 --no-wpp --bitrate ${rate} --no-pmode --no-pme --slices 0 --lookahead-slices 0 --psnr --tune psnr --qg-size 64 --b-adapt 2 --bframes 15 --keyint 5000 -o output.265 --csv ${seq}_${rate}.csv" >> ${sub_file}
+            #veryslow ssim single-thread
+            #echo "arguments       =  --preset veryslow --min-keyint 1 --input ${sequence_dir}/${sequence_name} --input-res ${width}x${height} --fps ${framerate} --ref 4 --frame-thread 1 --no-wpp --bitrate ${rate} --no-pmode --no-pme --slices 0 --lookahead-slices 0 --ssim --tune ssim --qg-size 64 --aq-mode 1 --aq-strength 1.0 --b-adapt 2 --bframes 15 --keyint 5000 -o output.265 --csv ${seq}_${rate}.csv" >> ${sub_file}
+            #medium psnr low-latency single-thread
+            #echo "arguments       =  --preset medium --min-keyint 1 --rc-lookahead 5 --input ${sequence_dir}/${sequence_name} --input-res ${width}x${height} --fps ${framerate} --ref 4 --frame-thread 1 --no-wpp --bitrate ${rate} --no-pmode --no-pme --slices 0 --lookahead-slices 0 --psnr --tune psnr --qg-size 64 --b-adapt 1 --bframes 4 --keyint 5000 -o output.265 --csv ${seq}_${rate}.csv" >> ${sub_file}
+            #medium ssim low-latency single-thread
+            #echo "arguments       =  --preset medium --min-keyint 1 --rc-lookahead 5 --input ${sequence_dir}/${sequence_name} --input-res ${width}x${height} --fps ${framerate} --ref 4 --frame-thread 1 --no-wpp --bitrate ${rate} --no-pmode --no-pme --slices 0 --lookahead-slices 0 --ssim --tune ssim --qg-size 64 --aq-mode 1 --aq-strength 1.0 --b-adapt 1 --bframes 4 --keyint 5000 -o output.265 --csv ${seq}_${rate}.csv" >> ${sub_file}
+            #medium ssim multi-thread
+            #echo "arguments       =  --preset medium --min-keyint 1 --input ${sequence_dir}/${sequence_name} --input-res ${width}x${height} --fps ${framerate} --ref 4 --bitrate ${rate} --ssim --tune ssim --qg-size 64 --aq-mode 1 --aq-strength 1.0 --b-adapt 2 --bframes 15 --keyint 5000 --max-tlayer 4 -o output.265 --rc-lookahead 32 --csv ${seq}_${rate}.csv" >> ${sub_file}
+            #medium psnr single-thread
+            #echo "arguments       =  --preset medium --min-keyint 1 --input ${sequence_dir}/${sequence_name} --input-res ${width}x${height} --fps ${framerate} --ref 4 --frame-thread 1 --no-wpp --bitrate ${rate} --no-pmode --no-pme --slices 0 --lookahead-slices 0 --psnr --tune psnr --qg-size 64 --b-adapt 1 --bframes 15 --keyint 5000 -o output.265 --csv ${seq}_${rate}.csv" >> ${sub_file}
+            #medium ssim single-thread
+            #echo "arguments       =  --preset medium --min-keyint 1 --input ${sequence_dir}/${sequence_name} --input-res ${width}x${height} --fps ${framerate} --ref 4 --frame-thread 1 --no-wpp --bitrate ${rate} --no-pmode --no-pme --slices 0 --lookahead-slices 0 --ssim --tune ssim --qg-size 64 --aq-mode 1 --aq-strength 1.0 --b-adapt 1 --bframes 15 --keyint 5000 -o output.265 --csv ${seq}_${rate}.csv" >> ${sub_file}
             echo "queue" >> ${sub_file}
             condor_submit ${sub_file}
             #cd ..

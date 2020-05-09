@@ -1,152 +1,3785 @@
 # Our265
 
-An effective h265 encoder. x265 is compiled in CentOS-7 g++ (GCC) 4.8.5 20150623. 
+Our265, one effective HEVC(h265) encoder, is compiled with CentOS-7.7 g++ (GCC) 4.8.5 20150623. 
+
+## Contact
+Author: Zhenyu Liu;
+Address: 4-305, FIT Building, Tsinghua University, Beijing (100084), China;
+Email: liuzhenyu73@tsinghua.edu.cn
 
 ## Usage
 
 Only linux edition is supported. When you use Our265 at the first time, the library files (libx265.a, libx265.so, libx265.so.130)  should be copied to /usr/lib.
 
-### Encode single sequence
+### 1-Pass Encode single sequence
 
 command line examples:
 
 ```
-./x265 --preset veryslow --input PeopleOnStreet_2560x1600_30_crop.yuv --input-res 2560x1600 --ref 4 --fps 30 --frame-thread 1 --no-wpp --bitrate 10000 --no-pmode --no-pme --slices 0 --lookahead-slices 0 --psnr --tune psnr --b-adapt 1 --bframes 15 --max-tlayer 4 --keyint 5000 -o output.265
+./x265 --preset veryslow --input PeopleOnStreet_2560x1600_30_crop.yuv --input-res 2560x1600 --ref 4 --fps 30 --frame-thread 1 --no-wpp --bitrate 10000 --no-pmode --no-pme --slices 0 --lookahead-slices 0 --psnr --tune psnr --b-adapt 1 --bframes 15 --keyint 5000 -o output.265
+```
+### 2-Pass Encode single sequence
+
+command line examples:
+
+```
+./x265 --pass 1 --preset veryslow --input PeopleOnStreet_2560x1600_30_crop.yuv --input-res 2560x1600 --ref 4 --fps 30 --frame-thread 1 --no-wpp --bitrate 10000 --no-pmode --no-pme --slices 0 --lookahead-slices 0 --psnr --tune psnr --b-adapt 1 --bframes 15 --keyint 5000 -o output.265
+
+./x265 --pass 2 --preset veryslow --input PeopleOnStreet_2560x1600_30_crop.yuv --input-res 2560x1600 --ref 4 --fps 30 --frame-thread 1 --no-wpp --bitrate 10000 --no-pmode --no-pme --slices 0 --lookahead-slices 0 --psnr --tune psnr --b-adapt 1 --bframes 15 --keyint 5000 -o output.265
 ```
 
 #### Parameters:
+As compared with x265, there is one exceptions:
 
-##### Executable Options:
-
--h/--help                        
-Show this help text and exit.
-
--V/--version                    
-Show version info and exit.
-
-##### Output Options:
--o/--output <filename>           
-Bitstream output file name
-
--D/--output-depth 8|10|12        
-Output bit depth (also internal bit depth). Default 8
-   
---log-level <string>          
-Logging level: none error warning info debug full. Default info
-
---no-progress              
-Disable CLI progress reports
-   
---csv <filename>              
-Comma separated log file, if csv-log-level > 0 frame level statistics, else one line per run
-   
---csv-log-level <integer>     
-Level of csv logging, if csv-log-level > 0 frame level statistics, else one line per run: 0-2
-   
-##### Input Options:
---input <filename>            
-Raw YUV or Y4M input file name. `-` for stdin
-   
---fps <float|rational>        
-Source frame rate (float or num/denom), auto-detected if Y4M
-
---input-res WxH          
-Source picture size [w x h], auto-detected if Y4M
-
--f/--frames <integer>            
-Maximum number of frames to encode. Default all
-   
---seek <integer>              
-First frame to encode
-
-##### Quality reporting metrics:
-
---[no-]ssim                   
-Enable reporting SSIM metric scores. Default disabled
-
---[no-]psnr                  
-Enable reporting PSNR metric scores. Default disabled
-
-##### Profile, Level, Tier:
--P/--profile <string>            
-Enforce an encode profile: main, main10, mainstillpicture
-   
---level-idc <integer|float> 
-Force a minimum required decoder level (as '5.0' or '50')
-
---[no-]high-tier              
-If a decoder level is specified, this modifier selects High tier of that level
-
---uhd-bd                      
-Enable UHD Bluray compatibility support
-
---[no-]allow-non-conformance            
-Allow the encoder to generate profile NONE bitstreams. Default disabled
-
-##### Threading, performance:
-
---pools <integer,...>         
-Comma separated thread count per thread pool (pool per NUMA node), '-' implies no threads on node, '+' implies one thread per core on node
-
--F/--frame-threads <integer>       
-Number of concurrently encoded frames. 0: auto-determined by core count
-   
---[no-]wpp                 
-Enable Wavefront Parallel Processing. Default enabled
-
---[no-]slices <integer>   
-Enable Multiple Slices feature. Default 1
-
---[no-]pmode                  
-Parallel mode analysis. Default disabled
-
---[no-]pme                    
-Parallel motion estimation. Default disabled
-
---[no-]asm <bool|int|string>     
-Override CPU detection. Default: auto
-
-##### GOP structure:
---max-tlayer
-max temporal layer number. For example, GOP16: --bframes 15 --max-tlayer 4; GOP8: --bframes 7 --max-tlayer 3
-
-##### Presets:
-
--p/--preset <string>
-Trade off performance for compression efficiency. Default medium
-ultrafast, superfast, veryfast, faster, fast, medium, slow, slower, veryslow, or placebo
-
--t/--tune <string>  
-Tune the settings for a particular type of source or situation: psnr, ssim, grain, zerolatency, fastdecode
-
-For more parameters, you can refer to ./x265 --help.
+- The pyramid b-frame minGOP structure is always enabled, therefore, the option *--b-pyramid* is dropped.
 
 ### Encode batch sequences
-HTcondor is required to run our tests. condor_test_read_file.sh is a shell scripts and sequence_file.txt contains all sequence configurations.
 
-(1) You can change the source dir and other options in sequence_file.txt.
+HTcondor is required. 
 
-(2) run the command "sh condor_test_read_file.sh sequence_file.txt".
+condor_test_read_file.sh is a 1-pass encoding shell scripts and sequence_file.txt contains all sequence configurations.
+
+
+- You can change the source dir and other options in sequence_file.txt.
+
+- run the command "sh condor_test_read_file.sh sequence_file.txt".
+
+- In our tests, when the reference frame number is not less than 4, the long-term reference technique is enabled adaptively. You also can use less than 4 references.
+
+- We optimize the slice type decision algorithms, cu-tree algorithms and the 1-pass rate control algorithms, which is described in "Optimize x265 Rate Control: An Exploration of Lookahead in Frame Bit Allocation and Slice Type Decision".
 
 ## Performance
-Encoding test sequences of JCTVC CLASS-A ~ CLASS-F in medium preset:
+Our work is still being improved...
+### Compare with x265 1-pass encoding in SSIM metric (low latency: lookahead depth 5)
 
-Compared with x265, the quality of Our265 increases with **1.15dB** in average, while the bitrate saves with **30.93%** in average.
+The coding parameters are "--preset medium --rc-lookahead 5 --ref 4 --frame-thread 1 --no-wpp --no-pmode --no-pme --slices 0 --lookahead-slices 0 --ssim --tune ssim --qg-size 64 --aq-mode 1 --aq-strength 1.0 --b-adapt 1 --bframes 4 --keyint 5000"
 
-Our work is still being improved in terms of 2-pass encoding.
+<table>
+  <tr>
+    <td rowspan="2">sequence</td>
+    <td rowspan="2">target rate<br>(kbps)</td>
+    <td colspan="2">Our265</td>
+    <td colspan="2">x265</td>
+    <td rowspan="2">BDBR<br>(%)</td>
+
+  </tr>
+  <tr>
+    <td>SSIM</td>
+    <td>rate</td>
+    <td>SSIM</td>
+    <td>rate</td>
+  </tr>
+  <tr>
+    <td rowspan="4">BasketballPass<br>416x240<br>50</td>
+    <td>1500</td>
+    <td>0.973819</td>
+    <td>1489.92</td>
+    <td>0.970247</td>
+    <td>1598.44</td>
+    <td rowspan="4">-18.725</td>
+  </tr>
+  <tr>
+    <td>1000</td>
+    <td>0.960122</td>
+    <td>1001.15</td>
+    <td>0.954149</td>
+    <td>1068.86</td>
+  </tr>
+  <tr>
+    <td>500</td>
+    <td>0.923506</td>
+    <td>511.24</td>
+    <td>0.911896</td>
+    <td>538.75</td>
+  </tr>
+  <tr>
+    <td>250</td>
+    <td>0.864961</td>
+    <td>260.27</td>
+    <td>0.846486</td>
+    <td>273.04</td>
+  </tr>
+  <tr>
+    <td rowspan="4">BlowingBubbles<br>416x240<br>50</td>
+    <td>1500</td>
+    <td>0.969334</td>
+    <td>1510.78</td>
+    <td>0.962273</td>
+    <td>1561.24</td>
+    <td rowspan="4">-25.960</td>
+  </tr>
+  <tr>
+    <td>1000</td>
+    <td>0.960122</td>
+    <td>1001.15</td>
+    <td>0.945594</td>
+    <td>1049.94</td>
+  </tr>
+  <tr>
+    <td>500</td>
+    <td>0.922309</td>
+    <td>512.23</td>
+    <td>0.902404</td>
+    <td>529.91</td>
+  </tr>
+  <tr>
+    <td>250</td>
+    <td>0.868269</td>
+    <td>258.21</td>
+    <td>0.839031</td>
+    <td>268.47</td>
+  </tr>
+  <tr>
+    <td rowspan="4">Flowervase<br>416x240<br>30</td>
+    <td>1500</td>
+    <td>0.995849</td>
+    <td>1535.65</td>
+    <td>0.995712</td>
+    <td>1764.26</td>
+    <td rowspan="4">-29.231</td>
+  </tr>
+  <tr>
+    <td>1000</td>
+    <td>0.995116</td>
+    <td>1044.56</td>
+    <td>0.994716</td>
+    <td>1180.63</td>
+  </tr>
+  <tr>
+    <td>500</td>
+    <td>0.993450</td>
+    <td>549.80</td>
+    <td>0.992299</td>
+    <td>596.03</td>
+  </tr>
+  <tr>
+    <td>250</td>
+    <td>0.990307</td>
+    <td>286.12</td>
+    <td>0.988231</td>
+    <td>301.62</td>
+  </tr>
+  <tr>
+    <td rowspan="4">BQSquare<br>416x240<br>60</td>
+    <td>1500</td>
+    <td>0.966549</td>
+    <td>1500.58</td>
+    <td>0.950919</td>
+    <td>1481.70</td>
+    <td rowspan="4">-40.252</td>
+  </tr>
+  <tr>
+    <td>1000</td>
+    <td>0.954951</td>
+    <td>1005.11</td>
+    <td>0.932458</td>
+    <td>981.49</td>
+  </tr>
+  <tr>
+    <td>500</td>
+    <td>0.925798</td>
+    <td>501.17</td>
+    <td>0.897116</td>
+    <td>488.74</td>
+  </tr>
+  <tr>
+    <td>250</td>
+    <td>0.888008</td>
+    <td>250.09</td>
+    <td>0.857949</td>
+    <td>244.94</td>
+  </tr>
+  <tr>
+    <td rowspan="4">RaceHorses<br>416x240<br>30</td>
+    <td>1500</td>
+    <td>0.973530</td>
+    <td>1473.37</td>
+    <td>0.969855</td>
+    <td>1431.65</td>
+    <td rowspan="4">-11.697</td>
+  </tr>
+  <tr>
+    <td>1000</td>
+    <td>0.959603</td>
+    <td>986.34</td>
+    <td>0.954088</td>
+    <td>960.06</td>
+  </tr>
+  <tr>
+    <td>500</td>
+    <td>0.919562</td>
+    <td>498.70</td>
+    <td>0.906966</td>
+    <td>485.30</td>
+  </tr>
+  <tr>
+    <td>250</td>
+    <td>0.851740</td>
+    <td>249.99</td>
+    <td>0.829970</td>
+    <td>245.19</td>
+  </tr>
+  <tr>
+    <td rowspan="4">BQMall<br>832x480<br>60</td>
+    <td>2000</td>
+    <td>0.953663</td>
+    <td>2004.02</td>
+    <td>0.946962</td>
+    <td>2035.42</td>
+    <td rowspan="4">-25.075</td>
+  </tr>
+  <tr>
+    <td>1500</td>
+    <td>0.944859</td>
+    <td>1507.87</td>
+    <td>0.935691</td>
+    <td>1535.57</td>
+  </tr>
+  <tr>
+    <td>1000</td>
+    <td>0.929052</td>
+    <td>1009.28</td>
+    <td>0.915677</td>
+    <td>1031.42</td>
+  </tr>
+  <tr>
+    <td>500</td>
+    <td>0.883551</td>
+    <td>515.75</td>
+    <td>0.864501</td>
+    <td>520.38</td>
+  </tr>
+  <tr>
+    <td rowspan="4">BasketballDrill<br>832x480<br>50</td>
+    <td>2000</td>
+    <td>0.954914</td>
+    <td>2024.75</td>
+    <td>0.935210</td>
+    <td>2038.52</td>
+    <td rowspan="4">-39.657</td>
+  </tr>
+  <tr>
+    <td>1500</td>
+    <td>0.944191</td>
+    <td>1511.12</td>
+    <td>0.917939</td>
+    <td>1534.70</td>
+  </tr>
+  <tr>
+    <td>1000</td>
+    <td>0.923783</td>
+    <td>1014.45</td>
+    <td>0.889945</td>
+    <td>1028.56</td>
+  </tr>
+  <tr>
+    <td>500</td>
+    <td>0.897778</td>
+    <td>509.76</td>
+    <td>0.835720</td>
+    <td>518.42</td>
+  </tr>
+  <tr>
+    <td rowspan="4">PartyScene<br>832x480<br>50</td>
+    <td>2000</td>
+    <td>0.924676</td>
+    <td>2000.63</td>
+    <td>0.899900</td>
+    <td>1870.53</td>
+    <td rowspan="4">-28.880</td>
+  </tr>
+  <tr>
+    <td>1500</td>
+    <td>0.906688</td>
+    <td>1508.97</td>
+    <td>0.876858</td>
+    <td>1406.96</td>
+  </tr>
+  <tr>
+    <td>1000</td>
+    <td>0.876000</td>
+    <td>1005.30</td>
+    <td>0.837579</td>
+    <td>942.31</td>
+  </tr>
+  <tr>
+    <td>500</td>
+    <td>0.809187</td>
+    <td>505.34</td>
+    <td>0.755674</td>
+    <td>475.92</td>
+  </tr>
+  <tr>
+    <td rowspan="4">RaceHorses<br>832x480<br>30</td>
+    <td>2000</td>
+    <td>0.931114</td>
+    <td>1927.84</td>
+    <td>0.923370</td>
+    <td>1835.52</td>
+    <td rowspan="4">-11.920</td>
+  </tr>
+  <tr>
+    <td>1500</td>
+    <td>0.916319</td>
+    <td>1460.00</td>
+    <td>0.906882</td>
+    <td>1391.32</td>
+  </tr>
+  <tr>
+    <td>1000</td>
+    <td>0.887854</td>
+    <td>981.40</td>
+    <td>0.875235</td>
+    <td>940.27</td>
+  </tr>
+  <tr>
+    <td>500</td>
+    <td>0.818997</td>
+    <td>491.23</td>
+    <td>0.798521</td>
+    <td>482.77</td>
+  </tr>
+  <tr>
+    <td rowspan="4">Flowervase<br>832x480<br>30</td>
+    <td>2000</td>
+    <td>0.983745</td>
+    <td>2048.64</td>
+    <td>0.983600</td>
+    <td>2361.60</td>
+    <td rowspan="4">-18.746</td>
+  </tr>
+  <tr>
+    <td>1500</td>
+    <td>0.982218</td>
+    <td>1540.59</td>
+    <td>0.981904</td>
+    <td>1776.90</td>
+  </tr>
+  <tr>
+    <td>1000</td>
+    <td>0.979492</td>
+    <td>1030.19</td>
+    <td>0.978923</td>
+    <td>1192.60</td>
+  </tr>
+  <tr>
+    <td>500</td>
+    <td>0.972022</td>
+    <td>523.36</td>
+    <td>0.971256</td>
+    <td>604.67</td>
+  </tr>
+  <tr>
+    <td rowspan="4">Johnny<br>1280x720<br>60</td>
+    <td>2000</td>
+    <td>0.972155</td>
+    <td>2030.33</td>
+    <td>0.969320</td>
+    <td>1935.31</td>
+    <td rowspan="4">-42.841</td>
+  </tr>
+  <tr>
+    <td>1500</td>
+    <td>0.971062</td>
+    <td>1499.60</td>
+    <td>0.967855</td>
+    <td>1431.95</td>
+  </tr>
+  <tr>
+    <td>1000</td>
+    <td>0.969185</td>
+    <td>1002.11</td>
+    <td>0.965104</td>
+    <td>944.23</td>
+  </tr>
+  <tr>
+    <td>500</td>
+    <td>0.964242</td>
+    <td>497.99</td>
+    <td>0.958209</td>
+    <td>460.39</td>
+  </tr>
+  <tr>
+    <td rowspan="4">FourPeople<br>1280x720<br>60</td>
+    <td>2000</td>
+    <td>0.975298</td>
+    <td>1988.46</td>
+    <td>0.972552</td>
+    <td>1873.62</td>
+    <td rowspan="4">-20.634</td>
+  </tr>
+  <tr>
+    <td>1500</td>
+    <td>0.973704</td>
+    <td>1480.00</td>
+    <td>0.970033</td>
+    <td>1379.67</td>
+  </tr>
+  <tr>
+    <td>1000</td>
+    <td>0.970120</td>
+    <td>993.75</td>
+    <td>0.964495</td>
+    <td>902.49</td>
+  </tr>
+  <tr>
+    <td>500</td>
+    <td>0.957963</td>
+    <td>492.55</td>
+    <td>0.948181</td>
+    <td>446.57</td>
+  </tr>
+  <tr>
+    <td rowspan="4">KristenAndSara<br>1280x720<br>60</td>
+    <td>2000</td>
+    <td>0.974870</td>
+    <td>2021.29</td>
+    <td>0.972898</td>
+    <td>2046.81</td>
+    <td rowspan="4">-29.978</td>
+  </tr>
+  <tr>
+    <td>1500</td>
+    <td>0.973537</td>
+    <td>1499.73</td>
+    <td>0.971240</td>
+    <td>1524.26</td>
+  </tr>
+  <tr>
+    <td>1000</td>
+    <td>0.971058</td>
+    <td>999.65</td>
+    <td>0.967947</td>
+    <td>1008.15</td>
+  </tr>
+  <tr>
+    <td>500</td>
+    <td>0.963515</td>
+    <td>501.15</td>
+    <td>0.958600</td>
+    <td>497.03</td>
+  </tr>
+  <tr>
+    <td rowspan="4">BasketballDrive<br>1920x1080<br>50</td>
+    <td>8000</td>
+    <td>0.921121</td>
+    <td>8110.36</td>
+    <td>0.918106</td>
+    <td>8014.12</td>
+    <td rowspan="4">-15.583</td>
+  </tr>
+  <tr>
+    <td>6000</td>
+    <td>0.914364</td>
+    <td>6065.89</td>
+    <td>0.910261</td>
+    <td>6005.94</td>
+  </tr>
+  <tr>
+    <td>4000</td>
+    <td>0.901207</td>
+    <td>4015.03</td>
+    <td>0.896176</td>
+    <td>4004.13</td>
+  </tr>
+  <tr>
+    <td>2000</td>
+    <td>0.867569</td>
+    <td>1993.19</td>
+    <td>0.861773</td>
+    <td>2003.35</td>
+  </tr>
+  <tr>
+    <td rowspan="4">BQTerrace<br>1920x1080<br>60</td>
+    <td>8000</td>
+    <td>0.906401</td>
+    <td>8018.91</td>
+    <td>0.899814</td>
+    <td>8040.39</td>
+    <td rowspan="4">-39.250</td>
+  </tr>
+  <tr>
+    <td>6000</td>
+    <td>0.902890</td>
+    <td>6022.86</td>
+    <td>0.895542</td>
+    <td>6006.04</td>
+  </tr>
+  <tr>
+    <td>4000</td>
+    <td>0.896785</td>
+    <td>4011.45</td>
+    <td>0.888326</td>
+    <td>3974.16</td>
+  </tr>
+  <tr>
+    <td>2000</td>
+    <td>0.880127</td>
+    <td>1994.46</td>
+    <td>0.870736</td>
+    <td>1974.38</td>
+  </tr>
+  <tr>
+    <td rowspan="4">ParkScene<br>1920x1080<br>24</td>
+    <td>8000</td>
+    <td>0.960256</td>
+    <td>7894.54</td>
+    <td>0.955456</td>
+    <td>7654.56</td>
+    <td rowspan="4">-21.124</td>
+  </tr>
+  <tr>
+    <td>6000</td>
+    <td>0.954939</td>
+    <td>5908.53</td>
+    <td>0.948656</td>
+    <td>5716.85</td>
+  </tr>
+  <tr>
+    <td>4000</td>
+    <td>0.945053</td>
+    <td>3951.21</td>
+    <td>0.935755</td>
+    <td>3788.10</td>
+  </tr>
+  <tr>
+    <td>2000</td>
+    <td>0.918285</td>
+    <td>1959.65</td>
+    <td>0.902776</td>
+    <td>1878.61</td>
+  </tr>
+  <tr>
+    <td rowspan="4">Cactus<br>1920x1080<br>50</td>
+    <td>8000</td>
+    <td>0.924480</td>
+    <td>7970.13</td>
+    <td>0.919269</td>
+    <td>7902.56</td>
+    <td rowspan="4">-26.898</td>
+  </tr>
+  <tr>
+    <td>6000</td>
+    <td>0.919259</td>
+    <td>5889.06</td>
+    <td>0.911733</td>
+    <td>5913.34</td>
+  </tr>
+  <tr>
+    <td>4000</td>
+    <td>0.909684</td>
+    <td>4002.44</td>
+    <td>0.896906</td>
+    <td>3943.91</td>
+  </tr>
+  <tr>
+    <td>2000</td>
+    <td>0.880708</td>
+    <td>1992.52</td>
+    <td>0.863005</td>
+    <td>1965.73</td>
+  </tr>
+  <tr>
+    <td rowspan="4">Kimono1<br>1920x1080<br>24</td>
+    <td>8000</td>
+    <td>0.963293</td>
+    <td>7753.43</td>
+    <td>0.961715</td>
+    <td>7306.58</td>
+    <td rowspan="4">-10.377</td>
+  </tr>
+  <tr>
+    <td>6000</td>
+    <td>0.960656</td>
+    <td>5748.82</td>
+    <td>0.958381</td>
+    <td>5290.46</td>
+  </tr>
+  <tr>
+    <td>4000</td>
+    <td>0.955423</td>
+    <td>3735.32</td>
+    <td>0.951940</td>
+    <td>3348.17</td>
+  </tr>
+  <tr>
+    <td>2000</td>
+    <td>0.940131</td>
+    <td>1845.53</td>
+    <td>0.933308</td>
+    <td>1592.19</td>
+  </tr>
+  <tr>
+    <td rowspan="4">SlideEditing<br>1280x720<br>30</td>
+    <td>1250</td>
+    <td>0.998430</td>
+    <td>1003.96</td>
+    <td>0.993927</td>
+    <td>740.86</td>
+    <td rowspan="4">-25.090</td>
+  </tr>
+  <tr>
+    <td>1000</td>
+    <td>0.998164</td>
+    <td>880.28</td>
+    <td>0.991757</td>
+    <td>635.24</td>
+  </tr>
+  <tr>
+    <td>750</td>
+    <td>0.997217</td>
+    <td>715.23</td>
+    <td>0.987131</td>
+    <td>492.73</td>
+  </tr>
+  <tr>
+    <td>500</td>
+    <td>0.993586</td>
+    <td>491.77</td>
+    <td>0.978520</td>
+    <td>343.41</td>
+  </tr>
+  <tr>
+    <td rowspan="4">SlideShow<br>1280x720<br>20</td>
+    <td>1250</td>
+    <td>0.996608</td>
+    <td>1020.37</td>
+    <td>0.991280</td>
+    <td>905.24</td>
+    <td rowspan="4">-41.550</td>
+  </tr>
+  <tr>
+    <td>1000</td>
+    <td>0.995549</td>
+    <td>849.50</td>
+    <td>0.989131</td>
+    <td>733.19</td>
+  </tr>
+  <tr>
+    <td>750</td>
+    <td>0.993809</td>
+    <td>665.10</td>
+    <td>0.985552</td>
+    <td>551.85</td>
+  </tr>
+  <tr>
+    <td>500</td>
+    <td>0.990358</td>
+    <td>489.77</td>
+    <td>0.979075</td>
+    <td>370.60</td>
+  </tr>
+  <tr>
+    <td rowspan="4">ChinaSpeed<br>1024x768<br>30</td>
+    <td>2000</td>
+    <td>0.937210</td>
+    <td>1959.66</td>
+    <td>0.930722</td>
+    <td>1910.10</td>
+    <td rowspan="4">-18.545</td>
+  </tr>
+  <tr>
+    <td>1500</td>
+    <td>0.926263</td>
+    <td>1470.37</td>
+    <td>0.918299</td>
+    <td>1424.70</td>
+  </tr>
+  <tr>
+    <td>1000</td>
+    <td>0.910066</td>
+    <td>980.46</td>
+    <td>0.899140</td>
+    <td>946.68</td>
+  </tr>
+  <tr>
+    <td>500</td>
+    <td>0.879204</td>
+    <td>491.59</td>
+    <td>0.864453</td>
+    <td>471.22</td>
+  </tr>
+  <tr>
+    <td rowspan="4">BasketballDrillText<br>832x480<br>50</td>
+    <td>2000</td>
+    <td>0.956020</td>
+    <td>2016.13</td>
+    <td>0.935979</td>
+    <td>2055.29</td>
+    <td rowspan="4">-42.061</td>
+  </tr>
+  <tr>
+    <td>1500</td>
+    <td>0.946042</td>
+    <td>1522.22</td>
+    <td>0.919761</td>
+    <td>1544.05</td>
+  </tr>
+  <tr>
+    <td>1000</td>
+    <td>0.927076</td>
+    <td>1015.92</td>
+    <td>0.893399</td>
+    <td>1031.01</td>
+  </tr>
+  <tr>
+    <td>500</td>
+    <td>0.884507</td>
+    <td>510.15</td>
+    <td>0.841868</td>
+    <td>515.45</td>
+  </tr>
+  <tr>
+    <td rowspan="4">Traffic<br>2560x1600<br>30</td>
+    <td>10000</td>
+    <td>0.976575</td>
+    <td>9955.31</td>
+    <td>0.973098</td>
+    <td>9728.85</td>
+    <td rowspan="4">-25.309</td>
+  </tr>
+  <tr>
+    <td>8000</td>
+    <td>0.974134</td>
+    <td>7977.79</td>
+    <td>0.969281</td>
+    <td>7726.08</td>
+  </tr>
+  <tr>
+    <td>6000</td>
+    <td>0.969844</td>
+    <td>5969.88</td>
+    <td>0.962994</td>
+    <td>5731.75</td>
+  </tr>
+  <tr>
+    <td>4000</td>
+    <td>0.961736</td>
+    <td>3967.51</td>
+    <td>0.951509</td>
+    <td>3780.13</td>
+  </tr>
+  <tr>
+    <td rowspan="4">PeopleOnStreet<br>2560x1600<br>30</td>
+    <td>10000</td>
+    <td>0.922662</td>
+    <td>10027.00</td>
+    <td>0.916534</td>
+    <td>10103.09</td>
+    <td rowspan="4">-10.121</td>
+  </tr>
+  <tr>
+    <td>8000</td>
+    <td>0.908259</td>
+    <td>8005.19</td>
+    <td>0.901398</td>
+    <td>8086.67</td>
+  </tr>
+  <tr>
+    <td>6000</td>
+    <td>0.886854</td>
+    <td>5995.88</td>
+    <td>0.879331</td>
+    <td>6067.67</td>
+  </tr>
+  <tr>
+    <td>4000</td>
+    <td>0.852243</td>
+    <td>3994.94</td>
+    <td>0.842404</td>
+    <td>4048.06</td>
+  </tr>
+  <tr>
+    <td colspan="6">Average</td>
+    <td>-25.813</td>
+  </tr>
+</table>
+
+### Compare with x265 1-pass encoding in PSNR metric (low latency: lookahead depth 5)
+
+The coding parameters are "--preset medium --rc-lookahead 5 --ref 4 --frame-thread 1 --no-wpp --no-pmode --no-pme --slices 0 --lookahead-slices 0 --psnr --tune psnr --qg-size 64 --b-adapt 1 --bframes 4 --keyint 5000"
+
+<table>
+  <tr>
+    <td rowspan="2">sequence</td>
+    <td rowspan="2">target rate<br>(kbps)</td>
+    <td colspan="2">Our265</td>
+    <td colspan="2">x265</td>
+    <td rowspan="2">BDBR<br>(%)</td>
+
+  </tr>
+  <tr>
+    <td>PSNR(dB)</td>
+    <td>rate</td>
+    <td>PSNR(dB)</td>
+    <td>rate</td>
+  </tr>
+  <tr>
+    <td rowspan="4">BasketballPass<br>416x240<br>50</td>
+    <td>1500</td>
+    <td>40.614</td>
+    <td>1476.23</td>
+    <td>40.326</td>
+    <td>1611.74</td>
+    <td rowspan="4">-13.585</td>
+  </tr>
+  <tr>
+    <td>1000</td>
+    <td>38.599</td>
+    <td>995.54</td>
+    <td>38.238</td>
+    <td>1075.97</td>
+  </tr>
+  <tr>
+    <td>500</td>
+    <td>35.478</td>
+    <td>511.32</td>
+    <td>35.069</td>
+    <td>539.78</td>
+  </tr>
+  <tr>
+    <td>250</td>
+    <td>32.672</td>
+    <td>260.74</td>
+    <td>32.393</td>
+    <td>273.88</td>
+  </tr>
+  <tr>
+    <td rowspan="4">BlowingBubbles<br>416x240<br>50</td>
+    <td>1500</td>
+    <td>38.178</td>
+    <td>1543.90</td>
+    <td>37.184</td>
+    <td>1587.42</td>
+    <td rowspan="4">-24.392</td>
+  </tr>
+  <tr>
+    <td>1000</td>
+    <td>36.449</td>
+    <td>1024.89</td>
+    <td>35.478</td>
+    <td>1067.09</td>
+  </tr>
+  <tr>
+    <td>500</td>
+    <td>33.708</td>
+    <td>518.16</td>
+    <td>32.799</td>
+    <td>538.60</td>
+  </tr>
+  <tr>
+    <td>250</td>
+    <td>31.307</td>
+    <td>261.03</td>
+    <td>30.472</td>
+    <td>272.93</td>
+  </tr>
+  <tr>
+    <td rowspan="4">Flowervase<br>416x240<br>30</td>
+    <td>1500</td>
+    <td>51.760</td>
+    <td>1519.14</td>
+    <td>51.715</td>
+    <td>1801.29</td>
+    <td rowspan="4">-21.976</td>
+  </tr>
+  <tr>
+    <td>1000</td>
+    <td>50.521</td>
+    <td>1020.93</td>
+    <td>50.350</td>
+    <td>1208.57</td>
+  </tr>
+  <tr>
+    <td>500</td>
+    <td>48.309</td>
+    <td>515.19</td>
+    <td>47.922</td>
+    <td>608.17</td>
+  </tr>
+  <tr>
+    <td>250</td>
+    <td>45.770</td>
+    <td>269.88</td>
+    <td>45.367</td>
+    <td>310.67</td>
+  </tr>
+  <tr>
+    <td rowspan="4">BQSquare<br>416x240<br>60</td>
+    <td>1500</td>
+    <td>38.612</td>
+    <td>1508.08</td>
+    <td>37.002</td>
+    <td>1449.67</td>
+    <td rowspan="4">-34.785</td>
+  </tr>
+  <tr>
+    <td>1000</td>
+    <td>37.178</td>
+    <td>1001.84</td>
+    <td>35.568</td>
+    <td>956.86</td>
+  </tr>
+  <tr>
+    <td>500</td>
+    <td>34.936</td>
+    <td>502.67</td>
+    <td>33.486</td>
+    <td>478.24</td>
+  </tr>
+  <tr>
+    <td>250</td>
+    <td>32.734</td>
+    <td>251.36</td>
+    <td>31.572</td>
+    <td>240.69</td>
+  </tr>
+  <tr>
+    <td rowspan="4">RaceHorses<br>416x240<br>30</td>
+    <td>1500</td>
+    <td>40.293</td>
+    <td>1457.74</td>
+    <td>39.609</td>
+    <td>1418.41</td>
+    <td rowspan="4">-9.731</td>
+  </tr>
+  <tr>
+    <td>1000</td>
+    <td>38.272</td>
+    <td>979.40</td>
+    <td>37.604</td>
+    <td>951.88</td>
+  </tr>
+  <tr>
+    <td>500</td>
+    <td>35.135</td>
+    <td>499.15</td>
+    <td>34.546</td>
+    <td>478.24</td>
+  </tr>
+  <tr>
+    <td>250</td>
+    <td>32.318</td>
+    <td>248.79</td>
+    <td>31.935</td>
+    <td>242.28</td>
+  </tr>
+  <tr>
+    <td rowspan="4">BQMall<br>832x480<br>60</td>
+    <td>2000</td>
+    <td>38.779</td>
+    <td>2034.19</td>
+    <td>37.925</td>
+    <td>2060.64</td>
+    <td rowspan="4">-24.508</td>
+  </tr>
+  <tr>
+    <td>1500</td>
+    <td>37.770</td>
+    <td>1535.12</td>
+    <td>36.857</td>
+    <td>1555.57</td>
+  </tr>
+  <tr>
+    <td>1000</td>
+    <td>36.339</td>
+    <td>1023.05</td>
+    <td>35.365</td>
+    <td>1043.31</td>
+  </tr>
+  <tr>
+    <td>500</td>
+    <td>33.772</td>
+    <td>513.78</td>
+    <td>32.716</td>
+    <td>525.75</td>
+  </tr>
+  <tr>
+    <td rowspan="4">BasketballDrill<br>832x480<br>50</td>
+    <td>2000</td>
+    <td>39.143</td>
+    <td>2020.98</td>
+    <td>37.819</td>
+    <td>2048.57</td>
+    <td rowspan="4">-33.870</td>
+  </tr>
+  <tr>
+    <td>1500</td>
+    <td>38.200</td>
+    <td>1534.32</td>
+    <td>36.708</td>
+    <td>1543.37</td>
+  </tr>
+  <tr>
+    <td>1000</td>
+    <td>36.739</td>
+    <td>1030.54</td>
+    <td>35.225</td>
+    <td>1035.05</td>
+  </tr>
+  <tr>
+    <td>500</td>
+    <td>34.303</td>
+    <td>519.11</td>
+    <td>32.992</td>
+    <td>522.03</td>
+  </tr>
+  <tr>
+    <td rowspan="4">PartyScene<br>832x480<br>50</td>
+    <td>2000</td>
+    <td>33.734</td>
+    <td>2017.51</td>
+    <td>32.454</td>
+    <td>1846.87</td>
+    <td rowspan="4">-25.835</td>
+  </tr>
+  <tr>
+    <td>1500</td>
+    <td>32.700</td>
+    <td>1507.30</td>
+    <td>31.454</td>
+    <td>1387.63</td>
+  </tr>
+  <tr>
+    <td>1000</td>
+    <td>31.363</td>
+    <td>1011.53</td>
+    <td>30.118</td>
+    <td>929.06</td>
+  </tr>
+  <tr>
+    <td>500</td>
+    <td>29.274</td>
+    <td>510.61</td>
+    <td>28.146</td>
+    <td>466.31</td>
+  </tr>
+  <tr>
+    <td rowspan="4">RaceHorses<br>832x480<br>30</td>
+    <td>2000</td>
+    <td>36.249</td>
+    <td>1906.67</td>
+    <td>35.653</td>
+    <td>1801.90</td>
+    <td rowspan="4">-8.841</td>
+  </tr>
+  <tr>
+    <td>1500</td>
+    <td>35.285</td>
+    <td>1452.74</td>
+    <td>34.697</td>
+    <td>1364.40</td>
+  </tr>
+  <tr>
+    <td>1000</td>
+    <td>33.899</td>
+    <td>981.30</td>
+    <td>33.377</td>
+    <td>923.69</td>
+  </tr>
+  <tr>
+    <td>500</td>
+    <td>31.549</td>
+    <td>486.83</td>
+    <td>31.223</td>
+    <td>472.47</td>
+  </tr>
+  <tr>
+    <td rowspan="4">Flowervase<br>832x480<br>30</td>
+    <td>2000</td>
+    <td>45.148</td>
+    <td>2032.85</td>
+    <td>45.216</td>
+    <td>2438.31</td>
+    <td rowspan="4">-18.773</td>
+  </tr>
+  <tr>
+    <td>1500</td>
+    <td>44.379</td>
+    <td>1528.43</td>
+    <td>44.355</td>
+    <td>1830.33</td>
+  </tr>
+  <tr>
+    <td>1000</td>
+    <td>43.257</td>
+    <td>1022.23</td>
+    <td>43.160</td>
+    <td>1228.08</td>
+  </tr>
+  <tr>
+    <td>500</td>
+    <td>41.164</td>
+    <td>522.65</td>
+    <td>41.031</td>
+    <td>625.51</td>
+  </tr>
+  <tr>
+    <td rowspan="4">Johnny<br>1280x720<br>60</td>
+    <td>2000</td>
+    <td>44.649</td>
+    <td>2007.26</td>
+    <td>43.895</td>
+    <td>1922.87</td>
+    <td rowspan="4">-45.644</td>
+  </tr>
+  <tr>
+    <td>1500</td>
+    <td>44.352</td>
+    <td>1504.07</td>
+    <td>43.505</td>
+    <td>1433.33</td>
+  </tr>
+  <tr>
+    <td>1000</td>
+    <td>43.872</td>
+    <td>992.11</td>
+    <td>42.907</td>
+    <td>950.04</td>
+  </tr>
+  <tr>
+    <td>500</td>
+    <td>42.704</td>
+    <td>495.97</td>
+    <td>41.592</td>
+    <td>462.02</td>
+  </tr>
+  <tr>
+    <td rowspan="4">FourPeople<br>1280x720<br>60</td>
+    <td>2000</td>
+    <td>43.519</td>
+    <td>1979.20</td>
+    <td>42.779</td>
+    <td>1842.52</td>
+    <td rowspan="4">-26.809</td>
+  </tr>
+  <tr>
+    <td>1500</td>
+    <td>43.018</td>
+    <td>1484.22</td>
+    <td>42.041</td>
+    <td>1371.45</td>
+  </tr>
+  <tr>
+    <td>1000</td>
+    <td>42.074</td>
+    <td>995.97</td>
+    <td>40.767</td>
+    <td>905.08</td>
+  </tr>
+  <tr>
+    <td>500</td>
+    <td>39.776</td>
+    <td>499.33</td>
+    <td>38.356</td>
+    <td>446.36</td>
+  </tr>
+  <tr>
+    <td rowspan="4">KristenAndSara<br>1280x720<br>60</td>
+    <td>2000</td>
+    <td>44.473</td>
+    <td>2002.12</td>
+    <td>43.925</td>
+    <td>2055.68</td>
+    <td rowspan="4">-33.106</td>
+  </tr>
+  <tr>
+    <td>1500</td>
+    <td>44.076</td>
+    <td>1501.43</td>
+    <td>43.405</td>
+    <td>1534.69</td>
+  </tr>
+  <tr>
+    <td>1000</td>
+    <td>43.377</td>
+    <td>997.38</td>
+    <td>42.521</td>
+    <td>1015.80</td>
+  </tr>
+  <tr>
+    <td>500</td>
+    <td>41.682</td>
+    <td>503.13</td>
+    <td>40.579</td>
+    <td>498.41</td>
+  </tr>
+  <tr>
+    <td rowspan="4">BasketballDrive<br>1920x1080<br>50</td>
+    <td>8000</td>
+    <td>39.052</td>
+    <td>8160.66</td>
+    <td>38.797</td>
+    <td>8096.21</td>
+    <td rowspan="4">-11.398</td>
+  </tr>
+  <tr>
+    <td>6000</td>
+    <td>38.442</td>
+    <td>6071.07</td>
+    <td>38.159</td>
+    <td>6064.10</td>
+  </tr>
+  <tr>
+    <td>4000</td>
+    <td>37.448</td>
+    <td>4061.56</td>
+    <td>37.098</td>
+    <td>4042.98</td>
+  </tr>
+  <tr>
+    <td>2000</td>
+    <td>35.365</td>
+    <td>1999.39</td>
+    <td>35.042</td>
+    <td>2019.03</td>
+  </tr>
+  <tr>
+    <td rowspan="4">BQTerrace<br>1920x1080<br>60</td>
+    <td>8000</td>
+    <td>36.940</td>
+    <td>7963.59</td>
+    <td>36.447</td>
+    <td>8103.50</td>
+    <td rowspan="4">-39.250</td>
+  </tr>
+  <tr>
+    <td>6000</td>
+    <td>36.651</td>
+    <td>6015.91</td>
+    <td>36.131</td>
+    <td>6076.60</td>
+  </tr>
+  <tr>
+    <td>4000</td>
+    <td>36.210</td>
+    <td>4047.47</td>
+    <td>35.648</td>
+    <td>4026.19</td>
+  </tr>
+  <tr>
+    <td>2000</td>
+    <td>35.198</td>
+    <td>2031.68</td>
+    <td>34.636</td>
+    <td>2005.66</td>
+  </tr>
+  <tr>
+    <td rowspan="4">ParkScene<br>1920x1080<br>24</td>
+    <td>8000</td>
+    <td>40.773</td>
+    <td>7858.35</td>
+    <td>40.083</td>
+    <td>7634.67</td>
+    <td rowspan="4">-20.501</td>
+  </tr>
+  <tr>
+    <td>6000</td>
+    <td>39.985</td>
+    <td>5888.10</td>
+    <td>39.243</td>
+    <td>5715.46</td>
+  </tr>
+  <tr>
+    <td>4000</td>
+    <td>38.810</td>
+    <td>3937.08</td>
+    <td>37.993</td>
+    <td>3786.46</td>
+  </tr>
+  <tr>
+    <td>2000</td>
+    <td>36.682</td>
+    <td>1949.42</td>
+    <td>35.894</td>
+    <td>1882.20</td>
+  </tr>
+  <tr>
+    <td rowspan="4">Cactus<br>1920x1080<br>50</td>
+    <td>8000</td>
+    <td>38.208</td>
+    <td>7838.77</td>
+    <td>37.721</td>
+    <td>7888.39</td>
+    <td rowspan="4">-28.269</td>
+  </tr>
+  <tr>
+    <td>6000</td>
+    <td>37.776</td>
+    <td>5982.75</td>
+    <td>37.112</td>
+    <td>5911.62</td>
+  </tr>
+  <tr>
+    <td>4000</td>
+    <td>36.988</td>
+    <td>3979.13</td>
+    <td>36.143</td>
+    <td>3938.65</td>
+  </tr>
+  <tr>
+    <td>2000</td>
+    <td>35.212</td>
+    <td>1999.75</td>
+    <td>34.461</td>
+    <td>1963.29</td>
+  </tr>
+  <tr>
+    <td rowspan="4">Kimono1<br>1920x1080<br>24</td>
+    <td>8000</td>
+    <td>42.925</td>
+    <td>7858.91</td>
+    <td>42.612</td>
+    <td>7120.92</td>
+    <td rowspan="4">-9.207</td>
+  </tr>
+  <tr>
+    <td>6000</td>
+    <td>42.464</td>
+    <td>5834.79</td>
+    <td>42.050</td>
+    <td>5170.13</td>
+  </tr>
+  <tr>
+    <td>4000</td>
+    <td>41.644</td>
+    <td>3823.19</td>
+    <td>41.095</td>
+    <td>3327.24</td>
+  </tr>
+  <tr>
+    <td>2000</td>
+    <td>39.808</td>
+    <td>1874.05</td>
+    <td>39.084</td>
+    <td>1599.97</td>
+  </tr>
+  <tr>
+    <td rowspan="4">SlideEditing<br>1280x720<br>30</td>
+    <td>1250</td>
+    <td>52.138</td>
+    <td>1135.42</td>
+    <td>45.306</td>
+    <td>713.69</td>
+    <td rowspan="4">-14.859</td>
+  </tr>
+  <tr>
+    <td>1000</td>
+    <td>50.582</td>
+    <td>975.17</td>
+    <td>43.001</td>
+    <td>583.56</td>
+  </tr>
+  <tr>
+    <td>750</td>
+    <td>47.245</td>
+    <td>717.30</td>
+    <td>41.165</td>
+    <td>482.61</td>
+  </tr>
+  <tr>
+    <td>500</td>
+    <td>42.992</td>
+    <td>502.59</td>
+    <td>37.422</td>
+    <td>326.47</td>
+  </tr>
+  <tr>
+    <td rowspan="4">SlideShow<br>1280x720<br>20</td>
+    <td>1250</td>
+    <td>53.995</td>
+    <td>1005.42</td>
+    <td>48.825</td>
+    <td>768.77</td>
+    <td rowspan="4">-30.499</td>
+  </tr>
+  <tr>
+    <td>1000</td>
+    <td>52.607</td>
+    <td>842.29</td>
+    <td>47.207</td>
+    <td>622.15</td>
+  </tr>
+  <tr>
+    <td>750</td>
+    <td>50.652</td>
+    <td>664.83</td>
+    <td>45.102</td>
+    <td>472.55</td>
+  </tr>
+  <tr>
+    <td>500</td>
+    <td>48.444</td>
+    <td>508.95</td>
+    <td>42.245</td>
+    <td>321.05</td>
+  </tr>
+  <tr>
+    <td rowspan="4">ChinaSpeed<br>1024x768<br>30</td>
+    <td>2000</td>
+    <td>37.628</td>
+    <td>1944.72</td>
+    <td>36.900</td>
+    <td>1870.82</td>
+    <td rowspan="4">-19.046</td>
+  </tr>
+  <tr>
+    <td>1500</td>
+    <td>36.569</td>
+    <td>1460.52</td>
+    <td>35.747</td>
+    <td>1394.36</td>
+  </tr>
+  <tr>
+    <td>1000</td>
+    <td>35.205</td>
+    <td>982.16</td>
+    <td>34.254</td>
+    <td>924.84</td>
+  </tr>
+  <tr>
+    <td>500</td>
+    <td>33.122</td>
+    <td>497.93</td>
+    <td>32.244</td>
+    <td>459.28</td>
+  </tr>
+  <tr>
+    <td rowspan="4">BasketballDrillText<br>832x480<br>50</td>
+    <td>2000</td>
+    <td>38.854</td>
+    <td>2042.18</td>
+    <td>37.337</td>
+    <td>2101.13</td>
+    <td rowspan="4">-36.664</td>
+  </tr>
+  <tr>
+    <td>1500</td>
+    <td>37.819</td>
+    <td>1532.21</td>
+    <td>36.174</td>
+    <td>1578.54</td>
+  </tr>
+  <tr>
+    <td>1000</td>
+    <td>36.263</td>
+    <td>1023.49</td>
+    <td>34.598</td>
+    <td>1055.35</td>
+  </tr>
+  <tr>
+    <td>500</td>
+    <td>33.646</td>
+    <td>513.33</td>
+    <td>32.161</td>
+    <td>526.86</td>
+  </tr>
+  <tr>
+    <td rowspan="4">Traffic<br>2560x1600<br>30</td>
+    <td>10000</td>
+    <td>41.262</td>
+    <td>9914.35</td>
+    <td>40.671</td>
+    <td>9760.85</td>
+    <td rowspan="4">-22.162</td>
+  </tr>
+  <tr>
+    <td>8000</td>
+    <td>40.713</td>
+    <td>7880.77</td>
+    <td>40.034</td>
+    <td>7741.52</td>
+  </tr>
+  <tr>
+    <td>6000</td>
+    <td>39.967</td>
+    <td>5902.53</td>
+    <td>39.191</td>
+    <td>5775.80</td>
+  </tr>
+  <tr>
+    <td>4000</td>
+    <td>38.842</td>
+    <td>3929.81</td>
+    <td>37.943</td>
+    <td>3804.56</td>
+  </tr>
+  <tr>
+    <td rowspan="4">PeopleOnStreet<br>2560x1600<br>30</td>
+    <td>10000</td>
+    <td>36.183</td>
+    <td>9991.23</td>
+    <td>35.946</td>
+    <td>10177.52</td>
+    <td rowspan="4">-6.301</td>
+  </tr>
+  <tr>
+    <td>8000</td>
+    <td>35.225</td>
+    <td>7992.27</td>
+    <td>35.027</td>
+    <td>8139.77</td>
+  </tr>
+  <tr>
+    <td>6000</td>
+    <td>33.975</td>
+    <td>5976.26</td>
+    <td>33.778</td>
+    <td>6076.11</td>
+  </tr>
+  <tr>
+    <td>4000</td>
+    <td>32.258</td>
+    <td>3991.88</td>
+    <td>32.043</td>
+    <td>4064.74</td>
+  </tr>
+  <tr>
+    <td colspan="6">Average</td>
+    <td>-23.167</td>
+  </tr>
+</table>
+
+### Compare with x265 1-pass encoding in SSIM metric (preset medium)
+
+The coding parameters are "--preset medium --ref 4 --frame-thread 1 --no-wpp --no-pmode --no-pme --slices 0 --lookahead-slices 0 --ssim --tune ssim --qg-size 64 --aq-mode 1 --aq-strength 1.0 --b-adapt 1 --bframes 15 --keyint 5000"
+
+<table>
+  <tr>
+    <td rowspan="2">sequence</td>
+    <td rowspan="2">target rate<br>(kbps)</td>
+    <td colspan="2">Our265</td>
+    <td colspan="2">x265</td>
+    <td rowspan="2">BDBR<br>(%)</td>
+
+  </tr>
+  <tr>
+    <td>SSIM</td>
+    <td>rate</td>
+    <td>SSIM</td>
+    <td>rate</td>
+  </tr>
+  <tr>
+    <td rowspan="4">BasketballPass<br>416x240<br>50</td>
+    <td>1500</td>
+    <td>0.974748</td>
+    <td>1486.84</td>
+    <td>0.971105</td>
+    <td>1578.82</td>
+    <td rowspan="4">-20.424</td>
+  </tr>
+  <tr>
+    <td>1000</td>
+    <td>0.961875</td>
+    <td>996.70</td>
+    <td>0.955740</td>
+    <td>1055.46</td>
+  </tr>
+  <tr>
+    <td>500</td>
+    <td>0.928142</td>
+    <td>505.69</td>
+    <td>0.915114</td>
+    <td>531.55</td>
+  </tr>
+  <tr>
+    <td>250</td>
+    <td>0.875306</td>
+    <td>260.35</td>
+    <td>0.852547</td>
+    <td>269.13</td>
+  </tr>
+  <tr>
+    <td rowspan="4">BlowingBubbles<br>416x240<br>50</td>
+    <td>1500</td>
+    <td>0.971706</td>
+    <td>1506.23</td>
+    <td>0.962646</td>
+    <td>1558.95</td>
+    <td rowspan="4">-34.848</td>
+  </tr>
+  <tr>
+    <td>1000</td>
+    <td>0.961866</td>
+    <td>1022.57</td>
+    <td>0.946539</td>
+    <td>1045.77</td>
+  </tr>
+  <tr>
+    <td>500</td>
+    <td> 0.935054</td>
+    <td>522.39</td>
+    <td>0.905993</td>
+    <td>527.14</td>
+  </tr>
+  <tr>
+    <td>250</td>
+    <td>0.891664</td>
+    <td>260.15</td>
+    <td>0.844304</td>
+    <td>265.80</td>
+  </tr>
+  <tr>
+    <td rowspan="4">Flowervase<br>416x240<br>30</td>
+    <td>1500</td>
+    <td>0.995778</td>
+    <td>1490.55</td>
+    <td>0.995760</td>
+    <td>1723.43</td>
+    <td rowspan="4">-28.226</td>
+  </tr>
+  <tr>
+    <td>1000</td>
+    <td>0.995161</td>
+    <td>1054.81</td>
+    <td>0.994874</td>
+    <td>1145.12</td>
+  </tr>
+  <tr>
+    <td>500</td>
+    <td>0.993842</td>
+    <td>553.96</td>
+    <td>0.992839</td>
+    <td>575.04</td>
+  </tr>
+  <tr>
+    <td>250</td>
+    <td>0.991710</td>
+    <td>283.68</td>
+    <td>0.988947</td>
+    <td>289.72</td>
+  </tr>
+  <tr>
+    <td rowspan="4">BQSquare<br>416x240<br>60</td>
+    <td>1500</td>
+    <td>0.969673</td>
+    <td>1466.40</td>
+    <td>0.950419</td>
+    <td>1458.27</td>
+    <td rowspan="4">-58.365</td>
+  </tr>
+  <tr>
+    <td>1000</td>
+    <td>0.961311</td>
+    <td>988.17</td>
+    <td>0.931090</td>
+    <td>963.25</td>
+  </tr>
+  <tr>
+    <td>500</td>
+    <td>0.941425</td>
+    <td>508.20</td>
+    <td>0.895240</td>
+    <td>479.26</td>
+  </tr>
+  <tr>
+    <td>250</td>
+    <td>0.909652</td>
+    <td>252.41</td>
+    <td>0.857900</td>
+    <td>240.24</td>
+  </tr>
+  <tr>
+    <td rowspan="4">RaceHorses<br>416x240<br>30</td>
+    <td>1500</td>
+    <td>0.971998</td>
+    <td>1456.43</td>
+    <td>0.970052</td>
+    <td>1427.37</td>
+    <td rowspan="4">-7.340</td>
+  </tr>
+  <tr>
+    <td>1000</td>
+    <td>0.958082</td>
+    <td>977.26</td>
+    <td>0.954669</td>
+    <td>957.17</td>
+  </tr>
+  <tr>
+    <td>500</td>
+    <td>0.917400</td>
+    <td>495.85</td>
+    <td>0.909626</td>
+    <td>484.17</td>
+  </tr>
+  <tr>
+    <td>250</td>
+    <td>0.853987</td>
+    <td>250.47</td>
+    <td>0.835887</td>
+    <td>244.63</td>
+  </tr>
+  <tr>
+    <td rowspan="4">BQMall<br>832x480<br>60</td>
+    <td>2000</td>
+    <td>0.957508</td>
+    <td>2147.90</td>
+    <td>0.948506</td>
+    <td>2039.35</td>
+    <td rowspan="4">-29.051</td>
+  </tr>
+  <tr>
+    <td>1500</td>
+    <td>0.950845</td>
+    <td>1635.26</td>
+    <td>0.937722</td>
+    <td>1539.63</td>
+  </tr>
+  <tr>
+    <td>1000</td>
+    <td>0.937692</td>
+    <td>1093.70</td>
+    <td>0.918714</td>
+    <td>1032.87</td>
+  </tr>
+  <tr>
+    <td>500</td>
+    <td>0.899834</td>
+    <td>509.04</td>
+    <td>0.869535</td>
+    <td>519.27</td>
+  </tr>
+  <tr>
+    <td rowspan="4">BasketballDrill<br>832x480<br>50</td>
+    <td>2000</td>
+    <td>0.961472</td>
+    <td>1964.72</td>
+    <td>0.938393</td>
+    <td>2034.01</td>
+    <td rowspan="4">-49.049</td>
+  </tr>
+  <tr>
+    <td>1500</td>
+    <td>0.954054</td>
+    <td>1490.72</td>
+    <td>0.921991</td>
+    <td>1531.05</td>
+  </tr>
+  <tr>
+    <td>1000</td>
+    <td>0.938239</td>
+    <td>1011.13</td>
+    <td>0.895264</td>
+    <td>1025.90</td>
+  </tr>
+  <tr>
+    <td>500</td>
+    <td>0.897778</td>
+    <td>509.76</td>
+    <td>0.841873</td>
+    <td>517.17</td>
+  </tr>
+  <tr>
+    <td rowspan="4">PartyScene<br>832x480<br>50</td>
+    <td>2000</td>
+    <td>0.938125</td>
+    <td>2015.32</td>
+    <td>0.904519</td>
+    <td>1877.82</td>
+    <td rowspan="4">-43.693</td>
+  </tr>
+  <tr>
+    <td>1500</td>
+    <td>0.923649</td>
+    <td>1495.31</td>
+    <td>0.883681</td>
+    <td>1413.70</td>
+  </tr>
+  <tr>
+    <td>1000</td>
+    <td>0.898724</td>
+    <td>988.05</td>
+    <td>0.847980</td>
+    <td>946.04</td>
+  </tr>
+  <tr>
+    <td>500</td>
+    <td>0.845592</td>
+    <td>501.43</td>
+    <td>0.770107</td>
+    <td>474.73</td>
+  </tr>
+  <tr>
+    <td rowspan="4">RaceHorses<br>832x480<br>30</td>
+    <td>2000</td>
+    <td>0.929282</td>
+    <td>1912.36</td>
+    <td>0.924371</td>
+    <td>1829.17</td>
+    <td rowspan="4">-9.555</td>
+  </tr>
+  <tr>
+    <td>1500</td>
+    <td>0.914961</td>
+    <td>1444.19</td>
+    <td>0.908547</td>
+    <td>1386.79</td>
+  </tr>
+  <tr>
+    <td>1000</td>
+    <td>0.889067</td>
+    <td>974.23</td>
+    <td>0.878748</td>
+    <td>937.22</td>
+  </tr>
+  <tr>
+    <td>500</td>
+    <td>0.828272</td>
+    <td>495.00</td>
+    <td>0.804663</td>
+    <td>480.78</td>
+  </tr>
+  <tr>
+    <td rowspan="4">Flowervase<br>832x480<br>30</td>
+    <td>2000</td>
+    <td>0.983786</td>
+    <td>2049.06</td>
+    <td>0.983625</td>
+    <td>2309.25</td>
+    <td rowspan="4">-22.837</td>
+  </tr>
+  <tr>
+    <td>1500</td>
+    <td>0.982463</td>
+    <td>1542.80</td>
+    <td>0.982019</td>
+    <td>1736.77</td>
+  </tr>
+  <tr>
+    <td>1000</td>
+    <td>0.980270</td>
+    <td>1038.12</td>
+    <td>0.979218</td>
+    <td>1159.67</td>
+  </tr>
+  <tr>
+    <td>500</td>
+    <td>0.974552</td>
+    <td>530.17</td>
+    <td>0.971691</td>
+    <td>581.90</td>
+  </tr>
+  <tr>
+    <td rowspan="4">Johnny<br>1280x720<br>60</td>
+    <td>2000</td>
+    <td>0.972220</td>
+    <td>1889.86</td>
+    <td>0.969858</td>
+    <td>1922.51</td>
+    <td rowspan="4">-54.148</td>
+  </tr>
+  <tr>
+    <td>1500</td>
+    <td>0.971458</td>
+    <td>1458.19</td>
+    <td>0.968349</td>
+    <td>1433.48</td>
+  </tr>
+  <tr>
+    <td>1000</td>
+    <td>0.970216</td>
+    <td>1000.28</td>
+    <td>0.965854</td>
+    <td>947.76</td>
+  </tr>
+  <tr>
+    <td>500</td>
+    <td>0.966357</td>
+    <td>493.88</td>
+    <td>0.959438</td>
+    <td>461.90</td>
+  </tr>
+  <tr>
+    <td rowspan="4">FourPeople<br>1280x720<br>60</td>
+    <td>2000</td>
+    <td>0.976198</td>
+    <td>1951.09</td>
+    <td>0.973819</td>
+    <td>1867.99</td>
+    <td rowspan="4">-29.752</td>
+  </tr>
+  <tr>
+    <td>1500</td>
+    <td>0.974905</td>
+    <td>1483.20</td>
+    <td>0.971512</td>
+    <td>1382.84</td>
+  </tr>
+  <tr>
+    <td>1000</td>
+    <td>0.972125</td>
+    <td>984.38</td>
+    <td>0.966878</td>
+    <td>912.78</td>
+  </tr>
+  <tr>
+    <td>500</td>
+    <td>0.962509</td>
+    <td>493.13</td>
+    <td>0.953494</td>
+    <td>449.93</td>
+  </tr>
+  <tr>
+    <td rowspan="4">KristenAndSara<br>1280x720<br>60</td>
+    <td>2000</td>
+    <td>0.974939</td>
+    <td>1927.61</td>
+    <td>0.973681</td>
+    <td>2008.78</td>
+    <td rowspan="4">-30.256</td>
+  </tr>
+  <tr>
+    <td>1500</td>
+    <td>0.973849</td>
+    <td>1495.62</td>
+    <td>0.972077</td>
+    <td>1500.01</td>
+  </tr>
+  <tr>
+    <td>1000</td>
+    <td>0.971930</td>
+    <td>1027.46</td>
+    <td>0.969084</td>
+    <td>995.28</td>
+  </tr>
+  <tr>
+    <td>500</td>
+    <td>0.965911</td>
+    <td>521.89</td>
+    <td>0.960797</td>
+    <td>491.46</td>
+  </tr>
+  <tr>
+    <td rowspan="4">BasketballDrive<br>1920x1080<br>50</td>
+    <td>8000</td>
+    <td>0.921614</td>
+    <td>8028.19</td>
+    <td>0.918506</td>
+    <td>8042.09</td>
+    <td rowspan="4">-18.127</td>
+  </tr>
+  <tr>
+    <td>6000</td>
+    <td>0.915843</td>
+    <td>6054.40</td>
+    <td>0.895274</td>
+    <td>6029.34</td>
+  </tr>
+  <tr>
+    <td>4000</td>
+    <td>0.904844</td>
+    <td>4058.34</td>
+    <td>0.888595</td>
+    <td>3992.53</td>
+  </tr>
+  <tr>
+    <td>2000</td>
+    <td>0.875578</td>
+    <td>2002.62</td>
+    <td>0.863315</td>
+    <td>2008.51</td>
+  </tr>
+  <tr>
+    <td rowspan="4">BQTerrace<br>1920x1080<br>60</td>
+    <td>8000</td>
+    <td>0.907470</td>
+    <td>7691.18</td>
+    <td>0.899332</td>
+    <td>8064.38</td>
+    <td rowspan="4">-49.064</td>
+  </tr>
+  <tr>
+    <td>6000</td>
+    <td>0.904423</td>
+    <td>5757.62</td>
+    <td>0.895274</td>
+    <td>6029.34</td>
+  </tr>
+  <tr>
+    <td>4000</td>
+    <td>0.899305</td>
+    <td>3893.11</td>
+    <td>0.888595</td>
+    <td>3992.53</td>
+  </tr>
+  <tr>
+    <td>2000</td>
+    <td>0.887810</td>
+    <td>2017.80</td>
+    <td>0.872091</td>
+    <td>1984.41</td>
+  </tr>
+  <tr>
+    <td rowspan="4">ParkScene<br>1920x1080<br>24</td>
+    <td>8000</td>
+    <td>0.961038</td>
+    <td>7925.02</td>
+    <td>0.955723</td>
+    <td>7657.85</td>
+    <td rowspan="4">-30.560</td>
+  </tr>
+  <tr>
+    <td>6000</td>
+    <td>0.956621</td>
+    <td>5939.72</td>
+    <td>0.949138</td>
+    <td>5719.65</td>
+  </tr>
+  <tr>
+    <td>4000</td>
+    <td>0.948702</td>
+    <td>3971.88</td>
+    <td>0.936902</td>
+    <td>3790.87</td>
+  </tr>
+  <tr>
+    <td>2000</td>
+    <td>0.928013</td>
+    <td>1987.46</td>
+    <td>0.905497</td>
+    <td>1878.78</td>
+  </tr>
+  <tr>
+    <td rowspan="4">Cactus<br>1920x1080<br>50</td>
+    <td>8000</td>
+    <td>0.924479</td>
+    <td>7585.34</td>
+    <td>0.919380</td>
+    <td>7875.00</td>
+    <td rowspan="4">-31.772</td>
+  </tr>
+  <tr>
+    <td>6000</td>
+    <td>0.920082</td>
+    <td>5769.59</td>
+    <td>0.912502</td>
+    <td>5895.57</td>
+  </tr>
+  <tr>
+    <td>4000</td>
+    <td>0.911716</td>
+    <td>3929.92</td>
+    <td>0.898747</td>
+    <td>3932.66</td>
+  </tr>
+  <tr>
+    <td>2000</td>
+    <td>0.886625</td>
+    <td>1980.92</td>
+    <td>0.866621</td>
+    <td>1959.97</td>
+  </tr>
+  <tr>
+    <td rowspan="4">Kimono1<br>1920x1080<br>24</td>
+    <td>8000</td>
+    <td>0.962928</td>
+    <td>7772.80</td>
+    <td>0.962027</td>
+    <td>7489.83</td>
+    <td rowspan="4">-10.102</td>
+  </tr>
+  <tr>
+    <td>6000</td>
+    <td>0.960395</td>
+    <td>5738.85</td>
+    <td>0.958982</td>
+    <td>5451.65</td>
+  </tr>
+  <tr>
+    <td>4000</td>
+    <td>0.955626</td>
+    <td>3722.72</td>
+    <td>0.953046</td>
+    <td>3463.87</td>
+  </tr>
+  <tr>
+    <td>2000</td>
+    <td>0.941717</td>
+    <td>1801.80</td>
+    <td>0.935665</td>
+    <td>1646.11</td>
+  </tr>
+  <tr>
+    <td rowspan="4">SlideEditing<br>1280x720<br>30</td>
+    <td>1250</td>
+    <td>0.997684</td>
+    <td>637.80</td>
+    <td>0.996361</td>
+    <td>814.57</td>
+    <td rowspan="4">-32.055</td>
+  </tr>
+  <tr>
+    <td>1000</td>
+    <td>0.997676</td>
+    <td>625.43</td>
+    <td>0.994423</td>
+    <td>646.84</td>
+  </tr>
+  <tr>
+    <td>750</td>
+    <td>0.996859</td>
+    <td>545.81</td>
+    <td>0.991565</td>
+    <td>497.27</td>
+  </tr>
+  <tr>
+    <td>500</td>
+    <td>0.994283</td>
+    <td>427.93</td>
+    <td>0.985018</td>
+    <td>338.23</td>
+  </tr>
+  <tr>
+    <td rowspan="4">SlideShow<br>1280x720<br>20</td>
+    <td>1250</td>
+    <td>0.996287</td>
+    <td>1050.37</td>
+    <td>0.995171</td>
+    <td>1048.86</td>
+    <td rowspan="4">-23.351</td>
+  </tr>
+  <tr>
+    <td>1000</td>
+    <td>0.995345</td>
+    <td>863.67</td>
+    <td>0.993617</td>
+    <td>845.71</td>
+  </tr>
+  <tr>
+    <td>750</td>
+    <td>0.993829</td>
+    <td>671.84</td>
+    <td>0.991007</td>
+    <td>638.24</td>
+  </tr>
+  <tr>
+    <td>500</td>
+    <td>0.991019</td>
+    <td>474.22</td>
+    <td>0.986236</td>
+    <td>428.69</td>
+  </tr>
+  <tr>
+    <td rowspan="4">ChinaSpeed<br>1024x768<br>30</td>
+    <td>2000</td>
+    <td>0.936343</td>
+    <td>1925.42</td>
+    <td>0.932592</td>
+    <td>1908.09</td>
+    <td rowspan="4">-13.874</td>
+  </tr>
+  <tr>
+    <td>1500</td>
+    <td>0.925551</td>
+    <td>1441.34</td>
+    <td>0.920581</td>
+    <td>1423.71</td>
+  </tr>
+  <tr>
+    <td>1000</td>
+    <td>0.909696</td>
+    <td>960.05</td>
+    <td>0.902616</td>
+    <td>945.60</td>
+  </tr>
+  <tr>
+    <td>500</td>
+    <td>0.880316</td>
+    <td>480.17</td>
+    <td>0.869421</td>
+    <td>470.07</td>
+  </tr>
+  <tr>
+    <td rowspan="4">BasketballDrillText<br>832x480<br>50</td>
+    <td>2000</td>
+    <td>0.962286</td>
+    <td>1981.13</td>
+    <td>0.938637</td>
+    <td>2059.89</td>
+    <td rowspan="4">-48.995</td>
+  </tr>
+  <tr>
+    <td>1500</td>
+    <td>0.955090</td>
+    <td>1512.56</td>
+    <td>0.922952</td>
+    <td>1546.44</td>
+  </tr>
+  <tr>
+    <td>1000</td>
+    <td>0.939342</td>
+    <td>1029.07</td>
+    <td>0.897904</td>
+    <td>1033.05</td>
+  </tr>
+  <tr>
+    <td>500</td>
+    <td>0.900506</td>
+    <td>516.34</td>
+    <td>0.847394</td>
+    <td>516.56</td>
+  </tr>
+  <tr>
+    <td rowspan="4">Traffic<br>2560x1600<br>30</td>
+    <td>10000</td>
+    <td>0.978029</td>
+    <td>9736.30</td>
+    <td>0.973372</td>
+    <td>9513.11</td>
+    <td rowspan="4">-37.115</td>
+  </tr>
+  <tr>
+    <td>8000</td>
+    <td>0.975911</td>
+    <td>7795.08</td>
+    <td>0.969764</td>
+    <td>7565.34</td>
+  </tr>
+  <tr>
+    <td>6000</td>
+    <td>0.972747</td>
+    <td>5864.13</td>
+    <td>0.963962</td>
+    <td>5628.31</td>
+  </tr>
+  <tr>
+    <td>4000</td>
+    <td>0.966275</td>
+    <td>3920.35</td>
+    <td>0.953314</td>
+    <td>3715.21</td>
+  </tr>
+  <tr>
+    <td rowspan="4">PeopleOnStreet<br>2560x1600<br>30</td>
+    <td>10000</td>
+    <td>0.927133</td>
+    <td>10098.43</td>
+    <td>0.917765</td>
+    <td>10074.21</td>
+    <td rowspan="4">-14.362</td>
+  </tr>
+  <tr>
+    <td>8000</td>
+    <td>0.914517</td>
+    <td>8158.65</td>
+    <td>0.902883</td>
+    <td>8066.57</td>
+  </tr>
+  <tr>
+    <td>6000</td>
+    <td>0.894842</td>
+    <td>6167.51</td>
+    <td>0.881060</td>
+    <td>6055.92</td>
+  </tr>
+  <tr>
+    <td>4000</td>
+    <td>0.861680</td>
+    <td>4171.42</td>
+    <td>0.844267</td>
+    <td>4038.33</td>
+  </tr>
+  <tr>
+    <td colspan="6">Average</td>
+    <td>-30.288</td>
+  </tr>
+</table>
+
+### Compare with x265 1-pass encoding in PSNR metric (preset medium)
+
+The parameters are "--preset medium --ref 4 --frame-thread 1 --no-wpp --no-pmode --no-pme --slices 0 --lookahead-slices 0 --psnr --tune psnr --qg-size 64 --b-adapt 1 --bframes 15 --keyint 5000"
+
+<table>
+  <tr>
+    <td rowspan="2">sequence</td>
+    <td rowspan="2">target rate<br>(kbps)</td>
+    <td colspan="2">Our265</td>
+    <td colspan="2">x265</td>
+    <td rowspan="2">BDBR<br>(%)</td>
+
+  </tr>
+  <tr>
+    <td>PSNR(dB)</td>
+    <td>rate</td>
+    <td>PSNR(dB)</td>
+    <td>rate</td>
+  </tr>
+  <tr>
+    <td rowspan="4">BasketballPass<br>416x240<br>50</td>
+    <td>1500</td>
+    <td>40.703</td>
+    <td>1502.98</td>
+    <td>40.361</td>
+    <td>1587.57</td>
+    <td rowspan="4">-11.517</td>
+  </tr>
+  <tr>
+    <td>1000</td>
+    <td>38.687</td>
+    <td>1011.34</td>
+    <td>38.299</td>
+    <td>1061.35</td>
+  </tr>
+  <tr>
+    <td>500</td>
+    <td>35.538</td>
+    <td>515.27</td>
+    <td>35.154</td>
+    <td>534.12</td>
+  </tr>
+  <tr>
+    <td>250</td>
+    <td>32.807</td>
+    <td>268.14</td>
+    <td>32.462</td>
+    <td>270.10</td>
+  </tr>
+  <tr>
+    <td rowspan="4">BlowingBubbles<br>416x240<br>50</td>
+    <td>1500</td>
+    <td>38.630</td>
+    <td>1547.03</td>
+    <td>37.206</td>
+    <td>1584.195</td>
+    <td rowspan="4">-36.194</td>
+  </tr>
+  <tr>
+    <td>1000</td>
+    <td>37.090</td>
+    <td>1039.06</td>
+    <td>35.510</td>
+    <td>1062.04</td>
+  </tr>
+  <tr>
+    <td>500</td>
+    <td>34.502</td>
+    <td>531.31</td>
+    <td>32.910</td>
+    <td>535.29</td>
+  </tr>
+  <tr>
+    <td>250</td>
+    <td>32.169</td>
+    <td>268.84</td>
+    <td>30.602</td>
+    <td>269.76</td>
+  </tr>
+  <tr>
+    <td rowspan="4">Flowervase<br>416x240<br>30</td>
+    <td>1500</td>
+    <td>51.916</td>
+    <td>1573.34</td>
+    <td>51.886</td>
+    <td>1769.22</td>
+    <td rowspan="4">-25.157</td>
+  </tr>
+  <tr>
+    <td>1000</td>
+    <td>50.891</td>
+    <td>1091.50</td>
+    <td>50.482</td>
+    <td>1180.20</td>
+  </tr>
+  <tr>
+    <td>500</td>
+    <td>49.015</td>
+    <td>551.43</td>
+    <td>48.151</td>
+    <td>594.12</td>
+  </tr>
+  <tr>
+    <td>250</td>
+    <td>46.970</td>
+    <td>284.23</td>
+    <td>45.563</td>
+    <td>300.19</td>
+  </tr>
+  <tr>
+    <td rowspan="4">BQSquare<br>416x240<br>60</td>
+    <td>1500</td>
+    <td>39.117</td>
+    <td>1486.48</td>
+    <td>36.937</td>
+    <td>1421.69</td>
+    <td rowspan="4">-51.421</td>
+  </tr>
+  <tr>
+    <td>1000</td>
+    <td>37.912</td>
+    <td>1004.26</td>
+    <td>35.519</td>
+    <td>939.25</td>
+  </tr>
+  <tr>
+    <td>500</td>
+    <td>35.871</td>
+    <td>507.58</td>
+    <td>33.447</td>
+    <td>469.04</td>
+  </tr>
+  <tr>
+    <td>250</td>
+    <td>33.833</td>
+    <td>261.54</td>
+    <td>31.558</td>
+    <td>236.14</td>
+  </tr>
+  <tr>
+    <td rowspan="4">RaceHorses<br>416x240<br>30</td>
+    <td>1500</td>
+    <td>40.155</td>
+    <td>1476.05</td>
+    <td>39.627</td>
+    <td>1416.42</td>
+    <td rowspan="4">-5.692</td>
+  </tr>
+  <tr>
+    <td>1000</td>
+    <td>38.164</td>
+    <td>989.12</td>
+    <td>37.631</td>
+    <td>948.51</td>
+  </tr>
+  <tr>
+    <td>500</td>
+    <td>35.000</td>
+    <td>500.09</td>
+    <td>34.602</td>
+    <td>479.58</td>
+  </tr>
+  <tr>
+    <td>250</td>
+    <td>32.311</td>
+    <td>252.39</td>
+    <td>31.979</td>
+    <td>241.95</td>
+  </tr>
+  <tr>
+    <td rowspan="4">BQMall<br>832x480<br>60</td>
+    <td>2000</td>
+    <td>39.221</td>
+    <td>2184.59</td>
+    <td>38.053</td>
+    <td>2067.61</td>
+    <td rowspan="4">-29.015</td>
+  </tr>
+  <tr>
+    <td>1500</td>
+    <td>38.331</td>
+    <td>1645.25</td>
+    <td>37.009</td>
+    <td>1558.64</td>
+  </tr>
+  <tr>
+    <td>1000</td>
+    <td>36.735</td>
+    <td>1032.40</td>
+    <td>35.523</td>
+    <td>1044.50</td>
+  </tr>
+  <tr>
+    <td>500</td>
+    <td>34.250</td>
+    <td>515.52</td>
+    <td>32.833</td>
+    <td>523.76</td>
+  </tr>
+  <tr>
+    <td rowspan="4">BasketballDrill<br>832x480<br>50</td>
+    <td>2000</td>
+    <td>39.667</td>
+    <td>2023.36</td>
+    <td>37.989</td>
+    <td>2039.05</td>
+    <td rowspan="4">-37.946</td>
+  </tr>
+  <tr>
+    <td>1500</td>
+    <td>38.710</td>
+    <td>1527.88</td>
+    <td>36.901</td>
+    <td>1536.42</td>
+  </tr>
+  <tr>
+    <td>1000</td>
+    <td>37.220</td>
+    <td>1031.04</td>
+    <td>35.444</td>
+    <td>1033.01</td>
+  </tr>
+  <tr>
+    <td>500</td>
+    <td>34.719</td>
+    <td>521.56</td>
+    <td>33.144</td>
+    <td>521.07</td>
+  </tr>
+  <tr>
+    <td rowspan="4">PartyScene<br>832x480<br>50</td>
+    <td>2000</td>
+    <td>34.517</td>
+    <td>1998.91</td>
+    <td>32.625</td>
+    <td>1856.44</td>
+    <td rowspan="4">-41.012</td>
+  </tr>
+  <tr>
+    <td>1500</td>
+    <td>33.521</td>
+    <td>1489.69</td>
+    <td>31.667</td>
+    <td>1394.79</td>
+  </tr>
+  <tr>
+    <td>1000</td>
+    <td>32.290</td>
+    <td>1016.19</td>
+    <td>30.388</td>
+    <td>933.53</td>
+  </tr>
+  <tr>
+    <td>500</td>
+    <td>30.234</td>
+    <td>504.68</td>
+    <td>28.320</td>
+    <td>465.50</td>
+  </tr>
+  <tr>
+    <td rowspan="4">RaceHorses<br>832x480<br>30</td>
+    <td>2000</td>
+    <td>36.156</td>
+    <td>1912.46</td>
+    <td>35.669</td>
+    <td>1796.39</td>
+    <td rowspan="4">-6.486</td>
+  </tr>
+  <tr>
+    <td>1500</td>
+    <td>35.183</td>
+    <td>1444.98</td>
+    <td>34.736</td>
+    <td>1362.89</td>
+  </tr>
+  <tr>
+    <td>1000</td>
+    <td>33.831</td>
+    <td>974.77</td>
+    <td>33.412</td>
+    <td>918.24</td>
+  </tr>
+  <tr>
+    <td>500</td>
+    <td>31.605</td>
+    <td>493.90</td>
+    <td>31.263</td>
+    <td>471.69</td>
+  </tr>
+  <tr>
+    <td rowspan="4">Flowervase<br>832x480<br>30</td>
+    <td>2000</td>
+    <td>45.421</td>
+    <td>2121.10</td>
+    <td>45.276</td>
+    <td>2391.35</td>
+    <td rowspan="4">-24.016</td>
+  </tr>
+  <tr>
+    <td>1500</td>
+    <td>44.731</td>
+    <td>1600.59</td>
+    <td>44.457</td>
+    <td>1793.17</td>
+  </tr>
+  <tr>
+    <td>1000</td>
+    <td>43.762</td>
+    <td>1076.99</td>
+    <td>43.284</td>
+    <td>1199.25</td>
+  </tr>
+  <tr>
+    <td>500</td>
+    <td>41.956</td>
+    <td>544.82</td>
+    <td>41.138</td>
+    <td>603.09</td>
+  </tr>
+  <tr>
+    <td rowspan="4">Johnny<br>1280x720<br>60</td>
+    <td>2000</td>
+    <td>44.792</td>
+    <td>1970.50</td>
+    <td>43.884</td>
+    <td>1928.15</td>
+    <td rowspan="4">-60.026</td>
+  </tr>
+  <tr>
+    <td>1500</td>
+    <td>44.578</td>
+    <td>1494.05</td>
+    <td>43.538</td>
+    <td>1440.01</td>
+  </tr>
+  <tr>
+    <td>1000</td>
+    <td>44.221</td>
+    <td>996.31</td>
+    <td>42.980</td>
+    <td>951.40</td>
+  </tr>
+  <tr>
+    <td>500</td>
+    <td>43.208</td>
+    <td>489.87</td>
+    <td>41.724</td>
+    <td>462.38</td>
+  </tr>
+  <tr>
+    <td rowspan="4">FourPeople<br>1280x720<br>60</td>
+    <td>2000</td>
+    <td>43.936</td>
+    <td>1973.26</td>
+    <td>42.953</td>
+    <td>1871.73</td>
+    <td rowspan="4">-36.750</td>
+  </tr>
+  <tr>
+    <td>1500</td>
+    <td>43.445</td>
+    <td>1474.03</td>
+    <td>42.257</td>
+    <td>1389.51</td>
+  </tr>
+  <tr>
+    <td>1000</td>
+    <td>42.610</td>
+    <td>987.84</td>
+    <td>41.120</td>
+    <td>918.34</td>
+  </tr>
+  <tr>
+    <td>500</td>
+    <td>40.433</td>
+    <td>487.78</td>
+    <td>38.970</td>
+    <td>451.32</td>
+  </tr>
+  <tr>
+    <td rowspan="4">KristenAndSara<br>1280x720<br>60</td>
+    <td>2000</td>
+    <td>44.697</td>
+    <td>2021.75</td>
+    <td>44.003</td>
+    <td>2015.38</td>
+    <td rowspan="4">-41.594</td>
+  </tr>
+  <tr>
+    <td>1500</td>
+    <td>44.356</td>
+    <td>1536.87</td>
+    <td>43.519</td>
+    <td>1507.14</td>
+  </tr>
+  <tr>
+    <td>1000</td>
+    <td>43.759</td>
+    <td>1010.30</td>
+    <td>42.667</td>
+    <td>999.07</td>
+  </tr>
+  <tr>
+    <td>500</td>
+    <td>42.293</td>
+    <td>522.09</td>
+    <td>40.881</td>
+    <td>491.87</td>
+  </tr>
+  <tr>
+    <td rowspan="4">BasketballDrive<br>1920x1080<br>50</td>
+    <td>8000</td>
+    <td>39.053</td>
+    <td>8160.98</td>
+    <td>38.813</td>
+    <td>8136.96</td>
+    <td rowspan="4">-12.367</td>
+  </tr>
+  <tr>
+    <td>6000</td>
+    <td>38.484</td>
+    <td>6120.82</td>
+    <td>38.194</td>
+    <td>6109.08</td>
+  </tr>
+  <tr>
+    <td>4000</td>
+    <td>37.562</td>
+    <td>4159.33</td>
+    <td>37.149</td>
+    <td>4068.65</td>
+  </tr>
+  <tr>
+    <td>2000</td>
+    <td>35.561</td>
+    <td>2049.33</td>
+    <td>35.109</td>
+    <td>2034.13</td>
+  </tr>
+  <tr>
+    <td rowspan="4">BQTerrace<br>1920x1080<br>60</td>
+    <td>8000</td>
+    <td>37.061</td>
+    <td>7882.42</td>
+    <td>36.405</td>
+    <td>8127.41</td>
+    <td rowspan="4">-48.033</td>
+  </tr>
+  <tr>
+    <td>6000</td>
+    <td>36.820</td>
+    <td>5999.59</td>
+    <td>36.100</td>
+    <td>6085.15</td>
+  </tr>
+  <tr>
+    <td>4000</td>
+    <td>36.408</td>
+    <td>4034.55</td>
+    <td>35.639</td>
+    <td>4046.23</td>
+  </tr>
+  <tr>
+    <td>2000</td>
+    <td>35.531</td>
+    <td>1999.89</td>
+    <td>34.676</td>
+    <td>2006.88</td>
+  </tr>
+  <tr>
+    <td rowspan="4">ParkScene<br>1920x1080<br>24</td>
+    <td>8000</td>
+    <td>41.042</td>
+    <td>8079.32</td>
+    <td>40.08</td>
+    <td>7640.79</td>
+    <td rowspan="4">-30.928</td>
+  </tr>
+  <tr>
+    <td>6000</td>
+    <td>40.345</td>
+    <td>6049.92</td>
+    <td>39.259</td>
+    <td>5708.25</td>
+  </tr>
+  <tr>
+    <td>4000</td>
+    <td>39.297</td>
+    <td>4044.14</td>
+    <td>38.051</td>
+    <td>3788.89</td>
+  </tr>
+  <tr>
+    <td>2000</td>
+    <td>37.363</td>
+    <td>2018.49</td>
+    <td>35.991</td>
+    <td>1881.81</td>
+  </tr>
+  <tr>
+    <td rowspan="4">Cactus<br>1920x1080<br>50</td>
+    <td>8000</td>
+    <td>38.324</td>
+    <td>7872.62</td>
+    <td>37.694</td>
+    <td>7863.37</td>
+    <td rowspan="4">-32.523</td>
+  </tr>
+  <tr>
+    <td>6000</td>
+    <td>37.904</td>
+    <td>5953.27</td>
+    <td>37.151</td>
+    <td>5895.11</td>
+  </tr>
+  <tr>
+    <td>4000</td>
+    <td>37.176</td>
+    <td>3987.20</td>
+    <td>36.251</td>
+    <td>3924.03</td>
+  </tr>
+  <tr>
+    <td>2000</td>
+    <td>35.506</td>
+    <td>1993.01</td>
+    <td>34.589</td>
+    <td>1956.17</td>
+  </tr>
+  <tr>
+    <td rowspan="4">Kimono1<br>1920x1080<br>24</td>
+    <td>8000</td>
+    <td>42.918</td>
+    <td>7986.40</td>
+    <td>42.674</td>
+    <td>7440.44</td>
+    <td rowspan="4">-11.948</td>
+  </tr>
+  <tr>
+    <td>6000</td>
+    <td>42.482</td>
+    <td>5909.94</td>
+    <td>42.141</td>
+    <td>5418.35</td>
+  </tr>
+  <tr>
+    <td>4000</td>
+    <td>41.715</td>
+    <td>3837.11</td>
+    <td>41.221</td>
+    <td>3472.13</td>
+  </tr>
+  <tr>
+    <td>2000</td>
+    <td>39.988</td>
+    <td>1865.89</td>
+    <td>39.263</td>
+    <td>1661.08</td>
+  </tr>
+  <tr>
+    <td rowspan="4">SlideEditing<br>1280x720<br>30</td>
+    <td>1250</td>
+    <td>50.936</td>
+    <td>939.77</td>
+    <td>47.809</td>
+    <td>797.04</td>
+    <td rowspan="4">-17.315</td>
+  </tr>
+  <tr>
+    <td>1000</td>
+    <td>49.767</td>
+    <td>792.94</td>
+    <td>45.414</td>
+    <td>642.34</td>
+  </tr>
+  <tr>
+    <td>750</td>
+    <td>47.156</td>
+    <td>613.43</td>
+    <td>42.535</td>
+    <td>489.69</td>
+  </tr>
+  <tr>
+    <td>500</td>
+    <td>43.616</td>
+    <td>450.91</td>
+    <td>38.622</td>
+    <td>327.12</td>
+  </tr>
+  <tr>
+    <td rowspan="4">SlideShow<br>1280x720<br>20</td>
+    <td>1250</td>
+    <td>53.434</td>
+    <td>1015.30</td>
+    <td>50.699</td>
+    <td>863.30</td>
+    <td rowspan="4">-11.882</td>
+  </tr>
+  <tr>
+    <td>1000</td>
+    <td>51.869</td>
+    <td>845.54</td>
+    <td>49.017</td>
+    <td>700.95</td>
+  </tr>
+  <tr>
+    <td>750</td>
+    <td>49.729</td>
+    <td>663.75</td>
+    <td>46.998</td>
+    <td>536.25</td>
+  </tr>
+  <tr>
+    <td>500</td>
+    <td>46.625</td>
+    <td>465.60</td>
+    <td>44.073</td>
+    <td>365.24</td>
+  </tr>
+  <tr>
+    <td rowspan="4">ChinaSpeed<br>1024x768<br>30</td>
+    <td>2000</td>
+    <td>37.715</td>
+    <td>1936.66</td>
+    <td>37.062</td>
+    <td>1866.66</td>
+    <td rowspan="4">-18.381</td>
+  </tr>
+  <tr>
+    <td>1500</td>
+    <td>36.675</td>
+    <td>1446.66</td>
+    <td>35.968</td>
+    <td>1392.70</td>
+  </tr>
+  <tr>
+    <td>1000</td>
+    <td>35.320</td>
+    <td>959.85</td>
+    <td>34.503</td>
+    <td>923.72</td>
+  </tr>
+  <tr>
+    <td>500</td>
+    <td>33.279</td>
+    <td>476.35</td>
+    <td>32.470</td>
+    <td>458.50</td>
+  </tr>
+  <tr>
+    <td rowspan="4">BasketballDrillText<br>832x480<br>50</td>
+    <td>2000</td>
+    <td>39.352</td>
+    <td>2054.35</td>
+    <td>37.496</td>
+    <td>2103.13</td>
+    <td rowspan="4">-40.330</td>
+  </tr>
+  <tr>
+    <td>1500</td>
+    <td>38.320</td>
+    <td>1545.72</td>
+    <td>36.342</td>
+    <td>1579.92</td>
+  </tr>
+  <tr>
+    <td>1000</td>
+    <td>36.732</td>
+    <td>1034.85</td>
+    <td>34.796</td>
+    <td>1055.84</td>
+  </tr>
+  <tr>
+    <td>500</td>
+    <td>34.073</td>
+    <td>518.09</td>
+    <td>32.343</td>
+    <td>527.01</td>
+  </tr>
+  <tr>
+    <td rowspan="4">Traffic<br>2560x1600<br>30</td>
+    <td>10000</td>
+    <td>41.556</td>
+    <td>9908.11</td>
+    <td>40.660</td>
+    <td>9522.68</td>
+    <td rowspan="4">-32.946</td>
+  </tr>
+  <tr>
+    <td>8000</td>
+    <td>41.065</td>
+    <td>7926.32</td>
+    <td>40.060</td>
+    <td>7586.83</td>
+  </tr>
+  <tr>
+    <td>6000</td>
+    <td>40.440</td>
+    <td>5968.78</td>
+    <td>39.239</td>
+    <td>5662.66</td>
+  </tr>
+  <tr>
+    <td>4000</td>
+    <td>39.398</td>
+    <td>3960.82</td>
+    <td>38.052</td>
+    <td>3732.74</td>
+  </tr>
+  <tr>
+    <td rowspan="4">PeopleOnStreet<br>2560x1600<br>30</td>
+    <td>10000</td>
+    <td>36.439</td>
+    <td>10426.96</td>
+    <td>35.967</td>
+    <td>10102.38</td>
+    <td rowspan="4">-6.819</td>
+  </tr>
+  <tr>
+    <td>8000</td>
+    <td>35.532</td>
+    <td>8440.65</td>
+    <td>35.024</td>
+    <td>8075.13</td>
+  </tr>
+  <tr>
+    <td>6000</td>
+    <td>34.310</td>
+    <td>6384.97</td>
+    <td>33.820</td>
+    <td>6096.41</td>
+  </tr>
+  <tr>
+    <td>4000</td>
+    <td>32.686</td>
+    <td>4360.52</td>
+    <td>32.032</td>
+    <td>4042.26</td>
+  </tr>
+  <tr>
+    <td colspan="6">Average</td>
+    <td>-27.929</td>
+  </tr>
+</table>
+
+### Compare with x265 1-pass encoding in SSIM metric (preset veryslow)
+
+The coding parameters are "--preset veryslow --min-keyint 1 --ref 4 --frame-thread 1 --no-wpp --no-pmode --no-pme --slices 0 --lookahead-slices 0 --ssim --tune ssim --qg-size 64 --aq-mode 1 --aq-strength 1.0 --b-adapt 2 --bframes 15 --keyint 5000"
+
+<table>
+  <tr>
+    <td rowspan="2">sequence</td>
+    <td rowspan="2">target rate<br>(kbps)</td>
+    <td colspan="2">Our265</td>
+    <td colspan="2">x265</td>
+    <td rowspan="2">BDBR<br>(%)</td>
+
+  </tr>
+  <tr>
+    <td>SSIM</td>
+    <td>rate</td>
+    <td>SSIM</td>
+    <td>rate</td>
+  </tr>
+  <tr>
+    <td rowspan="4">BasketballPass<br>416x240<br>50</td>
+    <td>1500</td>
+    <td>0.980259</td>
+    <td>1462.87</td>
+    <td>0.978992</td>
+    <td>1603.32</td>
+    <td rowspan="4">-19.314</td>
+  </tr>
+  <tr>
+    <td>1000</td>
+    <td>0.969988</td>
+    <td>983.45</td>
+    <td>0.966868</td>
+    <td>1072.18</td>
+  </tr>
+  <tr>
+    <td>500</td>
+    <td>0.941840</td>
+    <td>494.75</td>
+    <td>0.933573</td>
+    <td>539.28</td>
+  </tr>
+  <tr>
+    <td>250</td>
+    <td>0.894158</td>
+    <td>250.58</td>
+    <td>0.880707</td>
+    <td>272.15</td>
+  </tr>
+  <tr>
+    <td rowspan="4">BlowingBubbles<br>416x240<br>50</td>
+    <td>1500</td>
+    <td>0.975092</td>
+    <td>1504.73</td>
+    <td>0.973030</td>
+    <td>1547.88</td>
+    <td rowspan="4">-24.113</td>
+  </tr>
+  <tr>
+    <td>1000</td>
+    <td>0.967219</td>
+    <td>1016.84</td>
+    <td>0.961663</td>
+    <td>1038.70</td>
+  </tr>
+  <tr>
+    <td>500</td>
+    <td>0.944252</td>
+    <td>510.08</td>
+    <td>0.929807</td>
+    <td>525.84</td>
+  </tr>
+  <tr>
+    <td>250</td>
+    <td>0.905477</td>
+    <td>256.25</td>
+    <td>0.878401</td>
+    <td>266.18</td>
+  </tr>
+  <tr>
+    <td rowspan="4">Flowervase<br>416x240<br>30</td>
+    <td>1500</td>
+    <td>0.996078</td>
+    <td>1498.66</td>
+    <td> 0.996017</td>
+    <td>1671.64</td>
+    <td rowspan="4">-28.768</td>
+  </tr>
+  <tr>
+    <td>1000</td>
+    <td>0.995486</td>
+    <td>1058.87</td>
+    <td>0.995211</td>
+    <td>1106.90</td>
+  </tr>
+  <tr>
+    <td>500</td>
+    <td>0.994389</td>
+    <td>550.73</td>
+    <td>0.993386</td>
+    <td>551.83</td>
+  </tr>
+  <tr>
+    <td>250</td>
+    <td>0.992685</td>
+    <td>281.91</td>
+    <td>0.989983</td>
+    <td>277.84</td>
+  </tr>
+  <tr>
+    <td rowspan="4">BQSquare<br>416x240<br>60</td>
+    <td>1500</td>
+    <td>0.973412</td>
+    <td>1468.67</td>
+    <td>0.967018</td>
+    <td>1482.69</td>
+    <td rowspan="4">-42.663</td>
+  </tr>
+  <tr>
+    <td>1000</td>
+    <td>0.966443</td>
+    <td>982.49</td>
+    <td>0.953140</td>
+    <td>976.81</td>
+  </tr>
+  <tr>
+    <td>500</td>
+    <td>0.949141</td>
+    <td>503.57</td>
+    <td>0.919004</td>
+    <td>478.51</td>
+  </tr>
+  <tr>
+    <td>250</td>
+    <td>0.919205</td>
+    <td>251.04</td>
+    <td>0.882609</td>
+    <td>238.38</td>
+  </tr>
+  <tr>
+    <td rowspan="4">RaceHorses<br>416x240<br>30</td>
+    <td>1500</td>
+    <td>0.978974</td>
+    <td>1445.26</td>
+    <td>0.978010</td>
+    <td>1448.29</td>
+    <td rowspan="4">-8.056</td>
+  </tr>
+  <tr>
+    <td>1000</td>
+    <td>0.968920</td>
+    <td>970.34</td>
+    <td>0.966862</td>
+    <td>966.42</td>
+  </tr>
+  <tr>
+    <td>500</td>
+    <td>0.938118</td>
+    <td>491.61</td>
+    <td>0.932263</td>
+    <td>486.10</td>
+  </tr>
+  <tr>
+    <td>250</td>
+    <td>0.883875</td>
+    <td>248.51</td>
+    <td>0.869535</td>
+    <td>245.71</td>
+  </tr>
+  <tr>
+    <td rowspan="4">BQMall<br>832x480<br>60</td>
+    <td>2000</td>
+    <td>0.962763</td>
+    <td>2104.62</td>
+    <td>0.957965</td>
+    <td>2039.38</td>
+    <td rowspan="4">-21.034</td>
+  </tr>
+  <tr>
+    <td>1500</td>
+    <td>0.956939</td>
+    <td>1596.31</td>
+    <td>0.949718</td>
+    <td>1537.85</td>
+  </tr>
+  <tr>
+    <td>1000</td>
+    <td>0.945713</td>
+    <td>1076.78</td>
+    <td>0.934601</td>
+    <td>1034.16</td>
+  </tr>
+  <tr>
+    <td>500</td>
+    <td>0.912301</td>
+    <td>510.53</td>
+    <td>0.895800</td>
+    <td>521.95</td>
+  </tr>
+  <tr>
+    <td rowspan="4">BasketballDrill<br>832x480<br>50</td>
+    <td>2000</td>
+    <td>0.965944</td>
+    <td>1975.37</td>
+    <td>0.951374</td>
+    <td>2053.03</td>
+    <td rowspan="4">-40.933</td>
+  </tr>
+  <tr>
+    <td>1500</td>
+    <td>0.9593955</td>
+    <td>1507.46</td>
+    <td>0.937340</td>
+    <td>1546.86</td>
+  </tr>
+  <tr>
+    <td>1000</td>
+    <td>0.944787</td>
+    <td>1022.90</td>
+    <td>0.912176</td>
+    <td>1037.15</td>
+  </tr>
+  <tr>
+    <td>500</td>
+    <td>0.904049</td>
+    <td>506.79</td>
+    <td>0.861098</td>
+    <td>522.27</td>
+  </tr>
+  <tr>
+    <td rowspan="4">PartyScene<br>832x480<br>50</td>
+    <td>2000</td>
+    <td>0.947087</td>
+    <td>1996.16</td>
+    <td>0.923961</td>
+    <td>1863.38</td>
+    <td rowspan="4">-35.560</td>
+  </tr>
+  <tr>
+    <td>1500</td>
+    <td>0.933654</td>
+    <td>1471.54</td>
+    <td>0.906233</td>
+    <td>1405.60</td>
+  </tr>
+  <tr>
+    <td>1000</td>
+    <td>0.911470</td>
+    <td>989.49</td>
+    <td>0.876140</td>
+    <td>943.96</td>
+  </tr>
+  <tr>
+    <td>500</td>
+    <td>0.861945</td>
+    <td>494.99</td>
+    <td>0.814714</td>
+    <td>476.62</td>
+  </tr>
+  <tr>
+    <td rowspan="4">RaceHorses<br>832x480<br>30</td>
+    <td>2000</td>
+    <td>0.939770</td>
+    <td>1883.55</td>
+    <td>0.936971</td>
+    <td>1842.83</td>
+    <td rowspan="4">-7.219</td>
+  </tr>
+  <tr>
+    <td>1500</td>
+    <td>0.928104</td>
+    <td>1423.00</td>
+    <td>0.924352</td>
+    <td>1391.43</td>
+  </tr>
+  <tr>
+    <td>1000</td>
+    <td>0.906111</td>
+    <td>959.02</td>
+    <td>0.900302</td>
+    <td>939.43</td>
+  </tr>
+  <tr>
+    <td>500</td>
+    <td>0.851731</td>
+    <td>491.81</td>
+    <td>0.836651</td>
+    <td>481.76</td>
+  </tr>
+  <tr>
+    <td rowspan="4">Flowervase<br>832x480<br>30</td>
+    <td>2000</td>
+    <td>0.984640</td>
+    <td>2021.13</td>
+    <td>0.984562</td>
+    <td>2221.00</td>
+    <td rowspan="4">-17.341</td>
+  </tr>
+  <tr>
+    <td>1500</td>
+    <td>0.983508</td>
+    <td>1522.53</td>
+    <td>0.983276</td>
+    <td>1666.69</td>
+  </tr>
+  <tr>
+    <td>1000</td>
+    <td>0.981659</td>
+    <td>1023.29</td>
+    <td>0.981064</td>
+    <td>1113.37</td>
+  </tr>
+  <tr>
+    <td>500</td>
+    <td>0.977138</td>
+    <td>534.90</td>
+    <td>0.975250</td>
+    <td>561.68</td>
+  </tr>
+  <tr>
+    <td rowspan="4">Johnny<br>1280x720<br>60</td>
+    <td>2000</td>
+    <td>0.972620</td>
+    <td>1949.63</td>
+    <td>0.971621</td>
+    <td>1937.71</td>
+    <td rowspan="4">-34.256</td>
+  </tr>
+  <tr>
+    <td>1500</td>
+    <td>0.971858</td>
+    <td>1495.68</td>
+    <td>0.970521</td>
+    <td>1434.06</td>
+  </tr>
+  <tr>
+    <td>1000</td>
+    <td>0.970575</td>
+    <td>982.47</td>
+    <td>0.968623</td>
+    <td>939.13</td>
+  </tr>
+  <tr>
+    <td>500</td>
+    <td>0.967264</td>
+    <td>490.06</td>
+    <td>0.963996</td>
+    <td>456.30</td>
+  </tr>
+  <tr>
+    <td rowspan="4">FourPeople<br>1280x720<br>60</td>
+    <td>2000</td>
+    <td>0.976976</td>
+    <td>1984.83</td>
+    <td>0.975259</td>
+    <td>1868.04</td>
+    <td rowspan="4">-22.488</td>
+  </tr>
+  <tr>
+    <td>1500</td>
+    <td>0.975804</td>
+    <td>1478.23</td>
+    <td>0.973440</td>
+    <td>1382.42</td>
+  </tr>
+  <tr>
+    <td>1000</td>
+    <td>0.973398</td>
+    <td>989.12</td>
+    <td>0.969675</td>
+    <td>907.95</td>
+  </tr>
+  <tr>
+    <td>500</td>
+    <td>0.964789</td>
+    <td>498.45</td>
+    <td>0.958350</td>
+    <td>448.74</td>
+  </tr>
+  <tr>
+    <td rowspan="4">KristenAndSara<br>1280x720<br>60</td>
+    <td>2000</td>
+    <td>0.975620</td>
+    <td>1966.31</td>
+    <td>0.974622</td>
+    <td>1994.26</td>
+    <td rowspan="4">-27.134</td>
+  </tr>
+  <tr>
+    <td>1500</td>
+    <td>0.974636</td>
+    <td>1516.13</td>
+    <td>0.973273</td>
+    <td>1489.16</td>
+  </tr>
+  <tr>
+    <td>1000</td>
+    <td>0.972800</td>
+    <td>1003.48</td>
+    <td>0.970768</td>
+    <td>986.47</td>
+  </tr>
+  <tr>
+    <td>500</td>
+    <td>0.967700</td>
+    <td>511.22</td>
+    <td>0.964046</td>
+    <td>489.22</td>
+  </tr>
+  <tr>
+    <td rowspan="4">BasketballDrive<br>1920x1080<br>50</td>
+    <td>8000</td>
+    <td>0.925067</td>
+    <td>7696.57</td>
+    <td>0.924246</td>
+    <td>8119.73</td>
+    <td rowspan="4">-17.098</td>
+  </tr>
+  <tr>
+    <td>6000</td>
+    <td>0.920280</td>
+    <td>5841.24</td>
+    <td>0.917750</td>
+    <td>6079.03</td>
+  </tr>
+  <tr>
+    <td>4000</td>
+    <td>0.910962</td>
+    <td>3936.74</td>
+    <td>0.905572</td>
+    <td>4049.22</td>
+  </tr>
+  <tr>
+    <td>2000</td>
+    <td>0.885406</td>
+    <td>1978.99</td>
+    <td>0.876648</td>
+    <td>2025.80</td>
+  </tr>
+  <tr>
+    <td rowspan="4">BQTerrace<br>1920x1080<br>60</td>
+    <td>8000</td>
+    <td>0.908756</td>
+    <td>7760.09</td>
+    <td>0.906436</td>
+    <td>7975.55</td>
+    <td rowspan="4">-26.540</td>
+  </tr>
+  <tr>
+    <td>6000</td>
+    <td>0.906213</td>
+    <td>5816.63</td>
+    <td>0.903426</td>
+    <td>5954.53</td>
+  </tr>
+  <tr>
+    <td>4000</td>
+    <td>0.902181</td>
+    <td>3883.50</td>
+    <td>0.898490</td>
+    <td>3940.95</td>
+  </tr>
+  <tr>
+    <td>2000</td>
+    <td>0.892175</td>
+    <td>1978.42</td>
+    <td>0.886412</td>
+    <td>1950.58</td>
+  </tr>
+  <tr>
+    <td rowspan="4">ParkScene<br>1920x1080<br>24</td>
+    <td>8000</td>
+    <td>0.963350</td>
+    <td>7929.71</td>
+    <td>0.961476</td>
+    <td>7632.50</td>
+    <td rowspan="4">-18.191</td>
+  </tr>
+  <tr>
+    <td>6000</td>
+    <td>0.959666</td>
+    <td>5937.99</td>
+    <td>0.956645</td>
+    <td>5698.29</td>
+  </tr>
+  <tr>
+    <td>4000</td>
+    <td>0.952924</td>
+    <td>3958.35</td>
+    <td>0.947279</td>
+    <td>3777.74</td>
+  </tr>
+  <tr>
+    <td>2000</td>
+    <td>0.934754</td>
+    <td>1979.87</td>
+    <td>0.922104</td>
+    <td>1874.32</td>
+  </tr>
+  <tr>
+    <td rowspan="4">Cactus<br>1920x1080<br>50</td>
+    <td>8000</td>
+    <td>0.927761</td>
+    <td>7701.69</td>
+    <td>0.925364</td>
+    <td>7880.71</td>
+    <td rowspan="4">-23.712</td>
+  </tr>
+  <tr>
+    <td>6000</td>
+    <td>0.924104</td>
+    <td>5846.00</td>
+    <td>0.920313</td>
+    <td>5910.74</td>
+  </tr>
+  <tr>
+    <td>4000</td>
+    <td>0.917122</td>
+    <td>3976.77</td>
+    <td>0.909753</td>
+    <td>3944.50</td>
+  </tr>
+  <tr>
+    <td>2000</td>
+    <td>0.895885</td>
+    <td>1997.86</td>
+    <td>0.880550</td>
+    <td>1972.97</td>
+  </tr>
+  <tr>
+    <td rowspan="4">Kimono1<br>1920x1080<br>24</td>
+    <td>8000</td>
+    <td>0.964301</td>
+    <td>7890.74</td>
+    <td>0.963578</td>
+    <td>7591.62</td>
+    <td rowspan="4">-7.409</td>
+  </tr>
+  <tr>
+    <td>6000</td>
+    <td>0.961992</td>
+    <td>5816.87</td>
+    <td>0.960961</td>
+    <td>5489.13</td>
+  </tr>
+  <tr>
+    <td>4000</td>
+    <td>0.957648</td>
+    <td>3753.90</td>
+    <td>0.955716</td>
+    <td>3453.53</td>
+  </tr>
+  <tr>
+    <td>2000</td>
+    <td>0.945103</td>
+    <td>1816.05</td>
+    <td>0.940292</td>
+    <td>1633.82</td>
+  </tr>
+  <tr>
+    <td rowspan="4">SlideEditing<br>1280x720<br>30</td>
+    <td>1250</td>
+    <td>0.998984</td>
+    <td>767.80</td>
+    <td>0.997545</td>
+    <td>713.96</td>
+    <td rowspan="4">-21.502</td>
+  </tr>
+  <tr>
+    <td>1000</td>
+    <td>0.998839</td>
+    <td>661.86</td>
+    <td>0.996450</td>
+    <td>561.47</td>
+  </tr>
+  <tr>
+    <td>750</td>
+    <td>0.998146</td>
+    <td>585.77</td>
+    <td>0.994602</td>
+    <td>425.04</td>
+  </tr>
+  <tr>
+    <td>500</td>
+    <td>0.996113</td>
+    <td>420.28</td>
+    <td>0.990647</td>
+    <td>294.04</td>
+  </tr>
+  <tr>
+    <td rowspan="4">SlideShow<br>1280x720<br>20</td>
+    <td>1250</td>
+    <td>0.998165</td>
+    <td>1020.47</td>
+    <td>0.997337</td>
+    <td>1019.17</td>
+    <td rowspan="4">-13.869</td>
+  </tr>
+  <tr>
+    <td>1000</td>
+    <td>0.997505</td>
+    <td>836.90</td>
+    <td>0.996424</td>
+    <td>825.52</td>
+  </tr>
+  <tr>
+    <td>750</td>
+    <td>0.996005</td>
+    <td>648.24</td>
+    <td>0.994847</td>
+    <td>626.70</td>
+  </tr>
+  <tr>
+    <td>500</td>
+    <td>0.993666</td>
+    <td>459.29</td>
+    <td>0.991758</td>
+    <td>424.84</td>
+  </tr>
+  <tr>
+    <td rowspan="4">ChinaSpeed<br>1024x768<br>30</td>
+    <td>2000</td>
+    <td>0.949316</td>
+    <td>1935.98</td>
+    <td>0.946445</td>
+    <td>1942.73</td>
+    <td rowspan="4">-11.745</td>
+  </tr>
+  <tr>
+    <td>1500</td>
+    <td>0.938198</td>
+    <td>1447.43</td>
+    <td>0.934191</td>
+    <td>1442.71</td>
+  </tr>
+  <tr>
+    <td>1000</td>
+    <td>0.921893</td>
+    <td>962.84</td>
+    <td>0.915986</td>
+    <td>952.65</td>
+  </tr>
+  <tr>
+    <td>500</td>
+    <td>0.892901</td>
+    <td>480.22</td>
+    <td>0.885093</td>
+    <td>471.68</td>
+  </tr>
+  <tr>
+    <td rowspan="4">BasketballDrillText<br>832x480<br>50</td>
+    <td>2000</td>
+    <td>0.968275</td>
+    <td>2008.92</td>
+    <td>0.954359</td>
+    <td>2065.53</td>
+    <td rowspan="4">-44.666</td>
+  </tr>
+  <tr>
+    <td>1500</td>
+    <td>0.960940</td>
+    <td>1530.76</td>
+    <td>0.940487</td>
+    <td>1553.50</td>
+  </tr>
+  <tr>
+    <td>1000</td>
+    <td>0.947444</td>
+    <td>1021.71</td>
+    <td>0.916244</td>
+    <td>1040.44</td>
+  </tr>
+  <tr>
+    <td>500</td>
+    <td>0.907893</td>
+    <td>504.49</td>
+    <td>0.868756</td>
+    <td>521.27</td>
+  </tr>
+  <tr>
+    <td rowspan="4">Traffic<br>2560x1600<br>30</td>
+    <td>10000</td>
+    <td>0.979445</td>
+    <td>9690.00</td>
+    <td>0.976617</td>
+    <td>9243.31</td>
+    <td rowspan="4">-28.062</td>
+  </tr>
+  <tr>
+    <td>8000</td>
+    <td>0.977511</td>
+    <td>7741.66</td>
+    <td>0.973676</td>
+    <td>7335.12</td>
+  </tr>
+  <tr>
+    <td>6000</td>
+    <td>0.974767</td>
+    <td>5830.37</td>
+    <td>0.968825</td>
+    <td>5440.54</td>
+  </tr>
+  <tr>
+    <td>4000</td>
+    <td>0.969006</td>
+    <td>3899.64</td>
+    <td>0.960112</td>
+    <td>3578.82</td>
+  </tr>
+  <tr>
+    <td rowspan="4">PeopleOnStreet<br>2560x1600<br>30</td>
+    <td>10000</td>
+    <td>0.939828</td>
+    <td>9996.16</td>
+    <td>0.932286</td>
+    <td>10204.66</td>
+    <td rowspan="4">-17.305</td>
+  </tr>
+  <tr>
+    <td>8000</td>
+    <td>0.929885</td>
+    <td>8081.47</td>
+    <td>0.919413</td>
+    <td>8171.21</td>
+  </tr>
+  <tr>
+    <td>6000</td>
+    <td>0.913985</td>
+    <td>6157.01</td>
+    <td>0.900309</td>
+    <td>6126.91</td>
+  </tr>
+  <tr>
+    <td>4000</td>
+    <td>0.884943</td>
+    <td>4156.42</td>
+    <td>0.869747</td>
+    <td>4079.22</td>
+  </tr>
+  <tr>
+    <td colspan="6">Average</td>
+    <td>-23.291</td>
+  </tr>
+</table>
 
 
+[//]: <> (|  our265 vs x265      | medium   | veryslow |placebo|)
+[//]: <> (| --------   | :-----:  | :----:  |:----:  |)
+[//]: <> (| BD-PSNR [dB]|0.764  |  0.811      | 0.807|)
+[//]: <> (| BD-BR [%]|   -21.45   |   -22.92   |-22.47|)
 
-### Compare with x265 encoder
-
-|  our265 vs x265      | medium in PSNR  |
-| --------   | :-----:  |
-| BD-PSNR(dB)|1.1503  | 
-| BD-BR(%)|   -30.93   | 
-
-|  our265 vs x265      | medium in SSIM
-| --------   | :-----:  |
-| BD-SSIM| 0.0187 |
-| BD-BR(%)| -32.50 |
 
 
