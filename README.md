@@ -1,6 +1,7 @@
 # Our265
 
-Our265, one effective HEVC(h265) encoder, is compiled with CentOS-7.7 g++ (GCC) 4.8.5 20150623. 
+
+Our265, based on x265 version 2.4, is compiled with CentOS-7.7 g++ (GCC) 4.8.5 20150623. From 2018 to 2020, I optimized the rate control schemes, the mini-GOP structure, the GPB picture, the long-term reference and the CU-tree algorithms. For some works are related with IPs with Huawei and Alibaba, I can not publish the source codes. The main compression quality gain comes from the ABR rate control algorithms, which was published in the literature "Optimize x265 Rate Control: An Exploration of Lookahead in Frame Bit Allocation and Slice Type Decision".
 
 ## Contact
 Author: Zhenyu Liu;
@@ -9,16 +10,24 @@ Email: liuzhenyu73@tsinghua.edu.cn
 
 ## Usage
 
-Only linux edition is supported. When you use Our265 at the first time, the library files (libx265.a, libx265.so, libx265.so.130)  should be copied to /usr/lib.
+Only linux edition is supported. When you use Our265 at the first time, the library files (libx265.a, libx265.so, libx265.so.130)  should be copied to /usr/lib. For example:
 
-### 1-Pass Encode single sequence
+### 1-Pass ABR
 
 command line examples:
 
 ```
 ./x265 --preset veryslow --input PeopleOnStreet_2560x1600_30_crop.yuv --input-res 2560x1600 --ref 4 --fps 30 --frame-thread 1 --no-wpp --bitrate 10000 --no-pmode --no-pme --slices 0 --lookahead-slices 0 --psnr --tune psnr --b-adapt 1 --bframes 15 --keyint 5000 -o output.265
 ```
-### 2-Pass Encode single sequence
+### 1-Pass CRF+VBV
+
+command line examples:
+
+```
+./x265 --preset veryslow --input PeopleOnStreet_2560x1600_30_crop.yuv --input-res 2560x1600 --ref 4 --fps 30 --frame-thread 1 --no-wpp --crf 25 --vbv-maxrate 2000 --vbv-bufsize 2000 --no-pmode --no-pme --slices 0 --lookahead-slices 0 --psnr --tune psnr --b-adapt 1 --bframes 15 --keyint 5000 -o output.265
+```
+
+### 2-Pass ABR
 
 command line examples:
 
